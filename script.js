@@ -37,10 +37,6 @@ const workBtn = document.getElementById('work-btn');
 const itemDexBtn = document.getElementById('item-dex-btn');
 const settingsBtn = document.getElementById('settings-btn');
 const creditsBtn = document.getElementById('credits-btn');
-const makerCredit = document.getElementById('maker-credit');
-const secretCodeBox = document.getElementById('secret-code-box');
-const secretCodeInput = document.getElementById('secret-code-input');
-const secretCodeSubmit = document.getElementById('secret-code-submit');
 const saveGameBtn = document.getElementById('save-game-btn');
 const resetGameBtn = document.getElementById('reset-game-btn');
 const resetPopup = document.getElementById('reset-popup');
@@ -90,7 +86,7 @@ const HIDDEN_ITEMS = [
 const ITEMS = {
     common: [
         { name: 'Googly-Eyed Rock', sellValue: 15, artClass: 'googly-rock' },
-        { name: 'Used Gum Wrapper', sellValue: 5 },
+        { name: 'Used Gum Wrapper', sellValue: 5, artClass: 'gum-wrapper' },
         { name: 'Lint Collection', sellValue: 10 },
         { name: 'Slightly Bent Spoon', sellValue: 20, artClass: 'bent-spoon' },
         { name: 'Expired Coupon', sellValue: 2 },
@@ -107,7 +103,7 @@ const ITEMS = {
         { name: 'Mystery Key', sellValue: 25 },
         { name: 'Worn-out Eraser', sellValue: 18 },
         { name: 'Chewed-up Pen', sellValue: 16 },
-        { name: 'Tangled Earbuds', sellValue: 22 },
+        { name: 'Tangled Earbuds', sellValue: 22, artClass: 'tangled-earbuds' },
         { name: 'Small Pebblestone', sellValue: 5 },
         { name: 'Ripped Paper', sellValue: 1 },
         { name: 'Half-used Matchbook', sellValue: 13 },
@@ -165,7 +161,7 @@ const ITEMS = {
     rare: [
         { name: 'Crystal Skull', sellValue: 1500, artClass: 'crystal-skull' },
         { name: 'Ancient Floppy Disk', sellValue: 1800 },
-        { name: 'Jar of Fireflies', sellValue: 2000 },
+        { name: 'Jar of Fireflies', sellValue: 2000, artClass: 'jar-of-fireflies' },
         { name: 'First Edition Comic Book', sellValue: 3000 },
         { name: 'Lucky Rabbit\'s Foot', sellValue: 2500 },
         { name: 'Hand-carved Wooden Mask', sellValue: 3500 },
@@ -186,8 +182,8 @@ const ITEMS = {
     ],
     mythical: [
         { name: 'Golden Compass', sellValue: 20000, artClass: 'golden-compass' },
-        { name: 'Bottle of Captured Sunlight', sellValue: 25000 },
-        { name: 'Ever-Burning Candle', sellValue: 30000 },
+        { name: 'Bottle of Captured Sunlight', sellValue: 25000, artClass: 'bottle-of-captured-sunlight' },
+        { name: 'Ever-Burning Candle', sellValue: 30000, artClass: 'ever-burning-candle' },
         { name: 'Orb of Eternal Snowfall', sellValue: 35000 },
         { name: 'The Last Unicorn Horn', sellValue: 40000 },
         { name: 'Glove of Telekinesis', sellValue: 45000 },
@@ -760,60 +756,6 @@ digTreasureBtn.addEventListener('click', () => {
     } else {
         showNotification("You dug and found nothing but dirt.");
     }
-});
-
-makerCredit.addEventListener('click', () => {
-    secretCodeBox.classList.remove('hidden');
-});
-
-secretCodeSubmit.addEventListener('click', () => {
-    const code = secretCodeInput.value.trim();
-    const addMatch = code.match(/^AddD(\d+)$/);
-    const removeMatch = code.match(/^removeD(\d+)$/);
-
-    if (code === '67isafunnyjoke' && !codeUsed) {
-        money += 1000;
-        moneyMade += 1000;
-        codeUsed = true;
-        showNotification("Code redeemed! You've received $1000.");
-        updateFinancialStats();
-        saveGame();
-    } else if (code === '67isafunnyjoke' && codeUsed) {
-        showNotification("This code has already been used!");
-    } else if (addMatch) {
-        const amount = parseInt(addMatch[1]);
-        if (!isNaN(amount)) {
-            money += amount;
-            moneyMade += amount;
-            showNotification(`Added $${amount}.`);
-            updateFinancialStats();
-            saveGame();
-        }
-    } else if (removeMatch) {
-        const amount = parseInt(removeMatch[1]);
-        if (!isNaN(amount)) {
-            money = Math.max(0, money - amount);
-            moneySpent += amount;
-            showNotification(`Removed $${amount}.`);
-            updateFinancialStats();
-            saveGame();
-        }
-    } else if (code === 'Itemsme') {
-        HIDDEN_ITEMS.forEach(item => {
-            if (!foundHiddenItems.includes(item.name)) {
-                inventory.push(item);
-                foundHiddenItems.push(item.name);
-            }
-        });
-        showNotification("You've received the hidden items!");
-        renderInventory();
-        saveGame();
-    } else {
-        showNotification("Invalid code.");
-    }
-
-    secretCodeInput.value = '';
-    secretCodeBox.classList.add('hidden');
 });
 
 saveGameBtn.addEventListener('click', () => {
