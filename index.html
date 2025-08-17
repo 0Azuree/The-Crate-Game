@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
 
@@ -26,7 +27,7 @@
             <button id="inventory-btn" class="main-button">Inventory</button>
             <button id="shop-btn" class="main-button">Shop</button>
             <button id="work-btn" class="main-button">Work</button>
-            <button id="placeholder-btn" class="main-button">Placeholder</button>
+            <button id="settings-btn" class="main-button">Settings</button>
         </div>
     </div>
 
@@ -106,6 +107,40 @@
             <input type="range" id="buy-amount-slider" min="1" max="100" value="1">
         </div>
         <button id="back-from-shop-btn" class="action-button back-button bottom-left">Back</button>
+    </div>
+
+    <!-- Settings Screen -->
+    <div id="settings-screen" class="screen">
+        <h2 class="screen-title">Settings</h2>
+        <div class="settings-options-container">
+            <button id="credits-btn" class="main-button">Credits</button>
+            <button id="save-game-btn" class="main-button">Save Game</button>
+        </div>
+        <button id="back-from-settings-btn" class="action-button back-button">Back</button>
+    </div>
+
+    <!-- Credits Screen -->
+    <div id="credits-screen" class="screen">
+        <h2 class="screen-title">Credits</h2>
+        <div class="credits-content">
+            <p>Game design & development: 0Azuree</p>
+            <p>UI/UX design: 0Azuree</p>
+            <p>Special Thanks to:</p>
+            <p>The amazing Crate Chronicles community</p>
+            <p>All bug finders</p>
+            <br>
+            <p>This is a custom game for personal use.</p>
+            <br>
+            <p>Additional Credits:</p>
+            <p>Art, Music, and Sound Effects by various creators</p>
+            <br>
+            <p id="maker-credit">The actual maker of the game 0Azuree</p>
+        </div>
+        <div id="secret-code-box" class="secret-code-container hidden">
+            <input type="text" id="secret-code-input" placeholder="Enter secret code...">
+            <button id="secret-code-submit" class="buy-button">Submit</button>
+        </div>
+        <button id="back-from-credits-btn" class="action-button back-button">Back</button>
     </div>
 
     <script src="script.js"></script>
