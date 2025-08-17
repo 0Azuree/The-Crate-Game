@@ -1,5 +1,5 @@
 // --- Game State Variables ---
-let money = 500;
+let money = 1000;
 let inventory = [];
 let selectedItemIndex = -1;
 let selectedTab = 'crates';
@@ -77,13 +77,43 @@ const HIDDEN_ITEMS = [
 ];
 
 const ITEMS = {
-    common: { names: Array.from({ length: 40 }, (_, i) => `Dusty Relic ${i + 1}`), sellValue: 150 },
-    uncommon: { names: Array.from({ length: 30 }, (_, i) => `Gleaming Fragment ${i + 1}`), sellValue: 500 },
-    rare: { names: Array.from({ length: 20 }, (_, i) => `Enchanted Gemstone ${i + 1}`), sellValue: 1200 },
-    epic: { names: Array.from({ length: 15 }, (_, i) => `Astral Shard ${i + 1}`), sellValue: 5000 },
-    mythical: { names: Array.from({ length: 6 }, (_, i) => `Cosmic Core ${i + 1}`), sellValue: 15000 },
-    legendary: { names: Array.from({ length: 4 }, (_, i) => `Eternal Flame ${i + 1}`), sellValue: 30000 },
-    hidden: { names: HIDDEN_ITEMS.map(item => item.name), sellValue: 0 }, // Handled individually
+    common: [
+        { name: 'Googly-Eyed Rock', sellValue: 15, artClass: 'googly-rock' },
+        { name: 'Used Gum Wrapper', sellValue: 5, artClass: 'gum-wrapper' },
+        { name: 'Lint Collection', sellValue: 10, artClass: 'lint' },
+        { name: 'Slightly Bent Spoon', sellValue: 20, artClass: 'bent-spoon' },
+        { name: 'Expired Coupon', sellValue: 2, artClass: 'coupon' }
+    ],
+    uncommon: [
+        { name: 'Vintage Cassette Player', sellValue: 500, artClass: 'cassette' },
+        { name: 'Fidget Spinner', sellValue: 350, artClass: 'fidget-spinner' },
+        { name: 'Signed Napkin', sellValue: 600, artClass: 'napkin' },
+        { name: 'Rubber Chicken', sellValue: 450, artClass: 'rubber-chicken' },
+        { name: 'Half-Eaten Sandwich', sellValue: 100, artClass: 'sandwich' }
+    ],
+    rare: [
+        { name: 'Crystal Skull', sellValue: 1500, artClass: 'skull' },
+        { name: 'Ancient Floppy Disk', sellValue: 1800, artClass: 'floppy-disk' },
+        { name: 'Jar of Fireflies', sellValue: 2000, artClass: 'fireflies' },
+        { name: 'First Edition Comic Book', sellValue: 3000, artClass: 'comic-book' },
+        { name: 'Lucky Rabbit\'s Foot', sellValue: 2500, artClass: 'rabbits-foot' }
+    ],
+    epic: [
+        { name: 'Starmap Projector', sellValue: 8000, artClass: 'starmap' },
+        { name: 'Time-Worn Hourglass', sellValue: 9500, artClass: 'hourglass' },
+        { name: 'Enchanted Chess Piece', sellValue: 7000, artClass: 'chess-piece' },
+        { name: 'The Golden Egg', sellValue: 12000, artClass: 'golden-egg' }
+    ],
+    mythical: [
+        { name: 'Golden Compass', sellValue: 20000, artClass: 'compass' },
+        { name: 'Bottle of Captured Sunlight', sellValue: 25000, artClass: 'sunlight' },
+        { name: 'Ever-Burning Candle', sellValue: 30000, artClass: 'candle' }
+    ],
+    legendary: [
+        { name: 'Amulet of Time', sellValue: 50000, artClass: 'amulet' },
+        { name: 'Phoenix Feather', sellValue: 75000, artClass: 'phoenix-feather' }
+    ],
+    hidden: HIDDEN_ITEMS
 };
 
 const RARITY_CHANCES = {
@@ -195,6 +225,10 @@ function createItemPixelArt(item) {
     if (hiddenItem) {
         return `<div class="pixel-art ${hiddenItem.artClass}"></div>`;
     }
+    const itemData = Object.values(ITEMS).flat().find(i => i.name === item.name);
+    if (itemData && itemData.artClass) {
+        return `<div class="pixel-art ${item.rarity} ${itemData.artClass}"></div>`;
+    }
     return `<div class="pixel-art ${item.rarity}"></div>`;
 }
 
@@ -245,23 +279,25 @@ function renderItemDex() {
     
     const allItems = [];
     for (const rarity in ITEMS) {
-        if (rarity === 'hidden') continue;
-        ITEMS[rarity].names.forEach(name => {
-            allItems.push({ name, rarity, sellValue: ITEMS[rarity].sellValue });
-        });
+        if (rarity === 'hidden') {
+            HIDDEN_ITEMS.forEach(item => {
+                allItems.push({ name: item.name, rarity, sellValue: item.sellValue, artClass: item.artClass });
+            });
+        } else {
+            ITEMS[rarity].forEach(item => {
+                allItems.push({ name: item.name, rarity, sellValue: item.sellValue, artClass: item.artClass });
+            });
+        }
     }
-
-    HIDDEN_ITEMS.forEach(item => {
-        allItems.push(item);
-    });
 
     allItems.forEach(item => {
         const slot = document.createElement('div');
         slot.classList.add('item-dex-slot', `rarity-${item.rarity}`);
 
         let content = '';
-        if (item.rarity === 'hidden' && !foundHiddenItems.includes(item.name)) {
-            // Render locked item
+        const isFound = item.rarity !== 'hidden' || foundHiddenItems.includes(item.name);
+
+        if (!isFound) {
             content = `
                 <div class="item-dex-art-container">
                     <svg class="lock-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#f0f0f0">
@@ -272,7 +308,6 @@ function renderItemDex() {
                 <div class="item-dex-rarity">Hidden Item</div>
             `;
         } else {
-            // Render unlocked item
             content = `
                 <div class="item-dex-art-container">
                     ${createItemPixelArt({ name: item.name, rarity: item.rarity, type: 'item' })}
@@ -333,12 +368,15 @@ function sellItem() {
     if (selectedItemIndex !== -1) {
         const itemToSell = inventory[selectedItemIndex];
         let sellPrice = 0;
+        let itemFound = false;
 
-        if (itemToSell.rarity === 'hidden') {
-            const hiddenItem = HIDDEN_ITEMS.find(item => item.name === itemToSell.name);
-            if (hiddenItem) sellPrice = hiddenItem.sellValue;
-        } else {
-            sellPrice = ITEMS[itemToSell.rarity].sellValue;
+        for (const rarity in ITEMS) {
+            const itemData = ITEMS[rarity].find(i => i.name === itemToSell.name);
+            if (itemData) {
+                sellPrice = itemData.sellValue;
+                itemFound = true;
+                break;
+            }
         }
 
         if (sellPrice > 0) {
@@ -356,10 +394,6 @@ function sellItem() {
 }
 
 function generateRandomItem(crateRarity) {
-    if (crateRarity === 'rare' && Math.random() < 0.2) { 
-        return { type: 'crate', name: 'Uncommon Crate', rarity: 'uncommon' };
-    }
-
     const possibleRarities = CRATE_CONTENTS[crateRarity];
     let rarity;
     let foundRarity = false;
@@ -379,11 +413,11 @@ function generateRandomItem(crateRarity) {
         rarity = possibleRarities[0];
     }
     
-    const itemPool = ITEMS[rarity].names;
+    const itemPool = ITEMS[rarity];
     const randomIndex = Math.floor(Math.random() * itemPool.length);
-    const itemName = itemPool[randomIndex];
+    const itemData = itemPool[randomIndex];
     
-    return { type: 'item', name: itemName, rarity: rarity };
+    return { type: 'item', name: itemData.name, rarity: rarity };
 }
 
 function tapToOpen() {
@@ -530,28 +564,9 @@ finishOpeningBtn.addEventListener('click', () => {
     renderInventory();
 });
 
-buyAmountSlider.addEventListener('input', () => {
-    buyAmountValue.textContent = buyAmountSlider.value;
-});
-
 buyButtons.forEach(button => {
     button.addEventListener('click', (e) => {
-        const crateType = e.target.dataset.crate-type;
-        const amountToBuy = parseInt(buyAmountSlider.value);
-        const pricePerCrate = CRATE_PRICES[crateType];
-        const totalPrice = pricePerCrate * amountToBuy;
-
-        if (money >= totalPrice) {
-            money -= totalPrice;
-            for (let i = 0; i < amountToBuy; i++) {
-                inventory.push({ type: 'crate', name: `${crateType} crate`, rarity: crateType });
-            }
-            updateMoneyDisplay();
-            saveGame();
-            showNotification(`You bought ${amountToBuy} ${crateType} crate(s)!`);
-        } else {
-            showNotification("Not enough money!");
-        }
+        showNotification("You cannot buy crates at the moment.");
     });
 });
 
@@ -569,8 +584,8 @@ doJobBtn.addEventListener('click', () => {
 
 digTreasureBtn.addEventListener('click', () => {
     digTreasureBtn.disabled = true;
-    treasureCooldown = Date.now() + 5000;
-    updateCooldownDisplay('treasure', 5);
+    treasureCooldown = Date.now() + 10000;
+    updateCooldownDisplay('treasure', 10);
     saveGame();
 
     if (Math.random() < 0.1) {
