@@ -266,7 +266,7 @@ function showScreen(screenId) {
 
 function showNotification(message) {
     notificationMessage.textContent = message;
-    **notificationPopup.classList.add('visible');**
+    *notificationPopup.classList.add('visible');*
     
     setTimeout(() => {
         **notificationPopup.classList.remove('visible');**
