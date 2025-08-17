@@ -116,17 +116,65 @@ body, html {
     left: 20px;
 }
 
+.money-stats-container {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    max-width: 800px;
+    flex-wrap: wrap;
+}
+
 .money-display-box {
     background-color: #242424;
     padding: 40px 60px;
     border-radius: 10px;
     border: 2px solid #4CAF50;
     box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+    min-width: 250px;
+    text-align: center;
 }
 
 .money-amount {
     font-size: 3em;
     font-weight: 700;
+    color: #4CAF50;
+}
+
+.stats-box {
+    background-color: #242424;
+    padding: 20px 30px;
+    border-radius: 10px;
+    border: 2px solid #555;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    min-width: 250px;
+}
+
+.stats-box h3 {
+    margin: 0 0 20px 0;
+    font-size: 1.5em;
+    text-align: center;
+    border-bottom: 2px solid #555;
+    padding-bottom: 10px;
+}
+
+.stat-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.stat-value {
+    font-weight: bold;
+}
+
+.text-red {
+    color: #f44336;
+}
+
+.text-green {
     color: #4CAF50;
 }
 
@@ -256,15 +304,17 @@ body, html {
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 0 1px; /* Base for all pixel art */
+    image-rendering: pixelated;
 }
 
-/* Common Item Pixel Art (Googly-Eyed Rock) */
+/* --- COMMON --- */
 .pixel-art.common.googly-rock {
-    background-color: #616161;
     width: 40px;
     height: 30px;
+    background-color: #616161;
     border-radius: 50%;
     position: relative;
+    box-shadow: 0 0 0 2px #444;
 }
 .pixel-art.common.googly-rock::before, .pixel-art.common.googly-rock::after {
     content: '';
@@ -279,7 +329,28 @@ body, html {
 .pixel-art.common.googly-rock::before { left: 5px; }
 .pixel-art.common.googly-rock::after { right: 5px; }
 
-/* Uncommon Item Pixel Art (Vintage Cassette Player) */
+.pixel-art.common.bent-spoon {
+    width: 10px;
+    height: 40px;
+    background-color: #c0c0c0;
+    position: relative;
+    border-radius: 2px;
+    transform: rotate(30deg);
+}
+.pixel-art.common.bent-spoon::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 25px;
+    background-color: #c0c0c0;
+    border-radius: 50% 50% 0 0;
+    top: -20px;
+    left: -5px;
+    border: 2px solid #999;
+    border-bottom: none;
+}
+
+/* --- UNCOMMON --- */
 .pixel-art.uncommon.cassette {
     width: 50px;
     height: 30px;
@@ -298,8 +369,34 @@ body, html {
     border: 1px solid #111;
 }
 
-/* Rare Item Pixel Art (Crystal Skull) */
-.pixel-art.rare.skull {
+.pixel-art.uncommon.fidget-spinner {
+    width: 60px;
+    height: 60px;
+    position: relative;
+}
+.pixel-art.uncommon.fidget-spinner::before, .pixel-art.uncommon.fidget-spinner::after {
+    content: '';
+    position: absolute;
+    background: #87ceeb;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+}
+.pixel-art.uncommon.fidget-spinner::before { top: 0; left: 50%; transform: translateX(-50%); }
+.pixel-art.uncommon.fidget-spinner::after { bottom: 0; left: 50%; transform: translateX(-50%); }
+.pixel-art.uncommon.fidget-spinner .spinner-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* --- RARE --- */
+.pixel-art.rare.crystal-skull {
     width: 40px;
     height: 50px;
     background: #00ffff;
@@ -307,7 +404,7 @@ body, html {
     position: relative;
     box-shadow: inset 0 0 0 2px #00cccc, inset 0 0 0 4px #009999;
 }
-.pixel-art.rare.skull::before, .pixel-art.rare.skull::after {
+.pixel-art.rare.crystal-skull::before, .pixel-art.rare.crystal-skull::after {
     content: '';
     position: absolute;
     bottom: 5px;
@@ -316,32 +413,31 @@ body, html {
     background: #00cccc;
     border-radius: 50% / 100% 100% 0 0;
 }
-.pixel-art.rare.skull::before { left: 5px; }
-.pixel-art.rare.skull::after { right: 5px; }
+.pixel-art.rare.crystal-skull::before { left: 5px; }
+.pixel-art.rare.crystal-skull::after { right: 5px; }
 
-/* Epic Item Pixel Art (Starmap Projector) */
-.pixel-art.epic.starmap {
-    width: 50px;
-    height: 50px;
-    background: #800080;
-    border-radius: 50%;
+.pixel-art.rare.golden-goblet {
+    width: 30px;
+    height: 40px;
+    background: #ffd700;
     position: relative;
-    box-shadow: 0 0 5px 2px #ff00ff;
+    border-radius: 0 0 5px 5px;
+    border-bottom: 5px solid #ccac00;
 }
-.pixel-art.epic.starmap::before {
+.pixel-art.rare.golden-goblet::before {
     content: '';
     position: absolute;
-    top: 5px;
-    left: 5px;
+    top: -15px;
+    left: -5px;
     width: 40px;
-    height: 40px;
-    background: radial-gradient(#ffff00 10%, transparent 10%);
-    background-size: 10px 10px;
-    border-radius: 50%;
+    height: 20px;
+    background: #ffd700;
+    border-radius: 50% 50% 0 0;
+    border-top: 5px solid #ccac00;
 }
 
-/* Mythical Item Pixel Art (Golden Compass) */
-.pixel-art.mythical.compass {
+/* --- MYTHICAL --- */
+.pixel-art.mythical.golden-compass {
     width: 40px;
     height: 40px;
     background: #ffd700;
@@ -349,21 +445,21 @@ body, html {
     border: 2px solid #ccac00;
     position: relative;
 }
-.pixel-art.mythical.compass::before, .pixel-art.mythical.compass::after {
+.pixel-art.mythical.golden-compass::before, .pixel-art.mythical.golden-compass::after {
     content: '';
     position: absolute;
     width: 0;
     height: 0;
     border-style: solid;
 }
-.pixel-art.mythical.compass::before {
+.pixel-art.mythical.golden-compass::before {
     top: 5px;
     left: 50%;
     transform: translateX(-50%);
     border-width: 0 5px 10px 5px;
     border-color: transparent transparent #ccac00 transparent;
 }
-.pixel-art.mythical.compass::after {
+.pixel-art.mythical.golden-compass::after {
     bottom: 5px;
     left: 50%;
     transform: translateX(-50%);
@@ -371,8 +467,28 @@ body, html {
     border-color: #ccac00 transparent transparent transparent;
 }
 
-/* Legendary Item Pixel Art (Amulet of Time) */
-.pixel-art.legendary.amulet {
+.pixel-art.mythical.dragon-egg {
+    width: 35px;
+    height: 50px;
+    background: linear-gradient(to bottom right, #800000, #ff4500);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    border: 2px solid #600000;
+    position: relative;
+    box-shadow: inset 0 0 10px #000;
+}
+.pixel-art.mythical.dragon-egg::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    width: 25px;
+    height: 30px;
+    border: 2px dotted #ff8c00;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+/* --- LEGENDARY --- */
+.pixel-art.legendary.amulet-of-time {
     width: 50px;
     height: 50px;
     background: #964B00;
@@ -380,7 +496,7 @@ body, html {
     border: 2px solid #5A2E0D;
     position: relative;
 }
-.pixel-art.legendary.amulet::before {
+.pixel-art.legendary.amulet-of-time::before {
     content: '';
     position: absolute;
     top: 10px;
@@ -391,13 +507,42 @@ body, html {
     border-radius: 50%;
 }
 
-/* Hidden Item Pixel Art */
+.pixel-art.legendary.excalibur-sword {
+    width: 10px;
+    height: 70px;
+    background: #c0c0c0;
+    position: relative;
+    box-shadow: 0 0 0 1px #808080;
+}
+.pixel-art.legendary.excalibur-sword::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -15px;
+    width: 40px;
+    height: 10px;
+    background: #ffd700;
+    box-shadow: 0 0 0 1px #ccac00;
+}
+.pixel-art.legendary.excalibur-sword::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -5px;
+    width: 20px;
+    height: 20px;
+    background: #ffffff;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    box-shadow: 0 0 0 1px #c0c0c0;
+}
+
+/* --- HIDDEN --- */
 .pixel-art.hidden.stick { background: #603010; width: 10px; height: 50px; }
 .pixel-art.hidden.baba { background: #a52a2a; width: 50px; height: 10px; border-radius: 5px; }
 .pixel-art.hidden.shoe { background: #1a1a1a; width: 25px; height: 15px; border-radius: 5px 5px 0 0; }
 .pixel-art.hidden.button { background: #f0f0f0; width: 20px; height: 20px; border-radius: 50%; }
 
-/* Crate Pixel Art */
+/* --- CRATE --- */
 .pixel-art.crate {
     background-color: #8B4513;
     border-top: 10px solid #5A2E0D;
