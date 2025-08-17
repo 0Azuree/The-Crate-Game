@@ -3,52 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crate Chronicles</title>
+    <title>Treasure Clicker</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
 
     <div id="start-screen" class="screen active">
-        <h1 class="game-title">Crate Chronicles</h1>
+        <h1 class="game-title">Treasure Clicker</h1>
         <div class="start-button-container">
-            <button id="start-button" class="action-button">Start</button>
+            <button id="start-button" class="action-button">Start Game</button>
         </div>
     </div>
 
     <div id="main-screen" class="screen">
+        <h2 class="screen-title">Main Menu</h2>
         <div class="main-buttons-container">
             <button id="check-money-btn" class="main-button">Check Money</button>
+            <button id="work-btn" class="main-button">Work</button>
             <button id="inventory-btn" class="main-button">Inventory</button>
             <button id="shop-btn" class="main-button">Shop</button>
-            <button id="work-btn" class="main-button">Work</button>
             <button id="item-dex-btn" class="main-button">Item Dex</button>
             <button id="settings-btn" class="main-button">Settings</button>
         </div>
     </div>
 
     <div id="money-screen" class="screen">
-        <h2 class="screen-title">Current Funds</h2>
+        <h2 class="screen-title">Financials</h2>
         <div class="money-stats-container">
             <div class="money-display-box">
-                <div id="money-display" class="money-amount">$0</div>
+                <div class="money-amount" id="money-display">$500</div>
+                <div class="money-label">Money</div>
             </div>
             <div class="stats-box">
-                <h3>Financial Overview</h3>
+                <h3>Statistics</h3>
                 <div class="stat-line">
-                    <span>Money Spent:</span>
-                    <span id="money-spent-display" class="stat-value text-red">$0</span>
+                    <div>Money Spent:</div>
+                    <div id="money-spent-display" class="stat-value text-red">$0</div>
                 </div>
                 <div class="stat-line">
-                    <span>Money Made:</span>
-                    <span id="money-made-display" class="stat-value text-green">$0</span>
+                    <div>Money Made:</div>
+                    <div id="money-made-display" class="stat-value text-green">$0</div>
                 </div>
                 <div class="stat-line">
-                    <span>Total Profit:</span>
-                    <span id="total-profit-display" class="stat-value">$0</span>
+                    <div>Total Profit:</div>
+                    <div id="total-profit-display" class="stat-value text-green">$0</div>
                 </div>
             </div>
         </div>
@@ -59,13 +57,13 @@
         <h2 class="screen-title">Work</h2>
         <div class="work-options-container">
             <div class="work-option">
-                <div class="work-text">Do a Job</div>
-                <button id="do-job-btn" class="buy-button">Work</button>
+                <div class="work-text">Do a quick job (5s)</div>
+                <button id="do-job-btn" class="action-button">Earn Money</button>
                 <div id="job-cooldown" class="cooldown-timer">Ready</div>
             </div>
             <div class="work-option">
-                <div class="work-text">Dig for Treasure</div>
-                <button id="dig-treasure-btn" class="buy-button">Dig</button>
+                <div class="work-text">Dig for Treasure (10s)</div>
+                <button id="dig-treasure-btn" class="action-button">Dig!</button>
                 <div id="treasure-cooldown" class="cooldown-timer">Ready</div>
             </div>
         </div>
@@ -73,12 +71,7 @@
     </div>
 
     <div id="inventory-screen" class="screen">
-        <div class="inventory-header">
-            <svg class="crate-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M19 12V16.8995C19 17.5143 18.2917 17.8286 17.8661 17.4082L15.4891 15.0489C15.1437 14.7061 14.7327 14.436 14.2818 14.2536L12.5645 13.5654C12.1691 13.4116 11.751 13.4116 11.3555 13.5654L9.63824 14.2536C9.18733 14.436 8.7763 14.7061 8.43089 15.0489L6.05391 17.4082C5.62832 17.8286 4.93993 17.5143 4.93993 16.8995V12M19 12L12 16L5 12M19 12V7.10053C19 6.48575 18.2917 6.17143 17.8661 6.59183L15.4891 8.95106C15.1437 9.29386 14.7327 9.56396 14.2818 9.74636L12.5645 10.4346C12.1691 10.5884 11.751 10.5884 11.3555 10.4346L9.63824 9.74636C9.18733 9.56396 8.7763 9.29386 8.43089 8.95106L6.05391 6.59183C5.62832 6.17143 4.93993 6.48575 4.93993 7.10053V12" stroke="#f0f0f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <h2 class="screen-title">Inventory</h2>
-        </div>
+        <h2 class="screen-title">Inventory</h2>
         <div class="inventory-tabs">
             <button id="crates-tab" class="tab-button active">Crates</button>
             <button id="items-tab" class="tab-button">Items</button>
@@ -86,17 +79,18 @@
         <div id="crates-container" class="item-grid active"></div>
         <div id="items-container" class="item-grid"></div>
         <div class="inventory-actions">
-            <button id="open-crate-btn" class="action-button hidden">Open</button>
-            <button id="sell-item-btn" class="action-button hidden">Sell</button>
+            <button id="open-crate-btn" class="action-button hidden">Open Crate</button>
+            <button id="sell-item-btn" class="action-button hidden">Sell Item</button>
         </div>
-        <button id="back-to-main-btn" class="action-button back-button bottom-left">Back</button>
+        <button id="back-to-main-btn" class="action-button back-button">Back</button>
     </div>
 
     <div id="open-crate-screen" class="screen">
-        <h2 id="tap-instruction" class="instruction-text">Tap 3 times to open!</h2>
+        <h2 class="screen-title">Opening Crate</h2>
         <div id="opening-crate-pixelart" class="crate-image"></div>
+        <div id="tap-instruction" class="instruction-text">Tap the crate to open!</div>
         <div id="item-drop-display" class="item-drop-text"></div>
-        <button id="finish-opening-btn" class="action-button hidden">Done</button>
+        <button id="finish-opening-btn" class="action-button hidden">Finish</button>
     </div>
 
     <div id="shop-screen" class="screen">
@@ -119,12 +113,12 @@
             </div>
         </div>
         <div class="buy-slider-container">
-            <div class="slider-label">Amount: <span id="buy-amount-value">1</span></div>
-            <input type="range" id="buy-amount-slider" min="1" max="100" value="1">
+            <span class="slider-label">Buy Amount: <span id="buy-amount-value">1</span></span>
+            <input type="range" id="buy-amount-slider" min="1" max="10" value="1">
         </div>
-        <button id="back-from-shop-btn" class="action-button back-button bottom-left">Back</button>
+        <button id="back-from-shop-btn" class="action-button back-button">Back</button>
     </div>
-    
+
     <div id="item-dex-screen" class="screen">
         <h2 class="screen-title">Item Dex</h2>
         <div id="item-dex-grid" class="item-dex-grid"></div>
@@ -134,9 +128,9 @@
     <div id="settings-screen" class="screen">
         <h2 class="screen-title">Settings</h2>
         <div class="settings-options-container">
-            <button id="credits-btn" class="main-button">Credits</button>
             <button id="save-game-btn" class="main-button">Save Game</button>
             <button id="reset-game-btn" class="main-button">Reset Game</button>
+            <button id="credits-btn" class="main-button">Credits</button>
         </div>
         <button id="back-from-settings-btn" class="action-button back-button">Back</button>
     </div>
@@ -144,39 +138,32 @@
     <div id="credits-screen" class="screen">
         <h2 class="screen-title">Credits</h2>
         <div class="credits-content">
-            <p>Game design & development: 0Azuree</p>
-            <p>UI/UX design: 0Azuree</p>
-            <p>Special Thanks to:</p>
-            <p>The amazing Crate Chronicles community</p>
-            <p>All bug finders</p>
-            <br>
-            <p>This is a custom game for personal use.</p>
-            <br>
-            <p>Additional Credits:</p>
-            <p>Art, Music, and Sound Effects by various creators</p>
-            <br>
-            <p id="maker-credit">The actual maker of the game 0Azuree</p>
-        </div>
-        <div id="secret-code-box" class="secret-code-container hidden">
-            <input type="text" id="secret-code-input" placeholder="Enter secret code...">
-            <button id="secret-code-submit" class="buy-button">Submit</button>
+            <p>Made with 💜 by a hobbyist developer.</p>
+            <p>This is a fan game inspired by other clicker/idle games.</p>
+            <p>Thanks to all the players for their support!</p>
+            <p id="maker-credit">Contact the maker here...</p>
         </div>
         <button id="back-from-credits-btn" class="action-button back-button">Back</button>
-    </div>
-
-    <div id="notification-popup" class="notification-box hidden">
-        <span id="notification-message"></span>
-    </div>
-
-    <div id="reset-popup" class="popup-box hidden">
-        <h3>Are you sure?</h3>
-        <p>This will permanently delete all your progress. You will start with $500.</p>
-        <div class="popup-buttons">
-            <button id="reset-yes-btn" class="popup-button reset-confirm">Yes</button>
-            <button id="reset-no-btn" class="popup-button reset-cancel">No</button>
+        <div id="secret-code-box" class="secret-code-container hidden">
+            <p>Enter Secret Code:</p>
+            <input type="text" id="secret-code-input">
+            <button id="secret-code-submit" class="action-button">Redeem</button>
         </div>
     </div>
 
+    <div id="notification-popup" class="notification-box">
+        <p id="notification-message"></p>
+    </div>
+
+    <div id="reset-popup" class="popup-box">
+        <h3>Are you sure?</h3>
+        <p>This will erase all your progress!</p>
+        <div class="popup-buttons">
+            <button id="reset-yes-btn" class="popup-button reset-confirm">Yes, reset</button>
+            <button id="reset-no-btn" class="popup-button reset-cancel">No, cancel</button>
+        </div>
+    </div>
+    
     <script src="script.js"></script>
 </body>
 </html>
