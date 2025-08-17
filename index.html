@@ -32,8 +32,25 @@
 
     <div id="money-screen" class="screen">
         <h2 class="screen-title">Current Funds</h2>
-        <div class="money-display-box">
-            <div id="money-display" class="money-amount">$0</div>
+        <div class="money-stats-container">
+            <div class="money-display-box">
+                <div id="money-display" class="money-amount">$0</div>
+            </div>
+            <div class="stats-box">
+                <h3>Financial Overview</h3>
+                <div class="stat-line">
+                    <span>Money Spent:</span>
+                    <span id="money-spent-display" class="stat-value text-red">$0</span>
+                </div>
+                <div class="stat-line">
+                    <span>Money Made:</span>
+                    <span id="money-made-display" class="stat-value text-green">$0</span>
+                </div>
+                <div class="stat-line">
+                    <span>Total Profit:</span>
+                    <span id="total-profit-display" class="stat-value">$0</span>
+                </div>
+            </div>
         </div>
         <button id="back-from-money-btn" class="action-button back-button">Back</button>
     </div>
