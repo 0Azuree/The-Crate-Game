@@ -89,6 +89,18 @@ const RARITY_CHANCES = {
     hidden: 0.01,
 };
 
+const CRATE_PRICES = {
+    normal: 500,
+    uncommon: 800,
+    rare: 1100,
+};
+
+const CRATE_CONTENTS = {
+    normal: ['common', 'uncommon'],
+    uncommon: ['uncommon', 'rare', 'epic'],
+    rare: ['rare', 'epic', 'mythical', 'legendary', 'hidden'],
+};
+
 // --- Game Logic Functions ---
 function updateMoneyDisplay() {
     moneyDisplay.textContent = `$${money}`;
@@ -107,7 +119,11 @@ function showScreen(screenId) {
 
 function showNotification(message) {
     notificationMessage.textContent = message;
-    notificationPopup.classList.add('visible');
+    notificationPopup.classList.remove('hidden'); // Ensure it's not display: none
+    setTimeout(() => {
+        notificationPopup.classList.add('visible');
+    }, 10); // A small delay to trigger the transition
+    
     setTimeout(() => {
         notificationPopup.classList.remove('visible');
     }, 3000); // Notification lasts 3 seconds
@@ -445,7 +461,7 @@ buyAmountSlider.addEventListener('input', () => {
 
 buyButtons.forEach(button => {
     button.addEventListener('click', (e) => {
-        const crateType = e.target.dataset.crate-type;
+        const crateType = e.target.dataset.crateType;
         const amountToBuy = parseInt(buyAmountSlider.value);
         let price = CRATE_PRICES[crateType];
 
