@@ -265,10 +265,10 @@ function showScreen(screenId) {
 
 function showNotification(message) {
     notificationMessage.textContent = message;
-    notificationPopup.classList.add('visible');
+    notificationPopup.classList.remove('hidden');
     
     setTimeout(() => {
-        notificationPopup.classList.remove('visible');
+        notificationPopup.classList.add('hidden');
     }, 3000);
 }
 
@@ -709,7 +709,7 @@ finishOpeningBtn.addEventListener('click', () => {
 
 buyButtons.forEach(button => {
     button.addEventListener('click', (e) => {
-        const crateType = e.target.dataset.crateType; // Fixed syntax here
+        const crateType = e.target.dataset.crateType;
         const cratePrice = CRATE_PRICES[crateType];
         const amount = parseInt(buyAmountSlider.value);
         const totalCost = cratePrice * amount;
@@ -821,16 +821,16 @@ saveGameBtn.addEventListener('click', () => {
 });
 
 resetGameBtn.addEventListener('click', () => {
-    resetPopup.classList.add('visible');
+    resetPopup.classList.remove('hidden');
 });
 
 resetNoBtn.addEventListener('click', () => {
-    resetPopup.classList.remove('visible');
+    resetPopup.classList.add('hidden');
 });
 
 resetYesBtn.addEventListener('click', () => {
     resetGame();
-    resetPopup.classList.remove('visible');
+    resetPopup.classList.add('hidden');
 });
 
 // --- Initial Setup ---
