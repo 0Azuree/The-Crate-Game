@@ -24,6 +24,11 @@ const shopScreen = document.getElementById('shop-screen');
 const itemDexScreen = document.getElementById('item-dex-screen');
 const settingsScreen = document.getElementById('settings-screen');
 const creditsScreen = document.getElementById('credits-screen');
+const codePopup = document.getElementById('code-popup');
+const codeInput = document.getElementById('code-input');
+const codeSubmitBtn = document.getElementById('code-submit-btn');
+const codeCancelBtn = document.getElementById('code-cancel-btn');
+const makerCredit = document.getElementById('maker-credit');
 
 const startButton = document.getElementById('start-button');
 const moneyDisplay = document.getElementById('money-display');
@@ -233,6 +238,28 @@ const CRATE_CONTENTS = {
     rare: ['rare', 'mythical', 'legendary', 'hidden'],
 };
 
+// --- Secret Codes ---
+const CODES = {
+    "ILoveThisGame": {
+        rewardType: "money",
+        amount: 2500,
+        message: "You received $2500!",
+        used: false
+    },
+    "TreasureMaster": {
+        rewardType: "crate",
+        crateType: "rare",
+        message: "You received a Rare Crate!",
+        used: false
+    },
+    "HiddenSecrets": {
+        rewardType: "item",
+        itemName: "Baba's Belt",
+        message: "You found Baba's Belt!",
+        used: false
+    }
+};
+
 // --- Game Logic Functions ---
 function updateFinancialStats() {
     moneyDisplay.textContent = `$${money}`;
@@ -278,6 +305,7 @@ function saveGame() {
     localStorage.setItem('treasureCooldown', treasureCooldown);
     localStorage.setItem('codeUsed', codeUsed);
     localStorage.setItem('foundHiddenItems', JSON.stringify(foundHiddenItems));
+    localStorage.setItem('codesUsed', JSON.stringify(Object.keys(CODES).filter(key => CODES[key].used)));
 }
 
 function loadGame() {
@@ -289,6 +317,7 @@ function loadGame() {
     const savedTreasureCooldown = localStorage.getItem('treasureCooldown');
     const savedCodeUsed = localStorage.getItem('codeUsed');
     const savedHiddenItems = localStorage.getItem('foundHiddenItems');
+    const savedCodesUsed = localStorage.getItem('codesUsed');
     
     if (savedMoney) {
         money = parseInt(savedMoney);
@@ -316,7 +345,15 @@ function loadGame() {
     if (savedHiddenItems) {
         foundHiddenItems = JSON.parse(savedHiddenItems);
     }
-    
+    if (savedCodesUsed) {
+        const usedCodes = JSON.parse(savedCodesUsed);
+        usedCodes.forEach(code => {
+            if (CODES[code]) {
+                CODES[code].used = true;
+            }
+        });
+    }
+
     updateFinancialStats();
     renderInventory();
     
@@ -597,6 +634,9 @@ function resetGame() {
     // Clear localStorage
     localStorage.clear();
     
+    // Reset codesUsed state
+    Object.keys(CODES).forEach(key => CODES[key].used = false);
+    
     // Update the UI
     updateFinancialStats();
     renderInventory();
@@ -604,6 +644,47 @@ function resetGame() {
     // Go back to the main screen
     showScreen('main-screen');
     showNotification("Game has been reset.");
+}
+
+function checkCode() {
+    const code = codeInput.value.trim();
+    if (CODES[code]) {
+        if (CODES[code].used) {
+            showNotification("Code already used!");
+        } else {
+            const reward = CODES[code];
+            if (reward.rewardType === "money") {
+                money += reward.amount;
+                moneyMade += reward.amount;
+            } else if (reward.rewardType === "crate") {
+                inventory.push({ type: 'crate', name: `${reward.crateType} crate`, rarity: reward.crateType });
+            } else if (reward.rewardType === "item") {
+                const itemData = Object.values(ITEMS).flat().find(i => i.name === reward.itemName);
+                if (itemData) {
+                    inventory.push({ type: 'item', name: itemData.name, rarity: itemData.rarity });
+                    if (itemData.rarity === 'hidden' && !foundHiddenItems.includes(itemData.name)) {
+                        foundHiddenItems.push(itemData.name);
+                    }
+                }
+            }
+            CODES[code].used = true;
+            updateFinancialStats();
+            showNotification(reward.message);
+            saveGame();
+            closeCodePopup();
+        }
+    } else {
+        showNotification("Invalid code!");
+    }
+}
+
+function openCodePopup() {
+    codePopup.classList.add('visible');
+    codeInput.value = '';
+}
+
+function closeCodePopup() {
+    codePopup.classList.remove('visible');
 }
 
 // --- Event Listeners ---
@@ -746,7 +827,6 @@ doJobBtn.addEventListener('click', () => {
 digTreasureBtn.addEventListener('click', () => {
     digTreasureBtn.disabled = true;
     treasureCooldown = Date.now() + 10000;
-    updateCooldownDisplay('treasure', 10);
     saveGame();
 
     if (Math.random() < 0.1) {
@@ -774,6 +854,21 @@ resetNoBtn.addEventListener('click', () => {
 resetYesBtn.addEventListener('click', () => {
     resetGame();
     resetPopup.classList.remove('visible');
+});
+
+makerCredit.addEventListener('click', () => {
+    openCodePopup();
+});
+
+codeSubmitBtn.addEventListener('click', checkCode);
+
+codeCancelBtn.addEventListener('click', closeCodePopup);
+
+// Listen for Enter key on code input
+codeInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        checkCode();
+    }
 });
 
 // --- Initial Setup ---
