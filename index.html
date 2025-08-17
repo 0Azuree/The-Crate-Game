@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-s1.0">
     <title>Crate Chronicles</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="item-designs.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
 
@@ -88,9 +89,12 @@
 
     <div id="open-crate-screen" class="screen">
         <h2 class="screen-title">Opening Crate</h2>
-        <div id="opening-crate-pixelart" class="crate-image"></div>
+        <div id="opening-crate-container">
+             <div id="opening-crate-pixelart" class="crate-image"></div>
+        </div>
         <div id="tap-instruction" class="instruction-text">Tap the crate to open!</div>
-        <div id="item-drop-display" class="item-drop-text"></div>
+        <div id="item-drop-display" class="item-drop-text hidden"></div>
+        <div id="item-drop-pixelart" class="pixel-art-container hidden"></div>
         <button id="finish-opening-btn" class="action-button hidden">Finish</button>
     </div>
 
@@ -142,10 +146,6 @@
             <div class="credits-section">
                 <h3>Game Design & Development</h3>
                 <p>Crate Chronicles Team</p>
-            </div>
-            <div class="credits-section">
-                <h3>Lead Programmer</h3>
-                <p>Gemini AI</p>
             </div>
             <div class="credits-section">
                 <h3>Item Art & Concepts</h3>
