@@ -173,8 +173,32 @@ body, html {
     height: 40px;
 }
 
+.inventory-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    font-size: 1.1em;
+    font-weight: 700;
+    border: none;
+    background-color: #242424;
+    color: #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.tab-button.active {
+    background-color: #555;
+    color: white;
+}
+
 .item-grid {
-    display: grid;
+    display: none; /* Default hidden */
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 20px;
     width: 90%;
@@ -186,25 +210,30 @@ body, html {
     border-radius: 10px;
 }
 
-.crate-item, .empty-slot {
+.item-grid.active {
+    display: grid;
+}
+
+.crate-item, .item-item, .empty-slot {
     width: 100%;
     padding-top: 100%; /* Creates a square container */
     position: relative;
     background-color: #333;
     border-radius: 8px;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.crate-item:hover {
+.crate-item:hover, .item-item:hover {
     transform: scale(1.05);
 }
 
-.crate-item .crate-text {
+.item-text {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -215,6 +244,31 @@ body, html {
     text-align: center;
 }
 
+.rarity-common { border: 2px solid #808080; }
+.rarity-uncommon { border: 2px solid #008000; }
+.rarity-rare { border: 2px solid #0000ff; }
+.rarity-epic { border: 2px solid #800080; }
+.rarity-mythical { border: 2px solid #ff4500; }
+.rarity-legendary { border: 2px solid #ffd700; }
+.rarity-hidden { border: 2px solid #ff1493; }
+.rarity-crate { border: 2px solid #5A2E0D; }
+
+.crate-pixel-art {
+    width: 80%;
+    height: 80%;
+    background-color: #8B4513;
+    border-top: 10px solid #5A2E0D;
+    border-bottom: 10px solid #5A2E0D;
+    box-shadow: 
+        inset 0 0 0 5px #703A0E, 
+        inset 0 0 0 8px #60320B,
+        inset 0 0 0 11px #703A0E;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .inventory-actions {
     position: fixed;
     bottom: 20px;
@@ -223,7 +277,7 @@ body, html {
     gap: 10px;
 }
 
-#open-crate-btn, #sell-crate-btn {
+#open-crate-btn, #sell-item-btn {
     width: 150px;
     height: 50px;
 }
