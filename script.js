@@ -8,6 +8,7 @@ let jobCooldown = 0;
 let treasureCooldown = 0;
 const CRATE_SELL_PRICE = 50;
 let codeUsed = false;
+let foundHiddenItems = []; // Array to store found hidden item names
 
 // --- DOM Elements ---
 const startScreen = document.getElementById('start-screen');
@@ -17,6 +18,7 @@ const workScreen = document.getElementById('work-screen');
 const inventoryScreen = document.getElementById('inventory-screen');
 const openCrateScreen = document.getElementById('open-crate-screen');
 const shopScreen = document.getElementById('shop-screen');
+const itemDexScreen = document.getElementById('item-dex-screen');
 const settingsScreen = document.getElementById('settings-screen');
 const creditsScreen = document.getElementById('credits-screen');
 
@@ -26,6 +28,7 @@ const checkMoneyBtn = document.getElementById('check-money-btn');
 const inventoryBtn = document.getElementById('inventory-btn');
 const shopBtn = document.getElementById('shop-btn');
 const workBtn = document.getElementById('work-btn');
+const itemDexBtn = document.getElementById('item-dex-btn');
 const settingsBtn = document.getElementById('settings-btn');
 const creditsBtn = document.getElementById('credits-btn');
 const makerCredit = document.getElementById('maker-credit');
@@ -43,6 +46,7 @@ const backFromMoneyBtn = document.getElementById('back-from-money-btn');
 const backToMainBtn = document.getElementById('back-to-main-btn');
 const backFromShopBtn = document.getElementById('back-from-shop-btn');
 const backFromWorkBtn = document.getElementById('back-from-work-btn');
+const backFromItemDexBtn = document.getElementById('back-from-item-dex-btn');
 const backFromSettingsBtn = document.getElementById('back-from-settings-btn');
 const backFromCreditsBtn = document.getElementById('back-from-credits-btn');
 
@@ -61,6 +65,9 @@ const treasureCooldownTimer = document.getElementById('treasure-cooldown');
 const notificationPopup = document.getElementById('notification-popup');
 const notificationMessage = document.getElementById('notification-message');
 
+const itemDexGrid = document.getElementById('item-dex-grid');
+
+
 // --- Item Data ---
 const HIDDEN_ITEMS = [
     { name: 'Stick', sellValue: 80000, rarity: 'hidden', artClass: 'hidden stick' },
@@ -70,13 +77,13 @@ const HIDDEN_ITEMS = [
 ];
 
 const ITEMS = {
-    common: Array.from({ length: 40 }, (_, i) => `Dusty Relic ${i + 1}`),
-    uncommon: Array.from({ length: 30 }, (_, i) => `Gleaming Fragment ${i + 1}`),
-    rare: Array.from({ length: 20 }, (_, i) => `Enchanted Gemstone ${i + 1}`),
-    epic: Array.from({ length: 15 }, (_, i) => `Astral Shard ${i + 1}`),
-    mythical: Array.from({ length: 6 }, (_, i) => `Cosmic Core ${i + 1}`),
-    legendary: Array.from({ length: 4 }, (_, i) => `Eternal Flame ${i + 1}`),
-    hidden: HIDDEN_ITEMS.map(item => item.name),
+    common: { names: Array.from({ length: 40 }, (_, i) => `Dusty Relic ${i + 1}`), sellValue: 150 },
+    uncommon: { names: Array.from({ length: 30 }, (_, i) => `Gleaming Fragment ${i + 1}`), sellValue: 500 },
+    rare: { names: Array.from({ length: 20 }, (_, i) => `Enchanted Gemstone ${i + 1}`), sellValue: 1200 },
+    epic: { names: Array.from({ length: 15 }, (_, i) => `Astral Shard ${i + 1}`), sellValue: 5000 },
+    mythical: { names: Array.from({ length: 6 }, (_, i) => `Cosmic Core ${i + 1}`), sellValue: 15000 },
+    legendary: { names: Array.from({ length: 4 }, (_, i) => `Eternal Flame ${i + 1}`), sellValue: 30000 },
+    hidden: { names: HIDDEN_ITEMS.map(item => item.name), sellValue: 0 }, // Handled individually
 };
 
 const RARITY_CHANCES = {
@@ -107,7 +114,7 @@ function updateMoneyDisplay() {
 }
 
 function showScreen(screenId) {
-    const screens = [startScreen, mainScreen, moneyScreen, workScreen, inventoryScreen, openCrateScreen, shopScreen, settingsScreen, creditsScreen];
+    const screens = [startScreen, mainScreen, moneyScreen, workScreen, inventoryScreen, openCrateScreen, shopScreen, itemDexScreen, settingsScreen, creditsScreen];
     screens.forEach(screen => {
         if (screen.id === screenId) {
             screen.classList.add('active');
@@ -119,14 +126,14 @@ function showScreen(screenId) {
 
 function showNotification(message) {
     notificationMessage.textContent = message;
-    notificationPopup.classList.remove('hidden'); // Ensure it's not display: none
+    notificationPopup.classList.remove('hidden');
     setTimeout(() => {
         notificationPopup.classList.add('visible');
-    }, 10); // A small delay to trigger the transition
+    }, 10);
     
     setTimeout(() => {
         notificationPopup.classList.remove('visible');
-    }, 3000); // Notification lasts 3 seconds
+    }, 3000);
 }
 
 function saveGame() {
@@ -135,6 +142,7 @@ function saveGame() {
     localStorage.setItem('jobCooldown', jobCooldown);
     localStorage.setItem('treasureCooldown', treasureCooldown);
     localStorage.setItem('codeUsed', codeUsed);
+    localStorage.setItem('foundHiddenItems', JSON.stringify(foundHiddenItems));
 }
 
 function loadGame() {
@@ -143,6 +151,7 @@ function loadGame() {
     const savedJobCooldown = localStorage.getItem('jobCooldown');
     const savedTreasureCooldown = localStorage.getItem('treasureCooldown');
     const savedCodeUsed = localStorage.getItem('codeUsed');
+    const savedHiddenItems = localStorage.getItem('foundHiddenItems');
     
     if (savedMoney) {
         money = parseInt(savedMoney);
@@ -159,11 +168,13 @@ function loadGame() {
     if (savedCodeUsed) {
         codeUsed = savedCodeUsed === 'true';
     }
+    if (savedHiddenItems) {
+        foundHiddenItems = JSON.parse(savedHiddenItems);
+    }
     
     updateMoneyDisplay();
     renderInventory();
     
-    // Check and update cooldowns on load
     if (jobCooldown > Date.now()) {
         const remainingTime = Math.ceil((jobCooldown - Date.now()) / 1000);
         doJobBtn.disabled = true;
@@ -180,12 +191,10 @@ function createItemPixelArt(item) {
     if (item.type === 'crate') {
         return `<div class="pixel-art crate"></div>`;
     }
-    // Handle specific hidden item art
     const hiddenItem = HIDDEN_ITEMS.find(h => h.name === item.name);
     if (hiddenItem) {
         return `<div class="pixel-art ${hiddenItem.artClass}"></div>`;
     }
-    // Generic pixel art for other rarities
     return `<div class="pixel-art ${item.rarity}"></div>`;
 }
 
@@ -196,8 +205,7 @@ function renderInventory() {
     const crates = inventory.filter(item => item.type === 'crate');
     const items = inventory.filter(item => item.type === 'item');
 
-    // Render crates
-    const totalCrateSlots = Math.max(crates.length, 20); // Show at least 20 empty slots
+    const totalCrateSlots = Math.max(crates.length, 20);
     crates.forEach((crate, index) => {
         const crateEl = document.createElement('div');
         crateEl.classList.add('item-slot', `rarity-${crate.rarity}`);
@@ -213,7 +221,6 @@ function renderInventory() {
         cratesContainer.appendChild(emptySlot);
     }
 
-    // Render items
     const totalItemSlots = Math.max(items.length, 20);
     items.forEach((item, index) => {
         const itemEl = document.createElement('div');
@@ -231,6 +238,54 @@ function renderInventory() {
     }
 
     updateActionButtons();
+}
+
+function renderItemDex() {
+    itemDexGrid.innerHTML = '';
+    
+    const allItems = [];
+    for (const rarity in ITEMS) {
+        if (rarity === 'hidden') continue;
+        ITEMS[rarity].names.forEach(name => {
+            allItems.push({ name, rarity, sellValue: ITEMS[rarity].sellValue });
+        });
+    }
+
+    HIDDEN_ITEMS.forEach(item => {
+        allItems.push(item);
+    });
+
+    allItems.forEach(item => {
+        const slot = document.createElement('div');
+        slot.classList.add('item-dex-slot', `rarity-${item.rarity}`);
+
+        let content = '';
+        if (item.rarity === 'hidden' && !foundHiddenItems.includes(item.name)) {
+            // Render locked item
+            content = `
+                <div class="item-dex-art-container">
+                    <svg class="lock-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#f0f0f0">
+                        <path d="M12 17a2 2 0 01-2-2v-2a2 2 0 012-2c.328 0 .642.064.935.191l.889.378a1 1 0 00.744-1.872L13.68 9.53a4 4 0 10-3.684 6.784L10 17v-2a2 2 0 012-2zM12 4a5 5 0 015 5h-2a3 3 0 00-3-3 3 3 0 00-3 3h-2a5 5 0 015-5z"/>
+                    </svg>
+                </div>
+                <div class="item-dex-name">???</div>
+                <div class="item-dex-rarity">Hidden Item</div>
+            `;
+        } else {
+            // Render unlocked item
+            content = `
+                <div class="item-dex-art-container">
+                    ${createItemPixelArt({ name: item.name, rarity: item.rarity, type: 'item' })}
+                </div>
+                <div class="item-dex-name">${item.name}</div>
+                <div class="item-dex-rarity">${item.rarity.charAt(0).toUpperCase() + item.rarity.slice(1)}</div>
+                <div class="item-dex-value">$${item.sellValue}</div>
+            `;
+        }
+
+        slot.innerHTML = content;
+        itemDexGrid.appendChild(slot);
+    });
 }
 
 function selectItem(index) {
@@ -277,20 +332,26 @@ function openCrate() {
 function sellItem() {
     if (selectedItemIndex !== -1) {
         const itemToSell = inventory[selectedItemIndex];
-        let sellPrice = CRATE_SELL_PRICE;
+        let sellPrice = 0;
 
-        const hiddenItem = HIDDEN_ITEMS.find(item => item.name === itemToSell.name);
-        if (hiddenItem) {
-            sellPrice = hiddenItem.sellValue;
+        if (itemToSell.rarity === 'hidden') {
+            const hiddenItem = HIDDEN_ITEMS.find(item => item.name === itemToSell.name);
+            if (hiddenItem) sellPrice = hiddenItem.sellValue;
+        } else {
+            sellPrice = ITEMS[itemToSell.rarity].sellValue;
         }
 
-        inventory.splice(selectedItemIndex, 1);
-        money += sellPrice;
-        updateMoneyDisplay();
-        selectedItemIndex = -1;
-        renderInventory();
-        saveGame();
-        showNotification(`You sold a ${itemToSell.name} for $${sellPrice}!`);
+        if (sellPrice > 0) {
+            inventory.splice(selectedItemIndex, 1);
+            money += sellPrice;
+            updateMoneyDisplay();
+            selectedItemIndex = -1;
+            renderInventory();
+            saveGame();
+            showNotification(`You sold a ${itemToSell.name} for $${sellPrice}!`);
+        } else {
+            showNotification("This item cannot be sold for a profit!");
+        }
     }
 }
 
@@ -318,7 +379,7 @@ function generateRandomItem(crateRarity) {
         rarity = possibleRarities[0];
     }
     
-    const itemPool = ITEMS[rarity];
+    const itemPool = ITEMS[rarity].names;
     const randomIndex = Math.floor(Math.random() * itemPool.length);
     const itemName = itemPool[randomIndex];
     
@@ -337,6 +398,11 @@ function tapToOpen() {
 
         inventory.splice(selectedItemIndex, 1); 
         inventory.push(droppedItem);
+        
+        // Add to found hidden items if applicable
+        if (droppedItem.rarity === 'hidden' && !foundHiddenItems.includes(droppedItem.name)) {
+            foundHiddenItems.push(droppedItem.name);
+        }
         
         itemDropDisplay.innerHTML = `You got a <span class="rarity-${droppedItem.rarity}">${droppedItem.rarity}</span> item: ${droppedItem.name}!`;
 
@@ -393,6 +459,11 @@ shopBtn.addEventListener('click', () => {
     showScreen('shop-screen');
 });
 
+itemDexBtn.addEventListener('click', () => {
+    showScreen('item-dex-screen');
+    renderItemDex();
+});
+
 workBtn.addEventListener('click', () => {
     showScreen('work-screen');
 });
@@ -410,6 +481,10 @@ backToMainBtn.addEventListener('click', () => {
 });
 
 backFromShopBtn.addEventListener('click', () => {
+    showScreen('main-screen');
+});
+
+backFromItemDexBtn.addEventListener('click', () => {
     showScreen('main-screen');
 });
 
@@ -461,16 +536,13 @@ buyAmountSlider.addEventListener('input', () => {
 
 buyButtons.forEach(button => {
     button.addEventListener('click', (e) => {
-        const crateType = e.target.dataset.crateType;
+        const crateType = e.target.dataset.crate-type;
         const amountToBuy = parseInt(buyAmountSlider.value);
-        let price = CRATE_PRICES[crateType];
+        const pricePerCrate = CRATE_PRICES[crateType];
+        const totalPrice = pricePerCrate * amountToBuy;
 
-        if (crateType === 'normal') {
-            price *= amountToBuy;
-        }
-
-        if (money >= price) {
-            money -= price;
+        if (money >= totalPrice) {
+            money -= totalPrice;
             for (let i = 0; i < amountToBuy; i++) {
                 inventory.push({ type: 'crate', name: `${crateType} crate`, rarity: crateType });
             }
@@ -551,7 +623,12 @@ secretCodeSubmit.addEventListener('click', () => {
             saveGame();
         }
     } else if (code === 'Itemsme') {
-        HIDDEN_ITEMS.forEach(item => inventory.push(item));
+        HIDDEN_ITEMS.forEach(item => {
+            if (!foundHiddenItems.includes(item.name)) {
+                inventory.push(item);
+                foundHiddenItems.push(item.name);
+            }
+        });
         showNotification("You've received the hidden items!");
         renderInventory();
         saveGame();
