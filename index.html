@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleek Clicker Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="start-screen" class="screen active">
+        <h1 class="game-title">Project Clicker</h1>
+        <div class="start-button-container">
+            <button id="start-button" class="action-button">Start</button>
+        </div>
+    </div>
+
+    <div id="main-screen" class="screen">
+        <div class="top-bar">
+            <div class="money-display-container">
+                <div class="money-text">Money:</div>
+                <div id="money-display" class="money-amount">$500</div>
+            </div>
+        </div>
+        <div class="main-buttons-container">
+            <button id="check-money-btn" class="main-button">Check Money</button>
+            <button id="inventory-btn" class="main-button">Inventory</button>
+            <button id="shop-btn" class="main-button">Shop</button>
+            <button id="achievements-btn" class="main-button">Achievements</button>
+            <button id="settings-btn" class="main-button">Settings</button>
+        </div>
+    </div>
+
+    <div id="inventory-screen" class="screen">
+        <h2 class="screen-title">Inventory</h2>
+        <div id="crates-container" class="item-grid"></div>
+        <div class="inventory-actions">
+            <button id="open-crate-btn" class="action-button hidden">Open</button>
+            <button id="sell-crate-btn" class="action-button hidden">Sell</button>
+            <button id="back-to-main-btn" class="action-button">Back</button>
+        </div>
+    </div>
+
+    <div id="open-crate-screen" class="screen">
+        <h2 id="tap-instruction" class="instruction-text">Tap 3 times to open!</h2>
+        <img id="opening-crate-img" src="" alt="Crate Image" class="crate-image">
+        <div id="item-drop-display" class="item-drop-text"></div>
+        <button id="finish-opening-btn" class="action-button hidden">Done</button>
+    </div>
+
+    <div id="shop-screen" class="screen">
+        <h2 class="screen-title">Shop</h2>
+        <div class="shop-items-grid">
+            <div class="shop-item">
+                <div class="item-name">Normal Crate</div>
+                <div class="item-cost">$500</div>
+                <button class="buy-button" data-crate-type="normal">Buy</button>
+            </div>
+            <div class="shop-item">
+                <div class="item-name">Uncommon Crate</div>
+                <div class="item-cost">$800</div>
+                <button class="buy-button" data-crate-type="uncommon">Buy</button>
+            </div>
+            <div class="shop-item">
+                <div class="item-name">Rare Crate</div>
+                <div class="item-cost">$1100</div>
+                <button class="buy-button" data-crate-type="rare">Buy</button>
+            </div>
+        </div>
+        <button id="back-from-shop-btn" class="action-button">Back</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
