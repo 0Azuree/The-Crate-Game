@@ -1,7 +1,8 @@
 // --- Game State Variables ---
 let money = 500;
 let inventory = [];
-let selectedCrateIndex = -1;
+let selectedItemIndex = -1;
+let selectedTab = 'crates';
 let tapCount = 0;
 let jobCooldown = 0;
 let treasureCooldown = 0;
@@ -33,8 +34,11 @@ const secretCodeInput = document.getElementById('secret-code-input');
 const secretCodeSubmit = document.getElementById('secret-code-submit');
 
 const cratesContainer = document.getElementById('crates-container');
+const itemsContainer = document.getElementById('items-container');
+const cratesTab = document.getElementById('crates-tab');
+const itemsTab = document.getElementById('items-tab');
 const openCrateBtn = document.getElementById('open-crate-btn');
-const sellCrateBtn = document.getElementById('sell-crate-btn');
+const sellItemBtn = document.getElementById('sell-item-btn');
 const backFromMoneyBtn = document.getElementById('back-from-money-btn');
 const backToMainBtn = document.getElementById('back-to-main-btn');
 const backFromShopBtn = document.getElementById('back-from-shop-btn');
@@ -47,7 +51,7 @@ const buyAmountSlider = document.getElementById('buy-amount-slider');
 const buyAmountValue = document.getElementById('buy-amount-value');
 const tapInstruction = document.getElementById('tap-instruction');
 const openingCratePixelart = document.getElementById('opening-crate-pixelart');
-const itemDropDisplay = document.getElementById('item-drop-display');
+const itemDropDisplay = document.getElementById('item-drop-text');
 const finishOpeningBtn = document.getElementById('finish-opening-btn');
 const doJobBtn = document.getElementById('do-job-btn');
 const jobCooldownTimer = document.getElementById('job-cooldown');
@@ -56,10 +60,10 @@ const treasureCooldownTimer = document.getElementById('treasure-cooldown');
 
 // --- Item Data ---
 const HIDDEN_ITEMS = [
-    { name: 'Stick', sellValue: 80000 },
-    { name: 'Baba\'s Belt', sellValue: 100000 },
-    { name: 'Shoe', sellValue: 50000 },
-    { name: 'Button', sellValue: 50000 }
+    { name: 'Stick', sellValue: 80000, rarity: 'hidden' },
+    { name: 'Baba\'s Belt', sellValue: 100000, rarity: 'hidden' },
+    { name: 'Shoe', sellValue: 50000, rarity: 'hidden' },
+    { name: 'Button', sellValue: 50000, rarity: 'hidden' }
 ];
 
 const ITEMS = {
@@ -80,6 +84,16 @@ const RARITY_CHANCES = {
     mythical: 0.06,
     legendary: 0.03,
     hidden: 0.01,
+};
+
+const RARITY_COLORS = {
+    'common': '#808080',
+    'uncommon': '#008000',
+    'rare': '#0000ff',
+    'epic': '#800080',
+    'mythical': '#ff4500',
+    'legendary': '#ffd700',
+    'hidden': '#ff1493'
 };
 
 const CRATE_PRICES = {
@@ -159,89 +173,116 @@ function loadGame() {
 
 function renderInventory() {
     cratesContainer.innerHTML = '';
-    const totalSlots = Math.max(inventory.length, 20); // Show at least 20 empty slots
+    itemsContainer.innerHTML = '';
     
+    const crates = inventory.filter(item => item.type === 'crate');
+    const items = inventory.filter(item => item.type === 'item');
+
     // Render crates
-    inventory.forEach((itemName, index) => {
-        const crate = document.createElement('div');
-        crate.classList.add('crate-item');
-        crate.innerHTML = `<span class="crate-text">${itemName}</span>`;
-        crate.dataset.index = index;
-        crate.addEventListener('click', () => selectCrate(index));
-        cratesContainer.appendChild(crate);
+    const totalCrateSlots = Math.max(crates.length, 20); // Show at least 20 empty slots
+    crates.forEach((crate, index) => {
+        const crateEl = document.createElement('div');
+        crateEl.classList.add('crate-item', `rarity-${crate.rarity}`);
+        crateEl.innerHTML = `<div class="crate-pixel-art"></div>`;
+        crateEl.dataset.index = inventory.indexOf(crate);
+        crateEl.addEventListener('click', () => selectItem(inventory.indexOf(crate)));
+        cratesContainer.appendChild(crateEl);
     });
 
-    // Render empty slots
-    for (let i = inventory.length; i < totalSlots; i++) {
+    for (let i = crates.length; i < totalCrateSlots; i++) {
         const emptySlot = document.createElement('div');
         emptySlot.classList.add('empty-slot');
         cratesContainer.appendChild(emptySlot);
     }
 
-    // Hide buttons if no crate is selected
-    if (selectedCrateIndex === -1) {
+    // Render items
+    const totalItemSlots = Math.max(items.length, 20);
+    items.forEach((item, index) => {
+        const itemEl = document.createElement('div');
+        itemEl.classList.add('item-item', `rarity-${item.rarity}`);
+        itemEl.innerHTML = `<span class="item-text">${item.name}</span>`;
+        itemEl.dataset.index = inventory.indexOf(item);
+        itemEl.addEventListener('click', () => selectItem(inventory.indexOf(item)));
+        itemsContainer.appendChild(itemEl);
+    });
+
+    for (let i = items.length; i < totalItemSlots; i++) {
+        const emptySlot = document.createElement('div');
+        emptySlot.classList.add('empty-slot');
+        itemsContainer.appendChild(emptySlot);
+    }
+
+    updateActionButtons();
+}
+
+function selectItem(index) {
+    selectedItemIndex = index;
+    // Highlight the selected item/crate
+    document.querySelectorAll('.crate-item, .item-item').forEach((el) => {
+        el.classList.remove('selected');
+        if (parseInt(el.dataset.index) === index) {
+            el.classList.add('selected');
+        }
+    });
+    updateActionButtons();
+}
+
+function updateActionButtons() {
+    const selectedItem = inventory[selectedItemIndex];
+    if (!selectedItem) {
         openCrateBtn.classList.add('hidden');
-        sellCrateBtn.classList.add('hidden');
+        sellItemBtn.classList.add('hidden');
+    } else {
+        if (selectedItem.type === 'crate') {
+            openCrateBtn.classList.remove('hidden');
+            sellItemBtn.classList.add('hidden');
+        } else {
+            openCrateBtn.classList.add('hidden');
+            sellItemBtn.classList.remove('hidden');
+        }
     }
 }
 
-function selectCrate(index) {
-    selectedCrateIndex = index;
-    // Highlight the selected crate
-    document.querySelectorAll('.crate-item').forEach((crate) => {
-        if (parseInt(crate.dataset.index) === index) {
-            crate.style.border = '2px solid #007BFF';
-        } else {
-            crate.style.border = '2px solid #333';
-        }
-    });
-    // Show buttons
-    openCrateBtn.classList.remove('hidden');
-    sellCrateBtn.classList.remove('hidden');
-}
-
 function openCrate() {
-    if (selectedCrateIndex !== -1) {
-        const item = inventory[selectedCrateIndex];
-        if (item.includes('Crate')) {
-            showScreen('open-crate-screen');
-            tapCount = 0;
-            itemDropDisplay.textContent = '';
-            finishOpeningBtn.classList.add('hidden');
-            tapInstruction.classList.remove('hidden');
-            openingCratePixelart.style.transform = 'scale(1)';
-        } else {
-            alert("This is an item, not a crate!");
-        }
+    const crate = inventory[selectedItemIndex];
+    if (crate && crate.type === 'crate') {
+        showScreen('open-crate-screen');
+        tapCount = 0;
+        itemDropDisplay.textContent = '';
+        finishOpeningBtn.classList.add('hidden');
+        tapInstruction.classList.remove('hidden');
+        openingCratePixelart.style.transform = 'scale(1)';
+    } else {
+        alert("This is not a crate!");
     }
 }
 
 function sellItem() {
-    if (selectedCrateIndex !== -1) {
-        const itemToSell = inventory[selectedCrateIndex];
+    if (selectedItemIndex !== -1) {
+        const itemToSell = inventory[selectedItemIndex];
         let sellPrice = CRATE_SELL_PRICE;
 
         // Check for special hidden item sell values
-        const hiddenItem = HIDDEN_ITEMS.find(item => item.name === itemToSell);
+        const hiddenItem = HIDDEN_ITEMS.find(item => item.name === itemToSell.name);
         if (hiddenItem) {
             sellPrice = hiddenItem.sellValue;
         }
 
-        inventory.splice(selectedCrateIndex, 1);
+        inventory.splice(selectedItemIndex, 1);
         money += sellPrice;
         updateMoneyDisplay();
-        selectedCrateIndex = -1;
+        selectedItemIndex = -1;
         renderInventory();
         saveGame();
     }
 }
 
-function generateRandomItem(crateType) {
-    if (crateType === 'mythicalcrate' && Math.random() < 0.2) { // 20% chance to drop a Rare Crate
-        return { name: 'Rare Crate', type: 'crate' };
+function generateRandomItem(crateRarity) {
+    if (crateRarity === 'mythical' && Math.random() < 0.2) { // 20% chance to drop a Rare Crate
+        return { type: 'crate', name: 'Rare Crate', rarity: 'rare' };
     }
 
-    const possibleRarities = CRATE_CONTENTS[crateType];
+    const possibleRarities = CRATE_CONTENTS[crateRarity];
     let rarity;
     let foundRarity = false;
     let roll = Math.random();
@@ -256,7 +297,7 @@ function generateRandomItem(crateType) {
         }
     }
     
-    // Fallback in case of a rounding issue or if no item was selected
+    // Fallback
     if (!foundRarity) {
         rarity = possibleRarities[0];
     }
@@ -265,7 +306,7 @@ function generateRandomItem(crateType) {
     const randomIndex = Math.floor(Math.random() * itemPool.length);
     const itemName = itemPool[randomIndex];
     
-    return { name: itemName, rarity: rarity, type: 'item' };
+    return { type: 'item', name: itemName, rarity: rarity };
 }
 
 function tapToOpen() {
@@ -275,15 +316,15 @@ function tapToOpen() {
     if (tapCount >= 3) {
         tapInstruction.classList.add('hidden');
         
-        const crateType = inventory[selectedCrateIndex];
-        const droppedItem = generateRandomItem(crateType);
+        const crate = inventory[selectedItemIndex];
+        const droppedItem = generateRandomItem(crate.rarity);
 
-        inventory.splice(selectedCrateIndex, 1); // Remove the opened crate
-        inventory.push(droppedItem.name); // Add the new item
+        inventory.splice(selectedItemIndex, 1); // Remove the opened crate
+        inventory.push(droppedItem); // Add the new item
         
-        itemDropDisplay.textContent = `You got a ${droppedItem.rarity || ''} item: ${droppedItem.name}!`;
+        itemDropDisplay.textContent = `You got a ${droppedItem.rarity} item: ${droppedItem.name}!`;
 
-        selectedCrateIndex = -1;
+        selectedItemIndex = -1;
         finishOpeningBtn.classList.remove('hidden');
         saveGame();
     }
@@ -310,11 +351,9 @@ function updateCooldownDisplay(type, time) {
 
 // --- Event Listeners ---
 startButton.addEventListener('click', () => {
-    // Start animation
     startButton.style.backgroundColor = 'white';
     setTimeout(() => {
-        startScreen.classList.remove('active');
-        mainScreen.classList.add('active');
+        showScreen('main-screen');
         saveGame();
     }, 500);
 });
@@ -369,8 +408,28 @@ backFromCreditsBtn.addEventListener('click', () => {
     showScreen('settings-screen');
 });
 
+cratesTab.addEventListener('click', () => {
+    selectedTab = 'crates';
+    cratesTab.classList.add('active');
+    itemsTab.classList.remove('active');
+    cratesContainer.classList.add('active');
+    itemsContainer.classList.remove('active');
+    selectedItemIndex = -1;
+    updateActionButtons();
+});
+
+itemsTab.addEventListener('click', () => {
+    selectedTab = 'items';
+    itemsTab.classList.add('active');
+    cratesTab.classList.remove('active');
+    cratesContainer.classList.remove('active');
+    itemsContainer.classList.add('active');
+    selectedItemIndex = -1;
+    updateActionButtons();
+});
+
 openCrateBtn.addEventListener('click', openCrate);
-sellCrateBtn.addEventListener('click', sellItem); // Changed to sellItem
+sellItemBtn.addEventListener('click', sellItem);
 
 openingCratePixelart.addEventListener('click', tapToOpen);
 
@@ -396,7 +455,7 @@ buyButtons.forEach(button => {
         if (money >= price) {
             money -= price;
             for (let i = 0; i < (crateType === 'normal' ? amountToBuy : 1); i++) {
-                inventory.push(`${crateType}crate`);
+                inventory.push({ type: 'crate', name: `${crateType} crate`, rarity: crateType });
             }
             updateMoneyDisplay();
             saveGame();
@@ -421,14 +480,14 @@ doJobBtn.addEventListener('click', () => {
 
 digTreasureBtn.addEventListener('click', () => {
     digTreasureBtn.disabled = true;
-    treasureCooldown = Date.now() + 5000; // 5-second cooldown
+    treasureCooldown = Date.now() + 5000;
     updateCooldownDisplay('treasure', 5);
     saveGame();
 
-    if (Math.random() < 0.1) { // 10% chance
-        if (Math.random() < 0.5) { // 50/50 for item vs money
+    if (Math.random() < 0.1) {
+        if (Math.random() < 0.5) {
             const rareItem = generateRandomItem('rare');
-            inventory.push(rareItem.name);
+            inventory.push(rareItem);
             alert(`You dug up a Rare Item: ${rareItem.name}!`);
         } else {
             const moneyGain = Math.floor(Math.random() * (5000 - 100 + 1)) + 100;
@@ -475,7 +534,7 @@ secretCodeSubmit.addEventListener('click', () => {
             saveGame();
         }
     } else if (code === 'Itemsme') {
-        HIDDEN_ITEMS.forEach(item => inventory.push(item.name));
+        HIDDEN_ITEMS.forEach(item => inventory.push(item));
         alert("You've received the hidden items!");
         renderInventory();
         saveGame();
