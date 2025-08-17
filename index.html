@@ -136,6 +136,7 @@
         <div class="settings-options-container">
             <button id="credits-btn" class="main-button">Credits</button>
             <button id="save-game-btn" class="main-button">Save Game</button>
+            <button id="reset-game-btn" class="main-button">Reset Game</button>
         </div>
         <button id="back-from-settings-btn" class="action-button back-button">Back</button>
     </div>
@@ -165,6 +166,15 @@
 
     <div id="notification-popup" class="notification-box hidden">
         <span id="notification-message"></span>
+    </div>
+
+    <div id="reset-popup" class="popup-box hidden">
+        <h3>Are you sure?</h3>
+        <p>This will permanently delete all your progress. You will start with $500.</p>
+        <div class="popup-buttons">
+            <button id="reset-yes-btn" class="popup-button reset-confirm">Yes</button>
+            <button id="reset-no-btn" class="popup-button reset-cancel">No</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
