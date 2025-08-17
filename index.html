@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-s1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crate Chronicles</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="item-designs.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
+
+    <div class="background-animation"></div>
 
     <div id="start-screen" class="screen active">
         <h1 class="game-title">Crate Chronicles</h1>
@@ -18,12 +20,17 @@
     </div>
 
     <div id="main-screen" class="screen">
+        <button class="changelog-btn">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </button>
         <h2 class="screen-title">Main Menu</h2>
         <div class="main-buttons-container">
             <button id="check-money-btn" class="main-button">Check Money</button>
-            <button id="work-btn" class="main-button">Work</button>
             <button id="inventory-btn" class="main-button">Inventory</button>
             <button id="shop-btn" class="main-button">Shop</button>
+            <button id="work-btn" class="main-button">Work</button>
             <button id="item-dex-btn" class="main-button">Item Dex</button>
             <button id="settings-btn" class="main-button">Settings</button>
         </div>
@@ -73,18 +80,20 @@
     </div>
 
     <div id="inventory-screen" class="screen">
+        <button class="back-button">Back</button>
         <h2 class="screen-title">Inventory</h2>
         <div class="inventory-tabs">
             <button id="crates-tab" class="tab-button active">Crates</button>
             <button id="items-tab" class="tab-button">Items</button>
         </div>
-        <div id="crates-container" class="item-grid active"></div>
-        <div id="items-container" class="item-grid"></div>
+        <div class="inventory-container">
+            <div id="crates-container" class="item-grid active"></div>
+            <div id="items-container" class="item-grid"></div>
+        </div>
         <div class="inventory-actions">
             <button id="open-crate-btn" class="action-button hidden">Open Crate</button>
             <button id="sell-item-btn" class="action-button hidden">Sell Item</button>
         </div>
-        <button id="back-to-main-btn" class="action-button back-button">Back</button>
     </div>
 
     <div id="open-crate-screen" class="screen">
@@ -99,6 +108,7 @@
     </div>
 
     <div id="shop-screen" class="screen">
+        <button class="back-button">Back</button>
         <h2 class="screen-title">Shop</h2>
         <div class="shop-items-container">
             <div class="shop-item">
@@ -119,28 +129,28 @@
         </div>
         <div class="buy-slider-container">
             <span class="slider-label">Buy Amount: <span id="buy-amount-value">1</span></span>
-            <input type="range" id="buy-amount-slider" min="1" max="10" value="1">
+            <input type="range" id="buy-amount-slider" min="1" max="100" value="1">
         </div>
-        <button id="back-from-shop-btn" class="action-button back-button">Back</button>
     </div>
 
     <div id="item-dex-screen" class="screen">
+        <button class="back-button">Back</button>
         <h2 class="screen-title">Item Dex</h2>
         <div id="item-dex-grid" class="item-dex-grid"></div>
-        <button id="back-from-item-dex-btn" class="action-button back-button">Back</button>
     </div>
 
     <div id="settings-screen" class="screen">
+        <button class="back-button">Back</button>
         <h2 class="screen-title">Settings</h2>
         <div class="settings-options-container">
             <button id="save-game-btn" class="main-button">Save Game</button>
             <button id="reset-game-btn" class="main-button">Reset Game</button>
             <button id="credits-btn" class="main-button">Credits</button>
         </div>
-        <button id="back-from-settings-btn" class="action-button back-button">Back</button>
     </div>
 
     <div id="credits-screen" class="screen">
+        <button class="back-button">Back</button>
         <h2 class="screen-title">Credits</h2>
         <div class="credits-content">
             <div class="credits-section">
@@ -157,7 +167,6 @@
             </div>
             <p id="maker-credit" class="clickable">The real maker of the game 0Azuree</p>
         </div>
-        <button id="back-from-credits-btn" class="action-button back-button">Back</button>
     </div>
 
     <div id="notification-popup" class="notification-box">
@@ -179,6 +188,27 @@
         <div class="popup-buttons">
             <button id="code-submit-btn" class="popup-button">Submit</button>
             <button id="code-cancel-btn" class="popup-button">Cancel</button>
+        </div>
+    </div>
+
+    <div id="changelog-popup" class="popup-box">
+        <h3>Changelogs</h3>
+        <div id="changelog-text">
+            <p><strong>- New Feature:</strong> Added changelog button and screen.</p>
+            <p><strong>- Fix:</strong> The crate buying popup now works correctly.</p>
+            <p><strong>- Update:</strong> The main menu has been reordered to "Check Money, Inventory, Shop, Work, Item Dex, Settings."</p>
+            <p><strong>- Update:</strong> The font has been changed to a more readable and nice font.</p>
+            <p><strong>- Fix:</strong> The crate texture is now visible.</p>
+            <p><strong>- New Feature:</strong> You can now sell crates for 200 currency.</p>
+            <p><strong>- Update:</strong> Uncommon crate drop rates have been increased by 1% for uncommon, rare, mythic, and legendary items.</p>
+            <p><strong>- New Feature:</strong> Items and crates now stack in the inventory.</p>
+            <p><strong>- New Feature:</strong> Custom scroll slider added to the inventory.</p>
+            <p><strong>- Update:</strong> The shop slider now goes up to 100.</p>
+            <p><strong>- New Feature:</strong> A popup now says "Your to broke to buy this" if you lack funds.</p>
+            <p><strong>- New Feature:</strong> The background now features a falling crate animation.</p>
+        </div>
+        <div class="popup-buttons">
+            <button id="changelog-close-btn" class="popup-button">Close</button>
         </div>
     </div>
     
