@@ -68,6 +68,7 @@ const buyAmountValue = document.getElementById('buy-amount-value');
 const tapInstruction = document.getElementById('tap-instruction');
 const openingCratePixelart = document.getElementById('opening-crate-pixelart');
 const itemDropDisplay = document.getElementById('item-drop-display');
+const itemDropPixelart = document.getElementById('item-drop-pixelart');
 const finishOpeningBtn = document.getElementById('finish-opening-btn');
 const doJobBtn = document.getElementById('do-job-btn');
 const jobCooldownTimer = document.getElementById('job-cooldown');
@@ -82,137 +83,137 @@ const itemDexGrid = document.getElementById('item-dex-grid');
 
 // --- Item Data ---
 const HIDDEN_ITEMS = [
-    { name: 'Stick', sellValue: 80000, rarity: 'hidden', artClass: 'hidden stick' },
-    { name: 'Baba\'s Belt', sellValue: 100000, rarity: 'hidden', artClass: 'hidden baba' },
-    { name: 'Shoe', sellValue: 50000, rarity: 'hidden', artClass: 'hidden shoe' },
-    { name: 'Button', sellValue: 50000, rarity: 'hidden', artClass: 'hidden button' }
+    { name: 'Stick', sellValue: 80000, rarity: 'hidden', artClass: 'stick' },
+    { name: 'Baba\'s Belt', sellValue: 100000, rarity: 'hidden', artClass: 'baba-belt' },
+    { name: 'Shoe', sellValue: 50000, rarity: 'hidden', artClass: 'shoe' },
+    { name: 'Button', sellValue: 50000, rarity: 'hidden', artClass: 'button' }
 ];
 
 const ITEMS = {
     common: [
         { name: 'Googly-Eyed Rock', sellValue: 15, artClass: 'googly-rock' },
         { name: 'Used Gum Wrapper', sellValue: 5, artClass: 'gum-wrapper' },
-        { name: 'Lint Collection', sellValue: 10 },
+        { name: 'Lint Collection', sellValue: 10, artClass: 'lint-collection' },
         { name: 'Slightly Bent Spoon', sellValue: 20, artClass: 'bent-spoon' },
-        { name: 'Expired Coupon', sellValue: 2 },
-        { name: 'Single Sock', sellValue: 8 },
-        { name: 'Broken Pencil', sellValue: 4 },
-        { name: 'Stale Cracker', sellValue: 1 },
-        { name: 'Pet Rock\'s Leash', sellValue: 12 },
-        { name: 'Empty Water Bottle', sellValue: 3 },
-        { name: 'Crumpled Receipt', sellValue: 6 },
-        { name: 'Plastic Bottle Cap', sellValue: 7 },
-        { name: 'Loose Screw', sellValue: 11 },
-        { name: 'Used Tea Bag', sellValue: 9 },
-        { name: 'Dust Bunny', sellValue: 14 },
-        { name: 'Mystery Key', sellValue: 25 },
-        { name: 'Worn-out Eraser', sellValue: 18 },
-        { name: 'Chewed-up Pen', sellValue: 16 },
+        { name: 'Expired Coupon', sellValue: 2, artClass: 'expired-coupon' },
+        { name: 'Single Sock', sellValue: 8, artClass: 'single-sock' },
+        { name: 'Broken Pencil', sellValue: 4, artClass: 'broken-pencil' },
+        { name: 'Stale Cracker', sellValue: 1, artClass: 'stale-cracker' },
+        { name: 'Pet Rock\'s Leash', sellValue: 12, artClass: 'pet-rock-leash' },
+        { name: 'Empty Water Bottle', sellValue: 3, artClass: 'empty-bottle' },
+        { name: 'Crumpled Receipt', sellValue: 6, artClass: 'crumpled-receipt' },
+        { name: 'Plastic Bottle Cap', sellValue: 7, artClass: 'bottle-cap' },
+        { name: 'Loose Screw', sellValue: 11, artClass: 'loose-screw' },
+        { name: 'Used Tea Bag', sellValue: 9, artClass: 'used-tea-bag' },
+        { name: 'Dust Bunny', sellValue: 14, artClass: 'dust-bunny' },
+        { name: 'Mystery Key', sellValue: 25, artClass: 'mystery-key' },
+        { name: 'Worn-out Eraser', sellValue: 18, artClass: 'worn-eraser' },
+        { name: 'Chewed-up Pen', sellValue: 16, artClass: 'chewed-pen' },
         { name: 'Tangled Earbuds', sellValue: 22, artClass: 'tangled-earbuds' },
-        { name: 'Small Pebblestone', sellValue: 5 },
-        { name: 'Ripped Paper', sellValue: 1 },
-        { name: 'Half-used Matchbook', sellValue: 13 },
-        { name: 'Dead Fly', sellValue: 0.5 },
-        { name: 'Dry Leaf', sellValue: 1 },
-        { name: 'Rusty Nail', sellValue: 2 },
-        { name: 'Old Shoelace', sellValue: 10 },
-        { name: 'Fuzzy Dice', sellValue: 17 },
-        { name: 'Bent Paperclip', sellValue: 3 },
-        { name: 'Cardboard Box', sellValue: 20 },
-        { name: 'Unidentified Scraps', sellValue: 1 }
+        { name: 'Small Pebblestone', sellValue: 5, artClass: 'small-pebblestone' },
+        { name: 'Ripped Paper', sellValue: 1, artClass: 'ripped-paper' },
+        { name: 'Half-used Matchbook', sellValue: 13, artClass: 'matchbook' },
+        { name: 'Dead Fly', sellValue: 0.5, artClass: 'dead-fly' },
+        { name: 'Dry Leaf', sellValue: 1, artClass: 'dry-leaf' },
+        { name: 'Rusty Nail', sellValue: 2, artClass: 'rusty-nail' },
+        { name: 'Old Shoelace', sellValue: 10, artClass: 'old-shoelace' },
+        { name: 'Fuzzy Dice', sellValue: 17, artClass: 'fuzzy-dice' },
+        { name: 'Bent Paperclip', sellValue: 3, artClass: 'bent-paperclip' },
+        { name: 'Cardboard Box', sellValue: 20, artClass: 'cardboard-box' },
+        { name: 'Unidentified Scraps', sellValue: 1, artClass: 'unidentified-scraps' }
     ],
     uncommon: [
-        { name: 'Vintage Cassette Player', sellValue: 500, artClass: 'cassette' },
+        { name: 'Vintage Cassette Player', sellValue: 500, artClass: 'cassette-player' },
         { name: 'Fidget Spinner', sellValue: 350, artClass: 'fidget-spinner' },
-        { name: 'Signed Napkin', sellValue: 600 },
-        { name: 'Rubber Chicken', sellValue: 450 },
-        { name: 'Half-Eaten Sandwich', sellValue: 100 },
-        { name: 'A Bag of Marbles', sellValue: 250 },
-        { name: 'Glow-in-the-Dark Star', sellValue: 150 },
-        { name: 'Retro Pager', sellValue: 700 },
-        { name: 'Floppy Hat', sellValue: 300 },
-        { name: 'Well-loved Teddy Bear', sellValue: 400 },
-        { name: 'Troll Doll with Blue Hair', sellValue: 550 },
-        { name: 'Polished Stone', sellValue: 800 },
-        { name: 'Unopened Action Figure', sellValue: 900 },
-        { name: 'Magic 8-Ball', sellValue: 750 },
-        { name: 'Handheld Game Console', sellValue: 1000 },
-        { name: 'Jingle Bell', sellValue: 120 },
-        { name: 'Tiny Umbrella', sellValue: 200 },
-        { name: 'A single, clean feather', sellValue: 180 },
-        { name: 'A key to an unknown door', sellValue: 650 },
-        { name: 'A small, shiny orb', sellValue: 1050 },
-        { name: 'A working yo-yo', sellValue: 320 },
-        { name: 'A set of old-school playing cards', sellValue: 500 },
-        { name: 'An antique coin', sellValue: 1100 },
-        { name: 'A miniature globe', sellValue: 950 },
-        { name: 'A compass that points nowhere', sellValue: 780 },
-        { name: 'A sealed letter with no address', sellValue: 850 },
-        { name: 'A small, ornate box', sellValue: 1300 },
-        { name: 'A tiny, wooden carving', sellValue: 470 },
-        { name: 'A broken wristwatch', sellValue: 210 },
-        { name: 'A stack of old photographs', sellValue: 530 },
-        { name: 'A jar of colorful buttons', sellValue: 280 },
-        { name: 'A well-preserved beetle', sellValue: 620 },
-        { name: 'A music box', sellValue: 1400 },
-        { name: 'A map to a fake treasure', sellValue: 710 },
-        { name: 'A vintage comic book', sellValue: 890 },
-        { name: 'A toy soldier', sellValue: 190 },
-        { name: 'A small snow globe', sellValue: 680 },
-        { name: 'A rusty whistle', sellValue: 150 },
-        { name: 'A miniature telescope', sellValue: 1200 },
-        { name: 'A perfectly round rock', sellValue: 230 }
+        { name: 'Signed Napkin', sellValue: 600, artClass: 'signed-napkin' },
+        { name: 'Rubber Chicken', sellValue: 450, artClass: 'rubber-chicken' },
+        { name: 'Half-Eaten Sandwich', sellValue: 100, artClass: 'half-sandwich' },
+        { name: 'A Bag of Marbles', sellValue: 250, artClass: 'bag-of-marbles' },
+        { name: 'Glow-in-the-Dark Star', sellValue: 150, artClass: 'glow-star' },
+        { name: 'Retro Pager', sellValue: 700, artClass: 'retro-pager' },
+        { name: 'Floppy Hat', sellValue: 300, artClass: 'floppy-hat' },
+        { name: 'Well-loved Teddy Bear', sellValue: 400, artClass: 'teddy-bear' },
+        { name: 'Troll Doll with Blue Hair', sellValue: 550, artClass: 'troll-doll' },
+        { name: 'Polished Stone', sellValue: 800, artClass: 'polished-stone' },
+        { name: 'Unopened Action Figure', sellValue: 900, artClass: 'action-figure' },
+        { name: 'Magic 8-Ball', sellValue: 750, artClass: 'magic-8-ball' },
+        { name: 'Handheld Game Console', sellValue: 1000, artClass: 'game-console' },
+        { name: 'Jingle Bell', sellValue: 120, artClass: 'jingle-bell' },
+        { name: 'Tiny Umbrella', sellValue: 200, artClass: 'tiny-umbrella' },
+        { name: 'A single, clean feather', sellValue: 180, artClass: 'clean-feather' },
+        { name: 'A key to an unknown door', sellValue: 650, artClass: 'unknown-key' },
+        { name: 'A small, shiny orb', sellValue: 1050, artClass: 'shiny-orb' },
+        { name: 'A working yo-yo', sellValue: 320, artClass: 'yo-yo' },
+        { name: 'A set of old-school playing cards', sellValue: 500, artClass: 'playing-cards' },
+        { name: 'An antique coin', sellValue: 1100, artClass: 'antique-coin' },
+        { name: 'A miniature globe', sellValue: 950, artClass: 'mini-globe' },
+        { name: 'A compass that points nowhere', sellValue: 780, artClass: 'broken-compass' },
+        { name: 'A sealed letter with no address', sellValue: 850, artClass: 'sealed-letter' },
+        { name: 'A small, ornate box', sellValue: 1300, artClass: 'ornate-box' },
+        { name: 'A tiny, wooden carving', sellValue: 470, artClass: 'wooden-carving' },
+        { name: 'A broken wristwatch', sellValue: 210, artClass: 'broken-wristwatch' },
+        { name: 'A stack of old photographs', sellValue: 530, artClass: 'old-photos' },
+        { name: 'A jar of colorful buttons', sellValue: 280, artClass: 'button-jar' },
+        { name: 'A well-preserved beetle', sellValue: 620, artClass: 'preserved-beetle' },
+        { name: 'A music box', sellValue: 1400, artClass: 'music-box' },
+        { name: 'A map to a fake treasure', sellValue: 710, artClass: 'fake-map' },
+        { name: 'A vintage comic book', sellValue: 890, artClass: 'vintage-comic' },
+        { name: 'A toy soldier', sellValue: 190, artClass: 'toy-soldier' },
+        { name: 'A small snow globe', sellValue: 680, artClass: 'snow-globe' },
+        { name: 'A rusty whistle', sellValue: 150, artClass: 'rusty-whistle' },
+        { name: 'A miniature telescope', sellValue: 1200, artClass: 'mini-telescope' },
+        { name: 'A perfectly round rock', sellValue: 230, artClass: 'perfectly-round-rock' }
     ],
     rare: [
         { name: 'Crystal Skull', sellValue: 1500, artClass: 'crystal-skull' },
-        { name: 'Ancient Floppy Disk', sellValue: 1800 },
+        { name: 'Ancient Floppy Disk', sellValue: 1800, artClass: 'floppy-disk' },
         { name: 'Jar of Fireflies', sellValue: 2000, artClass: 'jar-of-fireflies' },
-        { name: 'First Edition Comic Book', sellValue: 3000 },
-        { name: 'Lucky Rabbit\'s Foot', sellValue: 2500 },
-        { name: 'Hand-carved Wooden Mask', sellValue: 3500 },
-        { name: 'A Golden Ring', sellValue: 4000 },
-        { name: 'The Sword of a Former King (replica)', sellValue: 2800 },
-        { name: 'A bottle of unidentifiable liquid', sellValue: 2200 },
-        { name: 'A set of glowing dice', sellValue: 4500 },
-        { name: 'A perfectly preserved fossil', sellValue: 5000 },
-        { name: 'A cursed necklace', sellValue: 1000 },
-        { name: 'A magical key', sellValue: 3200 },
-        { name: 'A wizard\'s hat', sellValue: 3800 },
-        { name: 'A crystal ball', sellValue: 5500 },
-        { name: 'A dragon\'s scale', sellValue: 6000 },
-        { name: 'A grimoire of recipes', sellValue: 4200 },
-        { name: 'A time-traveling sundial', sellValue: 7000 },
-        { name: 'A potion of healing', sellValue: 2700 },
-        { name: 'A jar of starlight', sellValue: 6500 }
+        { name: 'First Edition Comic Book', sellValue: 3000, artClass: 'first-edition-comic' },
+        { name: 'Lucky Rabbit\'s Foot', sellValue: 2500, artClass: 'rabbit-foot' },
+        { name: 'Hand-carved Wooden Mask', sellValue: 3500, artClass: 'wooden-mask' },
+        { name: 'A Golden Ring', sellValue: 4000, artClass: 'golden-ring' },
+        { name: 'The Sword of a Former King (replica)', sellValue: 2800, artClass: 'replica-sword' },
+        { name: 'A bottle of unidentifiable liquid', sellValue: 2200, artClass: 'mystery-liquid' },
+        { name: 'A set of glowing dice', sellValue: 4500, artClass: 'glowing-dice' },
+        { name: 'A perfectly preserved fossil', sellValue: 5000, artClass: 'preserved-fossil' },
+        { name: 'A cursed necklace', sellValue: 1000, artClass: 'cursed-necklace' },
+        { name: 'A magical key', sellValue: 3200, artClass: 'magical-key' },
+        { name: 'A wizard\'s hat', sellValue: 3800, artClass: 'wizards-hat' },
+        { name: 'A crystal ball', sellValue: 5500, artClass: 'crystal-ball' },
+        { name: 'A dragon\'s scale', sellValue: 6000, artClass: 'dragon-scale' },
+        { name: 'A grimoire of recipes', sellValue: 4200, artClass: 'grimoire' },
+        { name: 'A time-traveling sundial', sellValue: 7000, artClass: 'sundial' },
+        { name: 'A potion of healing', sellValue: 2700, artClass: 'healing-potion' },
+        { name: 'A jar of starlight', sellValue: 6500, artClass: 'jar-of-starlight' }
     ],
     mythical: [
         { name: 'Golden Compass', sellValue: 20000, artClass: 'golden-compass' },
-        { name: 'Bottle of Captured Sunlight', sellValue: 25000, artClass: 'bottle-of-captured-sunlight' },
+        { name: 'Bottle of Captured Sunlight', sellValue: 25000, artClass: 'bottle-of-sunlight' },
         { name: 'Ever-Burning Candle', sellValue: 30000, artClass: 'ever-burning-candle' },
-        { name: 'Orb of Eternal Snowfall', sellValue: 35000 },
-        { name: 'The Last Unicorn Horn', sellValue: 40000 },
-        { name: 'Glove of Telekinesis', sellValue: 45000 },
-        { name: 'Heart of a Golem', sellValue: 50000 },
-        { name: 'Feather from an Archangel', sellValue: 60000 },
-        { name: 'Map to the Lost City of Atlantis', sellValue: 75000 },
-        { name: 'The philosopher\'s stone', sellValue: 100000 },
-        { name: 'A vial of vampire blood', sellValue: 80000 },
-        { name: 'A phoenix feather', sellValue: 90000 },
-        { name: 'A werewolf\'s fang', sellValue: 95000 },
-        { name: 'A griffin\'s claw', sellValue: 85000 },
-        { name: 'A dragon\'s tear', sellValue: 70000 }
+        { name: 'Orb of Eternal Snowfall', sellValue: 35000, artClass: 'snow-orb' },
+        { name: 'The Last Unicorn Horn', sellValue: 40000, artClass: 'unicorn-horn' },
+        { name: 'Glove of Telekinesis', sellValue: 45000, artClass: 'glove-of-telekinesis' },
+        { name: 'Heart of a Golem', sellValue: 50000, artClass: 'golem-heart' },
+        { name: 'Feather from an Archangel', sellValue: 60000, artClass: 'archangel-feather' },
+        { name: 'Map to the Lost City of Atlantis', sellValue: 75000, artClass: 'atlantis-map' },
+        { name: 'The philosopher\'s stone', sellValue: 90000, artClass: 'philosopher-stone' },
+        { name: 'A vial of vampire blood', sellValue: 80000, artClass: 'vampire-blood' },
+        { name: 'A phoenix feather', sellValue: 90000, artClass: 'phoenix-feather' },
+        { name: 'A werewolf\'s fang', sellValue: 95000, artClass: 'werewolf-fang' },
+        { name: 'A griffin\'s claw', sellValue: 85000, artClass: 'griffin-claw' },
+        { name: 'A dragon\'s tear', sellValue: 70000, artClass: 'dragon-tear' }
     ],
     legendary: [
         { name: 'Amulet of Time', sellValue: 50000, artClass: 'amulet-of-time' },
-        { name: 'Phoenix Feather', sellValue: 75000 },
-        { name: 'Crown of the Sun King', sellValue: 150000 },
-        { name: 'The Holy Grail', sellValue: 200000 },
-        { name: 'The Excalibur Sword', sellValue: 300000, artClass: 'excalibur-sword' },
-        { name: 'The Ark of the Covenant', sellValue: 500000 },
-        { name: 'The Ring of Power', sellValue: 1000000 },
-        { name: 'A vial of God\'s essence', sellValue: 2500000 },
-        { name: 'The Golden Fleece', sellValue: 4000000 },
-        { name: 'The Trident of Poseidon', sellValue: 5000000 }
+        { name: 'Phoenix Feather', sellValue: 75000, artClass: 'phoenix-feather' },
+        { name: 'Crown of the Sun King', sellValue: 95000, artClass: 'sun-king-crown' },
+        { name: 'The Holy Grail', sellValue: 98000, artClass: 'holy-grail' },
+        { name: 'The Excalibur Sword', sellValue: 99000, artClass: 'excalibur-sword' },
+        { name: 'The Ark of the Covenant', sellValue: 99500, artClass: 'ark-of-covenant' },
+        { name: 'The Ring of Power', sellValue: 99999, artClass: 'ring-of-power' },
+        { name: 'A vial of essence', sellValue: 99900, artClass: 'essence-vial' },
+        { name: 'The Golden Fleece', sellValue: 99950, artClass: 'golden-fleece' },
+        { name: 'The Trident of Poseidon', sellValue: 99980, artClass: 'poseidon-trident' }
     ],
     hidden: HIDDEN_ITEMS
 };
@@ -240,22 +241,16 @@ const CRATE_CONTENTS = {
 
 // --- Secret Codes ---
 const CODES = {
-    "ILoveThisGame": {
-        rewardType: "money",
-        amount: 2500,
-        message: "You received $2500!",
+    "67isafunnyjoke": {
+        rewardType: "items",
+        itemType: "common",
+        amount: 1000,
+        message: "You received 1000 Googly-Eyed Rocks!",
         used: false
     },
-    "TreasureMaster": {
-        rewardType: "crate",
-        crateType: "rare",
-        message: "You received a Rare Crate!",
-        used: false
-    },
-    "HiddenSecrets": {
-        rewardType: "item",
-        itemName: "Baba's Belt",
-        message: "You found Baba's Belt!",
+    "itemsme": {
+        rewardType: "hidden",
+        message: "You received all hidden items!",
         used: false
     }
 };
@@ -373,13 +368,14 @@ function createItemPixelArt(item) {
     if (item.type === 'crate') {
         return `<div class="pixel-art crate"></div>`;
     }
-    const itemData = Object.values(ITEMS).flat().find(i => i.name === item.name);
-    const artClass = itemData.artClass ? `${item.rarity} ${itemData.artClass}` : `${item.rarity}`;
     
-    if (itemData && itemData.artClass) {
-        return `<div class="pixel-art ${artClass}"></div>`;
+    const itemData = Object.values(ITEMS).flat().find(i => i.name === item.name);
+    if (!itemData) {
+        return ''; // Return nothing if item data is not found
     }
-    return `<div class="pixel-art ${item.rarity}"></div>`;
+    const artClass = itemData.artClass;
+    
+    return `<div class="pixel-art ${artClass}"></div>`;
 }
 
 function renderInventory() {
@@ -429,15 +425,9 @@ function renderItemDex() {
     
     const allItems = [];
     for (const rarity in ITEMS) {
-        if (rarity === 'hidden') {
-            HIDDEN_ITEMS.forEach(item => {
-                allItems.push({ name: item.name, rarity, sellValue: item.sellValue, artClass: item.artClass });
-            });
-        } else {
-            ITEMS[rarity].forEach(item => {
-                allItems.push({ name: item.name, rarity, sellValue: item.sellValue, artClass: item.artClass });
-            });
-        }
+        ITEMS[rarity].forEach(item => {
+            allItems.push({ name: item.name, rarity, sellValue: item.sellValue, artClass: item.artClass });
+        });
     }
 
     allItems.forEach(item => {
@@ -505,7 +495,8 @@ function openCrate() {
     if (crate && crate.type === 'crate') {
         showScreen('open-crate-screen');
         tapCount = 0;
-        itemDropDisplay.textContent = '';
+        itemDropDisplay.classList.add('hidden');
+        itemDropPixelart.classList.add('hidden');
         finishOpeningBtn.classList.add('hidden');
         tapInstruction.classList.remove('hidden');
         openingCratePixelart.style.transform = 'scale(1)';
@@ -577,24 +568,37 @@ function tapToOpen() {
     
     if (tapCount >= 3) {
         tapInstruction.classList.add('hidden');
-        
-        const crate = inventory[selectedItemIndex];
-        const droppedItem = generateRandomItem(crate.rarity);
+        openingCratePixelart.classList.add('explode');
 
-        inventory.splice(selectedItemIndex, 1); 
-        inventory.push(droppedItem);
-        
-        // Add to found hidden items if applicable
-        if (droppedItem.rarity === 'hidden' && !foundHiddenItems.includes(droppedItem.name)) {
-            foundHiddenItems.push(droppedItem.name);
-        }
-        
-        itemDropDisplay.innerHTML = `You got a <span class="rarity-${droppedItem.rarity}">${droppedItem.rarity}</span> item: ${droppedItem.name}!`;
+        // After the explosion animation, reveal the item
+        openingCratePixelart.addEventListener('animationend', () => {
+            const crate = inventory[selectedItemIndex];
+            const droppedItem = generateRandomItem(crate.rarity);
+    
+            inventory.splice(selectedItemIndex, 1); 
+            inventory.push(droppedItem);
+            
+            if (droppedItem.rarity === 'hidden' && !foundHiddenItems.includes(droppedItem.name)) {
+                foundHiddenItems.push(droppedItem.name);
+            }
+            
+            const itemElement = document.createElement('div');
+            itemElement.classList.add('pixel-art');
+            itemElement.innerHTML = createItemPixelArt(droppedItem);
+            itemDropPixelart.innerHTML = '';
+            itemDropPixelart.appendChild(itemElement);
+            itemDropPixelart.classList.remove('hidden');
 
-        openingCratePixelart.style.transform = `scale(1.3)`;
-        selectedItemIndex = -1;
-        finishOpeningBtn.classList.remove('hidden');
-        saveGame();
+            itemDropDisplay.innerHTML = `You got a <span class="rarity-${droppedItem.rarity}">${droppedItem.rarity}</span> item: ${droppedItem.name}!`;
+            itemDropDisplay.classList.remove('hidden');
+            
+            openingCratePixelart.classList.remove('explode');
+            openingCratePixelart.classList.add('hidden');
+            
+            selectedItemIndex = -1;
+            finishOpeningBtn.classList.remove('hidden');
+            saveGame();
+        }, { once: true });
     }
 }
 
@@ -647,27 +651,38 @@ function resetGame() {
 }
 
 function checkCode() {
-    const code = codeInput.value.trim();
-    if (CODES[code]) {
-        if (CODES[code].used) {
+    const fullCommand = codeInput.value.trim();
+    const [command, ...args] = fullCommand.split(' ');
+    const argString = args.join(' ');
+    
+    if (command === 'addD' && argString) {
+        handleDevCommand('addD', argString);
+        return;
+    }
+    if (command === 'removeD' && argString) {
+        handleDevCommand('removeD', argString);
+        return;
+    }
+
+    if (CODES[fullCommand]) {
+        if (CODES[fullCommand].used) {
             showNotification("Code already used!");
         } else {
-            const reward = CODES[code];
-            if (reward.rewardType === "money") {
-                money += reward.amount;
-                moneyMade += reward.amount;
-            } else if (reward.rewardType === "crate") {
-                inventory.push({ type: 'crate', name: `${reward.crateType} crate`, rarity: reward.crateType });
-            } else if (reward.rewardType === "item") {
-                const itemData = Object.values(ITEMS).flat().find(i => i.name === reward.itemName);
-                if (itemData) {
-                    inventory.push({ type: 'item', name: itemData.name, rarity: itemData.rarity });
-                    if (itemData.rarity === 'hidden' && !foundHiddenItems.includes(itemData.name)) {
-                        foundHiddenItems.push(itemData.name);
-                    }
+            const reward = CODES[fullCommand];
+            if (reward.rewardType === "items") {
+                const itemData = ITEMS[reward.itemType].find(i => i.name === 'Googly-Eyed Rock');
+                for (let i = 0; i < reward.amount; i++) {
+                     inventory.push({ type: 'item', name: itemData.name, rarity: reward.itemType });
                 }
+            } else if (reward.rewardType === "hidden") {
+                HIDDEN_ITEMS.forEach(item => {
+                    inventory.push({ type: 'item', name: item.name, rarity: item.rarity });
+                    if (!foundHiddenItems.includes(item.name)) {
+                        foundHiddenItems.push(item.name);
+                    }
+                });
             }
-            CODES[code].used = true;
+            CODES[fullCommand].used = true;
             updateFinancialStats();
             showNotification(reward.message);
             saveGame();
@@ -676,6 +691,35 @@ function checkCode() {
     } else {
         showNotification("Invalid code!");
     }
+}
+
+function handleDevCommand(command, itemName) {
+    const itemData = Object.values(ITEMS).flat().find(i => i.name.toLowerCase() === itemName.toLowerCase());
+    
+    if (!itemData) {
+        showNotification("Item not found!");
+        return;
+    }
+
+    if (command === 'addD') {
+        inventory.push({ type: 'item', name: itemData.name, rarity: itemData.rarity });
+        if (itemData.rarity === 'hidden' && !foundHiddenItems.includes(itemData.name)) {
+            foundHiddenItems.push(itemData.name);
+        }
+        showNotification(`Added ${itemData.name} to inventory!`);
+    } else if (command === 'removeD') {
+        const indexToRemove = inventory.findIndex(i => i.name.toLowerCase() === itemName.toLowerCase());
+        if (indexToRemove !== -1) {
+            inventory.splice(indexToRemove, 1);
+            showNotification(`Removed ${itemData.name} from inventory!`);
+        } else {
+            showNotification("Item not found in inventory!");
+        }
+    }
+
+    renderInventory();
+    saveGame();
+    closeCodePopup();
 }
 
 function openCodePopup() {
@@ -787,7 +831,7 @@ finishOpeningBtn.addEventListener('click', () => {
 
 buyButtons.forEach(button => {
     button.addEventListener('click', (e) => {
-        const crateType = e.target.dataset.crateType;
+        const crateType = e.target.dataset.crate-type;
         const cratePrice = CRATE_PRICES[crateType];
         const amount = parseInt(buyAmountSlider.value);
         const totalCost = cratePrice * amount;
