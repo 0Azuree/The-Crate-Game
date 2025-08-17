@@ -741,14 +741,14 @@ body, html {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     z-index: 1000;
     opacity: 0;
-    pointer-events: none; /* Prevents clicks on the hidden element */
+    pointer-events: none;
     transition: opacity 0.5s ease;
     text-align: center;
 }
 
 .notification-box.visible {
     opacity: 1;
-    pointer-events: auto; /* Allows clicks when visible */
+    pointer-events: auto;
 }
 
 #notification-message {
@@ -830,7 +830,7 @@ body, html {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     z-index: 2000;
     text-align: center;
-    visibility: hidden; /* Changed from display: none */
+    visibility: hidden;
     opacity: 0;
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
