@@ -23,6 +23,8 @@ body, html {
     align-items: center;
     transition: opacity 0.5s ease-in-out;
     opacity: 0;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .screen.active {
@@ -36,11 +38,18 @@ body, html {
     margin-bottom: 50px;
     letter-spacing: 5px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
 }
 
 .start-button-container {
     width: 300px;
     height: 80px;
+    transition: all 0.5s;
 }
 
 .action-button {
@@ -53,12 +62,13 @@ body, html {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .action-button:hover {
     background-color: #ffffff;
+    transform: translateY(-2px);
 }
 
 .main-buttons-container {
@@ -87,33 +97,6 @@ body, html {
     transform: translateY(-2px);
 }
 
-.top-bar {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-}
-
-.money-display-container {
-    display: flex;
-    align-items: center;
-    background-color: #242424;
-    padding: 10px 20px;
-    border-radius: 8px;
-    border: 2px solid #555;
-}
-
-.money-text {
-    font-size: 1.2em;
-    font-weight: 700;
-    margin-right: 10px;
-}
-
-.money-amount {
-    font-size: 1.5em;
-    font-weight: 700;
-    color: #4CAF50;
-}
-
 .hidden {
     display: none !important;
 }
@@ -124,13 +107,78 @@ body, html {
     font-weight: 700;
 }
 
+.back-button {
+    width: 120px;
+    height: 45px;
+    font-size: 1em;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+
+.money-display-box {
+    background-color: #242424;
+    padding: 40px 60px;
+    border-radius: 10px;
+    border: 2px solid #4CAF50;
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+}
+
+.money-amount {
+    font-size: 3em;
+    font-weight: 700;
+    color: #4CAF50;
+}
+
+.work-options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 80%;
+    max-width: 500px;
+    align-items: center;
+}
+
+.work-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px 25px;
+    background-color: #242424;
+    border: 2px solid #555;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.work-text {
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.cooldown-timer {
+    font-size: 0.9em;
+    color: #aaa;
+}
+
+.inventory-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.crate-icon {
+    width: 40px;
+    height: 40px;
+}
+
 .item-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 20px;
     width: 90%;
     max-width: 800px;
-    margin-bottom: 20px;
     max-height: 400px;
     overflow-y: auto;
     padding: 10px;
@@ -138,11 +186,11 @@ body, html {
     border-radius: 10px;
 }
 
-.crate-item {
+.crate-item, .empty-slot {
     width: 100%;
     padding-top: 100%; /* Creates a square container */
     position: relative;
-    background-color: #444;
+    background-color: #333;
     border-radius: 8px;
     cursor: pointer;
     transition: transform 0.2s;
@@ -164,27 +212,27 @@ body, html {
     font-size: 1.2em;
     font-weight: 700;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .inventory-actions {
     position: fixed;
     bottom: 20px;
-    left: 20px;
+    left: 170px;
     display: flex;
     gap: 10px;
-    flex-direction: column;
 }
 
-#back-to-main-btn {
+#open-crate-btn, #sell-crate-btn {
     width: 150px;
     height: 50px;
 }
 
-.shop-items-grid {
+.shop-items-container {
     display: flex;
+    justify-content: center;
     gap: 30px;
     flex-wrap: wrap;
-    justify-content: center;
     margin-top: 30px;
 }
 
@@ -226,6 +274,25 @@ body, html {
     background-color: #0056b3;
 }
 
+.buy-slider-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    width: 80%;
+    max-width: 400px;
+}
+
+.slider-label {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+#buy-amount-slider {
+    width: 100%;
+    cursor: pointer;
+}
+
 .instruction-text {
     font-size: 2em;
     animation: fade-in-out 2s infinite alternate;
@@ -241,7 +308,18 @@ body, html {
     height: 200px;
     cursor: pointer;
     margin-top: 30px;
-    transition: transform 0.1s;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Pixel art for the crate */
+#opening-crate-pixelart {
+    background-color: #8B4513;
+    border-top: 20px solid #5A2E0D;
+    border-bottom: 20px solid #5A2E0D;
+    box-shadow: inset 0 0 0 10px #703A0E, inset 0 0 0 15px #60320B;
 }
 
 .item-drop-text {
