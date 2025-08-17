@@ -533,15 +533,14 @@ body, html {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     z-index: 1000;
     opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease, visibility 0s 0.5s;
+    pointer-events: none; /* Prevents clicks on the hidden element */
+    transition: opacity 0.5s ease;
     text-align: center;
 }
 
 .notification-box.visible {
     opacity: 1;
-    visibility: visible;
-    transition: opacity 0.5s ease;
+    pointer-events: auto; /* Allows clicks when visible */
 }
 
 #notification-message {
