@@ -4,11 +4,19 @@ body, html {
     height: 100%;
     font-family: 'Montserrat', sans-serif;
     color: #f0f0f0;
-    background-color: #121212;
+    background: linear-gradient(-45deg, #121212, #212121, #333333, #424242);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .screen {
@@ -25,7 +33,7 @@ body, html {
     opacity: 0;
     padding: 20px;
     box-sizing: border-box;
-    z-index: 1; /* Ensure screens are on a base layer */
+    z-index: 1;
 }
 
 .screen.active {
@@ -203,11 +211,21 @@ body, html {
 .work-text {
     font-size: 1.2em;
     font-weight: 700;
+    flex: 1;
 }
 
 .cooldown-timer {
     font-size: 0.9em;
     color: #aaa;
+    min-width: 80px; /* Give it a fixed width */
+    text-align: right;
+}
+
+.work-option .action-button {
+    width: auto;
+    font-size: 0.9em;
+    padding: 10px 15px;
+    height: auto;
 }
 
 .inventory-header {
@@ -304,7 +322,7 @@ body, html {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 0 1px; /* Base for all pixel art */
+    box-shadow: 0 0 0 1px;
     image-rendering: pixelated;
 }
 
@@ -349,6 +367,33 @@ body, html {
     left: -5px;
     border: 2px solid #999;
     border-bottom: none;
+}
+.pixel-art.common.gum-wrapper {
+    width: 50px;
+    height: 30px;
+    background: #d8bfd8;
+    position: relative;
+    border: 2px solid #b37e96;
+    border-radius: 5px;
+}
+.pixel-art.common.tangled-earbuds {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid #808080;
+    border-radius: 50%;
+    position: relative;
+}
+.pixel-art.common.tangled-earbuds::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #808080;
+    border-radius: 50%;
+    transform: rotate(45deg);
 }
 
 /* --- UNCOMMON --- */
@@ -416,26 +461,27 @@ body, html {
 }
 .pixel-art.rare.crystal-skull::before { left: 5px; }
 .pixel-art.rare.crystal-skull::after { right: 5px; }
-
-.pixel-art.rare.golden-goblet {
+.pixel-art.rare.jar-of-fireflies {
     width: 30px;
-    height: 40px;
-    background: #ffd700;
+    height: 50px;
+    background: #add8e6;
+    border-radius: 5px;
+    border: 2px solid #5d8293;
     position: relative;
-    border-radius: 0 0 5px 5px;
-    border-bottom: 5px solid #ccac00;
 }
-.pixel-art.rare.golden-goblet::before {
+.pixel-art.rare.jar-of-fireflies::before, .pixel-art.rare.jar-of-fireflies::after {
     content: '';
     position: absolute;
-    top: -15px;
-    left: -5px;
-    width: 40px;
-    height: 20px;
-    background: #ffd700;
-    border-radius: 50% 50% 0 0;
-    border-top: 5px solid #ccac00;
+    width: 5px;
+    height: 5px;
+    background: #ffff00;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #ffff00;
+    animation: glow 1s infinite alternate;
 }
+.pixel-art.rare.jar-of-fireflies::before { top: 15px; left: 8px; }
+.pixel-art.rare.jar-of-fireflies::after { top: 30px; right: 10px; animation-delay: 0.5s; }
+@keyframes glow { from { opacity: 0.5; } to { opacity: 1; } }
 
 /* --- MYTHICAL --- */
 .pixel-art.mythical.golden-compass {
@@ -467,25 +513,46 @@ body, html {
     border-width: 10px 5px 0 5px;
     border-color: #ccac00 transparent transparent transparent;
 }
-
-.pixel-art.mythical.dragon-egg {
-    width: 35px;
+.pixel-art.mythical.ever-burning-candle {
+    width: 15px;
     height: 50px;
-    background: linear-gradient(to bottom right, #800000, #ff4500);
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    border: 2px solid #600000;
+    background: #fdfd96;
+    border: 2px solid #c0c080;
     position: relative;
-    box-shadow: inset 0 0 10px #000;
+    border-radius: 5px;
 }
-.pixel-art.mythical.dragon-egg::before {
+.pixel-art.mythical.ever-burning-candle::before {
     content: '';
     position: absolute;
-    top: 10px;
-    left: 5px;
-    width: 25px;
-    height: 30px;
-    border: 2px dotted #ff8c00;
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 15px solid #ff4500;
+    filter: drop-shadow(0 0 5px #ff4500);
+}
+.pixel-art.mythical.bottle-of-captured-sunlight {
+    width: 30px;
+    height: 50px;
+    background: #ffff00;
+    border: 2px solid #ccac00;
+    border-radius: 5px;
+    position: relative;
+    box-shadow: 0 0 10px 2px #ffff00;
+}
+.pixel-art.mythical.bottle-of-captured-sunlight::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 5px;
+    background: #8B4513;
+    border-radius: 2px;
 }
 
 /* --- LEGENDARY --- */
@@ -659,7 +726,6 @@ body, html {
     align-items: center;
 }
 
-/* Pixel art for the crate */
 #opening-crate-pixelart {
     background-color: #8B4513;
     border-top: 20px solid #5A2E0D;
@@ -698,38 +764,6 @@ body, html {
     margin: 5px 0;
 }
 
-#maker-credit {
-    font-weight: bold;
-    cursor: pointer;
-    text-decoration: underline;
-    color: #007BFF;
-}
-
-.secret-code-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    margin-top: 20px;
-    position: absolute;
-    padding: 20px;
-    background-color: #333;
-    border: 2px solid #555;
-    border-radius: 10px;
-    z-index: 100;
-}
-
-#secret-code-input {
-    padding: 10px;
-    font-size: 1em;
-    border: 2px solid #555;
-    border-radius: 5px;
-    background-color: #121212;
-    color: #f0f0f0;
-    text-align: center;
-}
-
-/* New Notification Pop-up */
 .notification-box {
     position: fixed;
     top: 50%;
@@ -757,7 +791,6 @@ body, html {
     font-weight: 700;
 }
 
-/* Item Dex Styles */
 .item-dex-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -818,7 +851,6 @@ body, html {
     fill: #f0f0f0;
 }
 
-/* New Popup Box for Confirmation */
 .popup-box {
     position: fixed;
     top: 50%;
