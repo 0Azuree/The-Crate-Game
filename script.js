@@ -1,5 +1,7 @@
 // --- Game State Variables ---
 let money = 1000;
+let moneySpent = 0;
+let moneyMade = 0;
 let inventory = [];
 let selectedItemIndex = -1;
 let selectedTab = 'crates';
@@ -24,6 +26,9 @@ const creditsScreen = document.getElementById('credits-screen');
 
 const startButton = document.getElementById('start-button');
 const moneyDisplay = document.getElementById('money-display');
+const moneySpentDisplay = document.getElementById('money-spent-display');
+const moneyMadeDisplay = document.getElementById('money-made-display');
+const totalProfitDisplay = document.getElementById('total-profit-display');
 const checkMoneyBtn = document.getElementById('check-money-btn');
 const inventoryBtn = document.getElementById('inventory-btn');
 const shopBtn = document.getElementById('shop-btn');
@@ -79,10 +84,10 @@ const HIDDEN_ITEMS = [
 const ITEMS = {
     common: [
         { name: 'Googly-Eyed Rock', sellValue: 15, artClass: 'googly-rock' },
-        { name: 'Used Gum Wrapper', sellValue: 5, artClass: 'gum-wrapper' },
-        { name: 'Lint Collection', sellValue: 10, artClass: 'lint' },
+        { name: 'Used Gum Wrapper', sellValue: 5 },
+        { name: 'Lint Collection', sellValue: 10 },
         { name: 'Slightly Bent Spoon', sellValue: 20, artClass: 'bent-spoon' },
-        { name: 'Expired Coupon', sellValue: 2, artClass: 'coupon' },
+        { name: 'Expired Coupon', sellValue: 2 },
         { name: 'Single Sock', sellValue: 8 },
         { name: 'Broken Pencil', sellValue: 4 },
         { name: 'Stale Cracker', sellValue: 1 },
@@ -111,7 +116,7 @@ const ITEMS = {
     ],
     uncommon: [
         { name: 'Vintage Cassette Player', sellValue: 500, artClass: 'cassette' },
-        { name: 'Fidget Spinner', sellValue: 350 },
+        { name: 'Fidget Spinner', sellValue: 350, artClass: 'fidget-spinner' },
         { name: 'Signed Napkin', sellValue: 600 },
         { name: 'Rubber Chicken', sellValue: 450 },
         { name: 'Half-Eaten Sandwich', sellValue: 100 },
@@ -152,7 +157,7 @@ const ITEMS = {
         { name: 'A perfectly round rock', sellValue: 230 }
     ],
     rare: [
-        { name: 'Crystal Skull', sellValue: 1500, artClass: 'skull' },
+        { name: 'Crystal Skull', sellValue: 1500, artClass: 'crystal-skull' },
         { name: 'Ancient Floppy Disk', sellValue: 1800 },
         { name: 'Jar of Fireflies', sellValue: 2000 },
         { name: 'First Edition Comic Book', sellValue: 3000 },
@@ -174,7 +179,7 @@ const ITEMS = {
         { name: 'A jar of starlight', sellValue: 6500 }
     ],
     mythical: [
-        { name: 'Golden Compass', sellValue: 20000, artClass: 'compass' },
+        { name: 'Golden Compass', sellValue: 20000, artClass: 'golden-compass' },
         { name: 'Bottle of Captured Sunlight', sellValue: 25000 },
         { name: 'Ever-Burning Candle', sellValue: 30000 },
         { name: 'Orb of Eternal Snowfall', sellValue: 35000 },
@@ -191,11 +196,11 @@ const ITEMS = {
         { name: 'A dragon\'s tear', sellValue: 70000 }
     ],
     legendary: [
-        { name: 'Amulet of Time', sellValue: 50000, artClass: 'amulet' },
+        { name: 'Amulet of Time', sellValue: 50000, artClass: 'amulet-of-time' },
         { name: 'Phoenix Feather', sellValue: 75000 },
         { name: 'Crown of the Sun King', sellValue: 150000 },
         { name: 'The Holy Grail', sellValue: 200000 },
-        { name: 'The Excalibur Sword', sellValue: 300000 },
+        { name: 'The Excalibur Sword', sellValue: 300000, artClass: 'excalibur-sword' },
         { name: 'The Ark of the Covenant', sellValue: 500000 },
         { name: 'The Ring of Power', sellValue: 1000000 },
         { name: 'A vial of God\'s essence', sellValue: 2500000 },
@@ -227,8 +232,19 @@ const CRATE_CONTENTS = {
 };
 
 // --- Game Logic Functions ---
-function updateMoneyDisplay() {
+function updateFinancialStats() {
     moneyDisplay.textContent = `$${money}`;
+    moneySpentDisplay.textContent = `$${moneySpent}`;
+    moneyMadeDisplay.textContent = `$${moneyMade}`;
+    const profit = moneyMade - moneySpent;
+    totalProfitDisplay.textContent = `$${profit}`;
+    if (profit >= 0) {
+        totalProfitDisplay.classList.remove('text-red');
+        totalProfitDisplay.classList.add('text-green');
+    } else {
+        totalProfitDisplay.classList.remove('text-green');
+        totalProfitDisplay.classList.add('text-red');
+    }
 }
 
 function showScreen(screenId) {
@@ -256,6 +272,8 @@ function showNotification(message) {
 
 function saveGame() {
     localStorage.setItem('gameMoney', money);
+    localStorage.setItem('gameMoneySpent', moneySpent);
+    localStorage.setItem('gameMoneyMade', moneyMade);
     localStorage.setItem('gameInventory', JSON.stringify(inventory));
     localStorage.setItem('jobCooldown', jobCooldown);
     localStorage.setItem('treasureCooldown', treasureCooldown);
@@ -265,6 +283,8 @@ function saveGame() {
 
 function loadGame() {
     const savedMoney = localStorage.getItem('gameMoney');
+    const savedMoneySpent = localStorage.getItem('gameMoneySpent');
+    const savedMoneyMade = localStorage.getItem('gameMoneyMade');
     const savedInventory = localStorage.getItem('gameInventory');
     const savedJobCooldown = localStorage.getItem('jobCooldown');
     const savedTreasureCooldown = localStorage.getItem('treasureCooldown');
@@ -273,6 +293,12 @@ function loadGame() {
     
     if (savedMoney) {
         money = parseInt(savedMoney);
+    }
+    if (savedMoneySpent) {
+        moneySpent = parseInt(savedMoneySpent);
+    }
+    if (savedMoneyMade) {
+        moneyMade = parseInt(savedMoneyMade);
     }
     if (savedInventory) {
         inventory = JSON.parse(savedInventory);
@@ -290,7 +316,7 @@ function loadGame() {
         foundHiddenItems = JSON.parse(savedHiddenItems);
     }
     
-    updateMoneyDisplay();
+    updateFinancialStats();
     renderInventory();
     
     if (jobCooldown > Date.now()) {
@@ -309,13 +335,11 @@ function createItemPixelArt(item) {
     if (item.type === 'crate') {
         return `<div class="pixel-art crate"></div>`;
     }
-    const hiddenItem = HIDDEN_ITEMS.find(h => h.name === item.name);
-    if (hiddenItem) {
-        return `<div class="pixel-art ${hiddenItem.artClass}"></div>`;
-    }
     const itemData = Object.values(ITEMS).flat().find(i => i.name === item.name);
+    const artClass = itemData.artClass ? `${item.rarity} ${itemData.artClass}` : `${item.rarity}`;
+    
     if (itemData && itemData.artClass) {
-        return `<div class="pixel-art ${item.rarity} ${itemData.artClass}"></div>`;
+        return `<div class="pixel-art ${artClass}"></div>`;
     }
     return `<div class="pixel-art ${item.rarity}"></div>`;
 }
@@ -470,7 +494,8 @@ function sellItem() {
         if (sellPrice > 0) {
             inventory.splice(selectedItemIndex, 1);
             money += sellPrice;
-            updateMoneyDisplay();
+            moneyMade += sellPrice;
+            updateFinancialStats();
             selectedItemIndex = -1;
             renderInventory();
             saveGame();
@@ -564,7 +589,7 @@ startButton.addEventListener('click', () => {
 });
 
 checkMoneyBtn.addEventListener('click', () => {
-    updateMoneyDisplay();
+    updateFinancialStats();
     showScreen('money-screen');
 });
 
@@ -654,17 +679,18 @@ finishOpeningBtn.addEventListener('click', () => {
 
 buyButtons.forEach(button => {
     button.addEventListener('click', (e) => {
-        const crateType = e.target.dataset.crateType;
+        const crateType = e.target.dataset.crate-type;
         const cratePrice = CRATE_PRICES[crateType];
         const amount = parseInt(buyAmountSlider.value);
         const totalCost = cratePrice * amount;
 
         if (money >= totalCost) {
             money -= totalCost;
+            moneySpent += totalCost;
             for (let i = 0; i < amount; i++) {
                 inventory.push({ type: 'crate', name: `${crateType} crate`, rarity: crateType });
             }
-            updateMoneyDisplay();
+            updateFinancialStats();
             showNotification(`You bought ${amount} ${crateType} crate(s) for $${totalCost}!`);
             saveGame();
         } else {
@@ -680,7 +706,8 @@ buyAmountSlider.addEventListener('input', (e) => {
 doJobBtn.addEventListener('click', () => {
     const jobGain = Math.floor(Math.random() * (50 - 20 + 1)) + 20;
     money += jobGain;
-    updateMoneyDisplay();
+    moneyMade += jobGain;
+    updateFinancialStats();
     showNotification(`You earned $${jobGain} from a job!`);
     
     doJobBtn.disabled = true;
@@ -715,9 +742,10 @@ secretCodeSubmit.addEventListener('click', () => {
 
     if (code === '67isafunnyjoke' && !codeUsed) {
         money += 1000;
+        moneyMade += 1000;
         codeUsed = true;
         showNotification("Code redeemed! You've received $1000.");
-        updateMoneyDisplay();
+        updateFinancialStats();
         saveGame();
     } else if (code === '67isafunnyjoke' && codeUsed) {
         showNotification("This code has already been used!");
@@ -725,16 +753,18 @@ secretCodeSubmit.addEventListener('click', () => {
         const amount = parseInt(addMatch[1]);
         if (!isNaN(amount)) {
             money += amount;
+            moneyMade += amount;
             showNotification(`Added $${amount}.`);
-            updateMoneyDisplay();
+            updateFinancialStats();
             saveGame();
         }
     } else if (removeMatch) {
         const amount = parseInt(removeMatch[1]);
         if (!isNaN(amount)) {
             money = Math.max(0, money - amount);
+            moneySpent += amount;
             showNotification(`Removed $${amount}.`);
-            updateMoneyDisplay();
+            updateFinancialStats();
             saveGame();
         }
     } else if (code === 'Itemsme') {
