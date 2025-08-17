@@ -8,8 +8,8 @@ let selectedTab = 'crates';
 let tapCount = 0;
 let jobCooldown = 0;
 let treasureCooldown = 0;
-const CRATE_SELL_PRICE = 50;
-let codeUsed = false;
+const CRATE_SELL_PRICE = 50; // This seems unused now based on item prices, but keeping for reference
+let codeUsed = false; // This seems unused now since we have a 'codesUsed' object in CODES
 let foundHiddenItems = [];
 let buyAmount = 1;
 
@@ -55,12 +55,12 @@ const itemsTab = document.getElementById('items-tab');
 const openCrateBtn = document.getElementById('open-crate-btn');
 const sellItemBtn = document.getElementById('sell-item-btn');
 const backFromMoneyBtn = document.getElementById('back-from-money-btn');
-const backToMainBtn = document.getElementById('back-to-main-btn');
-const backFromShopBtn = document.getElementById('back-from-shop-btn');
-const backFromWorkBtn = document.getElementById('back-from-work-btn');
-const backFromItemDexBtn = document.getElementById('back-from-item-dex-btn');
-const backFromSettingsBtn = document.getElementById('back-from-settings-btn');
-const backFromCreditsBtn = document.getElementById('back-from-credits-btn');
+const backToMainBtn = document.querySelectorAll('.back-button')[0]; // Assuming there is a common class for back buttons now. You can also keep individual IDs.
+const backFromShopBtn = document.querySelectorAll('.back-button')[1];
+const backFromWorkBtn = document.querySelectorAll('.back-button')[2];
+const backFromItemDexBtn = document.querySelectorAll('.back-button')[3];
+const backFromSettingsBtn = document.querySelectorAll('.back-button')[4];
+const backFromCreditsBtn = document.querySelectorAll('.back-button')[5];
 
 const buyButtons = document.querySelectorAll('.buy-button');
 const buyAmountSlider = document.getElementById('buy-amount-slider');
@@ -218,6 +218,7 @@ const ITEMS = {
     hidden: HIDDEN_ITEMS
 };
 
+// Updated Drop Rates and Prices from previous requests
 const RARITY_CHANCES = {
     common: 0.40,
     uncommon: 0.28,
@@ -233,9 +234,10 @@ const CRATE_PRICES = {
     rare: 1100,
 };
 
+// Updated Crate Drop Rates
 const CRATE_CONTENTS = {
     normal: ['common', 'uncommon'],
-    uncommon: ['uncommon', 'rare', 'mythical'],
+    uncommon: ['uncommon', 'rare', 'mythical', 'legendary'], // Drop rates adjusted
     rare: ['rare', 'mythical', 'legendary', 'hidden'],
 };
 
@@ -298,7 +300,6 @@ function saveGame() {
     localStorage.setItem('gameInventory', JSON.stringify(inventory));
     localStorage.setItem('jobCooldown', jobCooldown);
     localStorage.setItem('treasureCooldown', treasureCooldown);
-    localStorage.setItem('codeUsed', codeUsed);
     localStorage.setItem('foundHiddenItems', JSON.stringify(foundHiddenItems));
     localStorage.setItem('codesUsed', JSON.stringify(Object.keys(CODES).filter(key => CODES[key].used)));
 }
@@ -310,7 +311,6 @@ function loadGame() {
     const savedInventory = localStorage.getItem('gameInventory');
     const savedJobCooldown = localStorage.getItem('jobCooldown');
     const savedTreasureCooldown = localStorage.getItem('treasureCooldown');
-    const savedCodeUsed = localStorage.getItem('codeUsed');
     const savedHiddenItems = localStorage.getItem('foundHiddenItems');
     const savedCodesUsed = localStorage.getItem('codesUsed');
     
@@ -333,9 +333,6 @@ function loadGame() {
     }
     if (savedTreasureCooldown) {
         treasureCooldown = parseInt(savedTreasureCooldown);
-    }
-    if (savedCodeUsed) {
-        codeUsed = savedCodeUsed === 'true';
     }
     if (savedHiddenItems) {
         foundHiddenItems = JSON.parse(savedHiddenItems);
@@ -366,57 +363,69 @@ function loadGame() {
 
 function createItemPixelArt(item) {
     if (item.type === 'crate') {
-        return `<div class="pixel-art crate"></div>`;
+        const crateType = item.rarity;
+        const artClass = crateType === 'normal' ? 'crate-normal' : crateType === 'uncommon' ? 'crate-uncommon' : 'crate-rare';
+        return `<div class="pixel-art ${artClass}"></div>`;
     }
     
     const itemData = Object.values(ITEMS).flat().find(i => i.name === item.name);
     if (!itemData) {
-        return ''; // Return nothing if item data is not found
+        return '';
     }
     const artClass = itemData.artClass;
     
     return `<div class="pixel-art ${artClass}"></div>`;
 }
 
+// Function to handle inventory rendering, now with stacking
 function renderInventory() {
     cratesContainer.innerHTML = '';
     itemsContainer.innerHTML = '';
     
-    const crates = inventory.filter(item => item.type === 'crate');
-    const items = inventory.filter(item => item.type === 'item');
+    const stackedCrates = {};
+    const stackedItems = {};
 
-    const totalCrateSlots = Math.max(crates.length, 20);
-    crates.forEach((crate, index) => {
-        const crateEl = document.createElement('div');
-        crateEl.classList.add('item-slot', `rarity-${crate.rarity}`);
-        crateEl.innerHTML = createItemPixelArt(crate);
-        crateEl.dataset.index = inventory.indexOf(crate);
-        crateEl.addEventListener('click', () => selectItem(inventory.indexOf(crate)));
-        cratesContainer.appendChild(crateEl);
+    inventory.forEach(item => {
+        if (item.type === 'crate') {
+            stackedCrates[item.rarity] = (stackedCrates[item.rarity] || 0) + 1;
+        } else if (item.type === 'item') {
+            stackedItems[item.name] = (stackedItems[item.name] || 0) + 1;
+        }
     });
 
-    for (let i = crates.length; i < totalCrateSlots; i++) {
-        const emptySlot = document.createElement('div');
-        emptySlot.classList.add('item-slot');
-        cratesContainer.appendChild(emptySlot);
-    }
+    // Render crates
+    const crateTypes = ['normal', 'uncommon', 'rare'];
+    crateTypes.forEach(type => {
+        if (stackedCrates[type]) {
+            const crateEl = document.createElement('div');
+            crateEl.classList.add('item-slot', `rarity-crate`);
+            crateEl.innerHTML = createItemPixelArt({ type: 'crate', rarity: type }) + `<span class="item-count">${stackedCrates[type]}</span>`;
+            
+            // To handle selection of a specific crate type
+            crateEl.addEventListener('click', () => {
+                // Find the index of the first crate of this type to "select"
+                const index = inventory.findIndex(item => item.type === 'crate' && item.rarity === type);
+                selectItem(index);
+            });
+            cratesContainer.appendChild(crateEl);
+        }
+    });
 
-    const totalItemSlots = Math.max(items.length, 20);
-    items.forEach((item, index) => {
+    // Render items
+    for (const itemName in stackedItems) {
         const itemEl = document.createElement('div');
-        itemEl.classList.add('item-slot', `rarity-${item.rarity}`);
-        itemEl.innerHTML = createItemPixelArt(item);
-        itemEl.dataset.index = inventory.indexOf(item);
-        itemEl.addEventListener('click', () => selectItem(inventory.indexOf(item)));
+        const itemData = Object.values(ITEMS).flat().find(i => i.name === itemName);
+        itemEl.classList.add('item-slot', `rarity-${itemData.rarity}`);
+        itemEl.innerHTML = createItemPixelArt({ type: 'item', name: itemName }) + `<span class="item-count">${stackedItems[itemName]}</span>`;
+        
+        // Find the index of the first item of this type to "select"
+        itemEl.addEventListener('click', () => {
+            const index = inventory.findIndex(item => item.type === 'item' && item.name === itemName);
+            selectItem(index);
+        });
         itemsContainer.appendChild(itemEl);
-    });
-
-    for (let i = items.length; i < totalItemSlots; i++) {
-        const emptySlot = document.createElement('div');
-        emptySlot.classList.add('item-slot');
-        itemsContainer.appendChild(emptySlot);
     }
-
+    
     updateActionButtons();
 }
 
@@ -465,12 +474,22 @@ function renderItemDex() {
 
 function selectItem(index) {
     selectedItemIndex = index;
-    document.querySelectorAll('.item-slot').forEach((el) => {
-        el.classList.remove('selected');
-        if (parseInt(el.dataset.index) === index) {
-            el.classList.add('selected');
+    // Clear all selections first
+    document.querySelectorAll('.item-slot').forEach(el => el.classList.remove('selected'));
+
+    // Find and select the correct item slot based on the selected index
+    const selectedItem = inventory[index];
+    if (selectedItem) {
+        let slotToSelect;
+        if (selectedItem.type === 'crate') {
+            slotToSelect = document.querySelector(`#crates-container .item-slot[data-crate-type="${selectedItem.rarity}"]`);
+        } else {
+            slotToSelect = document.querySelector(`#items-container .item-slot[data-item-name="${selectedItem.name}"]`);
         }
-    });
+        if (slotToSelect) {
+            slotToSelect.classList.add('selected');
+        }
+    }
     updateActionButtons();
 }
 
@@ -482,10 +501,10 @@ function updateActionButtons() {
     } else {
         if (selectedItem.type === 'crate') {
             openCrateBtn.classList.remove('hidden');
-            sellItemBtn.classList.add('hidden');
+            sellItemBtn.classList.remove('hidden'); // Sell button for crates
         } else {
             openCrateBtn.classList.add('hidden');
-            sellItemBtn.classList.remove('hidden');
+            sellItemBtn.classList.remove('hidden'); // Sell button for items
         }
     }
 }
@@ -499,7 +518,10 @@ function openCrate() {
         itemDropPixelart.classList.add('hidden');
         finishOpeningBtn.classList.add('hidden');
         tapInstruction.classList.remove('hidden');
+        openingCratePixelart.classList.remove('hidden');
+        openingCratePixelart.classList.remove('explode');
         openingCratePixelart.style.transform = 'scale(1)';
+        openingCratePixelart.innerHTML = createItemPixelArt(crate);
     } else {
         showNotification("This is not a crate!");
     }
@@ -508,15 +530,22 @@ function openCrate() {
 function sellItem() {
     if (selectedItemIndex !== -1) {
         const itemToSell = inventory[selectedItemIndex];
+        
         let sellPrice = 0;
         let itemFound = false;
 
-        for (const rarity in ITEMS) {
-            const itemData = ITEMS[rarity].find(i => i.name === itemToSell.name);
-            if (itemData) {
-                sellPrice = itemData.sellValue;
-                itemFound = true;
-                break;
+        // Check if the item is a crate first
+        if (itemToSell.type === 'crate') {
+            sellPrice = CRATE_SELL_PRICE; // Or a specific value for each crate type if desired
+            itemFound = true;
+        } else {
+            for (const rarity in ITEMS) {
+                const itemData = ITEMS[rarity].find(i => i.name === itemToSell.name);
+                if (itemData) {
+                    sellPrice = itemData.sellValue;
+                    itemFound = true;
+                    break;
+                }
             }
         }
 
@@ -528,7 +557,7 @@ function sellItem() {
             selectedItemIndex = -1;
             renderInventory();
             saveGame();
-            showNotification(`You sold a ${itemToSell.name} for $${sellPrice}!`);
+            showNotification(`You sold a ${itemToSell.name || 'crate'} for $${sellPrice}!`);
         } else {
             showNotification("This item cannot be sold for a profit!");
         }
@@ -570,7 +599,6 @@ function tapToOpen() {
         tapInstruction.classList.add('hidden');
         openingCratePixelart.classList.add('explode');
 
-        // After the explosion animation, reveal the item
         openingCratePixelart.addEventListener('animationend', () => {
             const crate = inventory[selectedItemIndex];
             const droppedItem = generateRandomItem(crate.rarity);
@@ -583,7 +611,7 @@ function tapToOpen() {
             }
             
             const itemElement = document.createElement('div');
-            itemElement.classList.add('pixel-art');
+            itemElement.classList.add('pixel-art-container');
             itemElement.innerHTML = createItemPixelArt(droppedItem);
             itemDropPixelart.innerHTML = '';
             itemDropPixelart.appendChild(itemElement);
@@ -632,7 +660,7 @@ function resetGame() {
     tapCount = 0;
     jobCooldown = 0;
     treasureCooldown = 0;
-    codeUsed = false;
+    codeUsed = false; // Legacy variable
     foundHiddenItems = [];
     
     // Clear localStorage
@@ -775,28 +803,16 @@ creditsBtn.addEventListener('click', () => {
     showScreen('credits-screen');
 });
 
-backToMainBtn.addEventListener('click', () => {
-    showScreen('main-screen');
-});
-
-backFromShopBtn.addEventListener('click', () => {
-    showScreen('main-screen');
-});
-
-backFromItemDexBtn.addEventListener('click', () => {
-    showScreen('main-screen');
-});
-
-backFromWorkBtn.addEventListener('click', () => {
-    showScreen('main-screen');
-});
-
-backFromSettingsBtn.addEventListener('click', () => {
-    showScreen('main-screen');
-});
-
-backFromCreditsBtn.addEventListener('click', () => {
-    showScreen('settings-screen');
+// Assuming back buttons now have a common class
+document.querySelectorAll('.back-button').forEach(button => {
+    button.addEventListener('click', () => {
+        const parentScreen = button.closest('.screen');
+        let targetScreenId = 'main-screen';
+        if (parentScreen.id === 'credits-screen') {
+            targetScreenId = 'settings-screen';
+        }
+        showScreen(targetScreenId);
+    });
 });
 
 cratesTab.addEventListener('click', () => {
@@ -831,7 +847,7 @@ finishOpeningBtn.addEventListener('click', () => {
 
 buyButtons.forEach(button => {
     button.addEventListener('click', (e) => {
-        const crateType = e.target.dataset.crate-type;
+        const crateType = e.target.dataset.crateType;
         const cratePrice = CRATE_PRICES[crateType];
         const amount = parseInt(buyAmountSlider.value);
         const totalCost = cratePrice * amount;
@@ -845,6 +861,7 @@ buyButtons.forEach(button => {
             updateFinancialStats();
             showNotification(`You bought ${amount} ${crateType} crate(s) for $${totalCost}!`);
             saveGame();
+            renderInventory(); // Update inventory after purchase
         } else {
             showNotification("Not enough money!");
         }
@@ -877,6 +894,7 @@ digTreasureBtn.addEventListener('click', () => {
         const crateType = ['normal', 'uncommon', 'rare'][Math.floor(Math.random() * 3)];
         inventory.push({ type: 'crate', name: `${crateType} crate`, rarity: crateType });
         showNotification(`You dug up a treasure chest with a ${crateType} crate!`);
+        renderInventory(); // Update inventory after digging
     } else {
         showNotification("You dug and found nothing but dirt.");
     }
