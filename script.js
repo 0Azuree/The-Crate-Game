@@ -1,5 +1,5 @@
 // --- Game State Variables ---
-let money = 1000;
+let money = 500; // Starting money is now $500
 let moneySpent = 0;
 let moneyMade = 0;
 let inventory = [];
@@ -40,6 +40,11 @@ const makerCredit = document.getElementById('maker-credit');
 const secretCodeBox = document.getElementById('secret-code-box');
 const secretCodeInput = document.getElementById('secret-code-input');
 const secretCodeSubmit = document.getElementById('secret-code-submit');
+const saveGameBtn = document.getElementById('save-game-btn');
+const resetGameBtn = document.getElementById('reset-game-btn');
+const resetPopup = document.getElementById('reset-popup');
+const resetYesBtn = document.getElementById('reset-yes-btn');
+const resetNoBtn = document.getElementById('reset-no-btn');
 
 const cratesContainer = document.getElementById('crates-container');
 const itemsContainer = document.getElementById('items-container');
@@ -293,6 +298,8 @@ function loadGame() {
     
     if (savedMoney) {
         money = parseInt(savedMoney);
+    } else {
+        money = 500;
     }
     if (savedMoneySpent) {
         moneySpent = parseInt(savedMoneySpent);
@@ -579,6 +586,32 @@ function updateCooldownDisplay(type, time) {
     }, 1000);
 }
 
+function resetGame() {
+    // Reset all game state variables
+    money = 500;
+    moneySpent = 0;
+    moneyMade = 0;
+    inventory = [];
+    selectedItemIndex = -1;
+    selectedTab = 'crates';
+    tapCount = 0;
+    jobCooldown = 0;
+    treasureCooldown = 0;
+    codeUsed = false;
+    foundHiddenItems = [];
+    
+    // Clear localStorage
+    localStorage.clear();
+    
+    // Update the UI
+    updateFinancialStats();
+    renderInventory();
+    
+    // Go back to the main screen
+    showScreen('main-screen');
+    showNotification("Game has been reset.");
+}
+
 // --- Event Listeners ---
 startButton.addEventListener('click', () => {
     startButton.style.backgroundColor = 'white';
@@ -783,6 +816,24 @@ secretCodeSubmit.addEventListener('click', () => {
 
     secretCodeInput.value = '';
     secretCodeBox.classList.add('hidden');
+});
+
+saveGameBtn.addEventListener('click', () => {
+    saveGame();
+    showNotification("Game saved!");
+});
+
+resetGameBtn.addEventListener('click', () => {
+    resetPopup.classList.add('visible');
+});
+
+resetNoBtn.addEventListener('click', () => {
+    resetPopup.classList.remove('visible');
+});
+
+resetYesBtn.addEventListener('click', () => {
+    resetGame();
+    resetPopup.classList.remove('visible');
 });
 
 // --- Initial Setup ---
