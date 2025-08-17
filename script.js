@@ -1,5 +1,5 @@
 // --- Game State Variables ---
-let money = 500; // Starting money is now $500
+let money = 500;
 let moneySpent = 0;
 let moneyMade = 0;
 let inventory = [];
@@ -10,7 +10,8 @@ let jobCooldown = 0;
 let treasureCooldown = 0;
 const CRATE_SELL_PRICE = 50;
 let codeUsed = false;
-let foundHiddenItems = []; // Array to store found hidden item names
+let foundHiddenItems = [];
+let buyAmount = 1;
 
 // --- DOM Elements ---
 const startScreen = document.getElementById('start-screen');
@@ -265,10 +266,10 @@ function showScreen(screenId) {
 
 function showNotification(message) {
     notificationMessage.textContent = message;
-    notificationPopup.classList.remove('hidden');
+    **notificationPopup.classList.add('visible');**
     
     setTimeout(() => {
-        notificationPopup.classList.add('hidden');
+        **notificationPopup.classList.remove('visible');**
     }, 3000);
 }
 
@@ -821,16 +822,16 @@ saveGameBtn.addEventListener('click', () => {
 });
 
 resetGameBtn.addEventListener('click', () => {
-    resetPopup.classList.remove('hidden');
+    **resetPopup.classList.add('visible');**
 });
 
 resetNoBtn.addEventListener('click', () => {
-    resetPopup.classList.add('hidden');
+    **resetPopup.classList.remove('visible');**
 });
 
 resetYesBtn.addEventListener('click', () => {
     resetGame();
-    resetPopup.classList.add('hidden');
+    **resetPopup.classList.remove('visible');**
 });
 
 // --- Initial Setup ---
