@@ -266,10 +266,10 @@ function showScreen(screenId) {
 
 function showNotification(message) {
     notificationMessage.textContent = message;
-    *notificationPopup.classList.add('visible');*
+    notificationPopup.classList.add('visible');
     
     setTimeout(() => {
-        **notificationPopup.classList.remove('visible');**
+        notificationPopup.classList.remove('visible');
     }, 3000);
 }
 
@@ -822,16 +822,16 @@ saveGameBtn.addEventListener('click', () => {
 });
 
 resetGameBtn.addEventListener('click', () => {
-    **resetPopup.classList.add('visible');**
+    resetPopup.classList.add('visible');
 });
 
 resetNoBtn.addEventListener('click', () => {
-    **resetPopup.classList.remove('visible');**
+    resetPopup.classList.remove('visible');
 });
 
 resetYesBtn.addEventListener('click', () => {
     resetGame();
-    **resetPopup.classList.remove('visible');**
+    resetPopup.classList.remove('visible');
 });
 
 // --- Initial Setup ---
