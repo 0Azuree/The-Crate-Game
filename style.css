@@ -25,6 +25,7 @@ body, html {
     opacity: 0;
     padding: 20px;
     box-sizing: border-box;
+    z-index: 1; /* Ensure screens are on a base layer */
 }
 
 .screen.active {
