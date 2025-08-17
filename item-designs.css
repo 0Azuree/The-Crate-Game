@@ -1,1756 +1,1756 @@
 /* Pixel art for all items */
 
 .pixel-art.googly-rock {
-    background-color: #616161;
-    border-radius: 50%;
-    position: relative;
-    box-shadow: 0 0 0 2px #444;
+    background-color: #616161;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 0 2px #444;
 }
 .pixel-art.googly-rock::before, .pixel-art.googly-rock::after {
-    content: '';
-    position: absolute;
-    top: 30%;
-    width: 20%;
-    height: 20%;
-    background: white;
-    border-radius: 50%;
-    border: 1px solid black;
+    content: '';
+    position: absolute;
+    top: 30%;
+    width: 20%;
+    height: 20%;
+    background: white;
+    border-radius: 50%;
+    border: 1px solid black;
 }
 .pixel-art.googly-rock::before { left: 20%; }
 .pixel-art.googly-rock::after { right: 20%; }
 
 .pixel-art.gum-wrapper {
-    background: #d8bfd8;
-    position: relative;
-    border: 2px solid #b37e96;
-    border-radius: 5px;
-    width: 60%;
-    height: 40%;
+    background: #d8bfd8;
+    position: relative;
+    border: 2px solid #b37e96;
+    border-radius: 5px;
+    width: 60%;
+    height: 40%;
 }
 
 .pixel-art.lint-collection {
-    background-color: #a0a0a0;
-    border-radius: 50%;
-    box-shadow: 
-        10px 0 #a0a0a0,
-        -10px 0 #a0a0a0,
-        5px 10px #a0a0a0,
-        -5px -10px #a0a0a0;
+    background-color: #a0a0a0;
+    border-radius: 50%;
+    box-shadow: 
+        10px 0 #a0a0a0,
+        -10px 0 #a0a0a0,
+        5px 10px #a0a0a0,
+        -5px -10px #a0a0a0;
 }
 
 .pixel-art.bent-spoon {
-    background-color: #c0c0c0;
-    position: relative;
-    border-radius: 2px;
-    width: 15%;
-    height: 60%;
-    transform: rotate(30deg);
+    background-color: #c0c0c0;
+    position: relative;
+    border-radius: 2px;
+    width: 15%;
+    height: 60%;
+    transform: rotate(30deg);
 }
 .pixel-art.bent-spoon::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 50%;
-    background-color: #c0c0c0;
-    border-radius: 50% 50% 0 0;
-    top: -50%;
-    left: 0;
-    border: 2px solid #999;
-    border-bottom: none;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    background-color: #c0c0c0;
+    border-radius: 50% 50% 0 0;
+    top: -50%;
+    left: 0;
+    border: 2px solid #999;
+    border-bottom: none;
 }
 
 .pixel-art.expired-coupon {
-    background-color: #f0e68c;
-    border: 2px dashed #8b4513;
-    width: 70%;
-    height: 40%;
+    background-color: #f0e68c;
+    border: 2px dashed #8b4513;
+    width: 70%;
+    height: 40%;
 }
 
 .pixel-art.single-sock {
-    background-color: #f5f5dc;
-    border-radius: 50% 50% 0 0;
-    width: 40%;
-    height: 60%;
-    position: relative;
+    background-color: #f5f5dc;
+    border-radius: 50% 50% 0 0;
+    width: 40%;
+    height: 60%;
+    position: relative;
 }
 .pixel-art.single-sock::before {
-    content: '';
-    position: absolute;
-    width: 80%;
-    height: 20%;
-    background-color: #a52a2a;
-    top: 10%;
-    left: 10%;
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 20%;
+    background-color: #a52a2a;
+    top: 10%;
+    left: 10%;
 }
 
 .pixel-art.broken-pencil {
-    background-color: #ffd700;
-    width: 10%;
-    height: 80%;
-    position: relative;
-    border: 1px solid #000;
+    background-color: #ffd700;
+    width: 10%;
+    height: 80%;
+    position: relative;
+    border: 1px solid #000;
 }
 .pixel-art.broken-pencil::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 10%;
-    background-color: #8b4513;
-    bottom: 0;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    background-color: #8b4513;
+    bottom: 0;
 }
 
 .pixel-art.stale-cracker {
-    background-color: #d2b48c;
-    border: 2px solid #8b4513;
-    border-radius: 5px;
-    width: 50%;
-    height: 50%;
+    background-color: #d2b48c;
+    border: 2px solid #8b4513;
+    border-radius: 5px;
+    width: 50%;
+    height: 50%;
 }
 
 .pixel-art.pet-rock-leash {
-    background-color: #8b4513;
-    width: 50%;
-    height: 10%;
-    position: relative;
-    border-radius: 2px;
+    background-color: #8b4513;
+    width: 50%;
+    height: 10%;
+    position: relative;
+    border-radius: 2px;
 }
 .pixel-art.pet-rock-leash::before {
-    content: '';
-    position: absolute;
-    width: 15%;
-    height: 150%;
-    background-color: #a0522d;
-    left: 20%;
-    bottom: -100%;
-    border-radius: 50%;
+    content: '';
+    position: absolute;
+    width: 15%;
+    height: 150%;
+    background-color: #a0522d;
+    left: 20%;
+    bottom: -100%;
+    border-radius: 50%;
 }
 
 .pixel-art.empty-bottle {
-    background-color: #add8e6;
-    border: 2px solid #87ceeb;
-    width: 30%;
-    height: 60%;
-    border-radius: 5px 5px 20px 20px;
-    position: relative;
+    background-color: #add8e6;
+    border: 2px solid #87ceeb;
+    width: 30%;
+    height: 60%;
+    border-radius: 5px 5px 20px 20px;
+    position: relative;
 }
 .pixel-art.empty-bottle::before {
-    content: '';
-    position: absolute;
-    width: 50%;
-    height: 10%;
-    background-color: #a0522d;
-    top: -10%;
-    left: 25%;
-    border-radius: 3px;
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 10%;
+    background-color: #a0522d;
+    top: -10%;
+    left: 25%;
+    border-radius: 3px;
 }
 
 .pixel-art.crumpled-receipt {
-    background-color: #f5f5f5;
-    border: 1px solid #ccc;
-    width: 60%;
-    height: 80%;
-    transform: rotate(5deg);
-    border-radius: 5px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    width: 60%;
+    height: 80%;
+    transform: rotate(5deg);
+    border-radius: 5px;
 }
 
 .pixel-art.bottle-cap {
-    background-color: #b0c4de;
-    border-radius: 50%;
-    width: 40%;
-    height: 40%;
-    border: 2px solid #778899;
+    background-color: #b0c4de;
+    border-radius: 50%;
+    width: 40%;
+    height: 40%;
+    border: 2px solid #778899;
 }
 
 .pixel-art.loose-screw {
-    background-color: #c0c0c0;
-    width: 15%;
-    height: 60%;
-    position: relative;
+    background-color: #c0c0c0;
+    width: 15%;
+    height: 60%;
+    position: relative;
 }
 .pixel-art.loose-screw::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 10%;
-    background-color: #808080;
-    top: 15%;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    background-color: #808080;
+    top: 15%;
 }
 
 .pixel-art.used-tea-bag {
-    background-color: #8b4513;
-    width: 40%;
-    height: 40%;
-    border: 1px solid #a0522d;
-    position: relative;
+    background-color: #8b4513;
+    width: 40%;
+    height: 40%;
+    border: 1px solid #a0522d;
+    position: relative;
 }
 .pixel-art.used-tea-bag::before {
-    content: '';
-    position: absolute;
-    width: 50%;
-    height: 150%;
-    background-color: #f5f5dc;
-    left: 25%;
-    top: -100%;
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 150%;
+    background-color: #f5f5dc;
+    left: 25%;
+    top: -100%;
 }
 
 .pixel-art.dust-bunny {
-    background-color: #f0f0f0;
-    border-radius: 50%;
-    width: 50%;
-    height: 50%;
-    box-shadow: 
-        5px 5px #f0f0f0,
-        -5px -5px #f0f0f0,
-        -5px 5px #f0f0f0,
-        5px -5px #f0f0f0;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    width: 50%;
+    height: 50%;
+    box-shadow: 
+        5px 5px #f0f0f0,
+        -5px -5px #f0f0f0,
+        -5px 5px #f0f0f0,
+        5px -5px #f0f0f0;
 }
 
 .pixel-art.mystery-key {
-    background-color: #daa520;
-    width: 10%;
-    height: 80%;
-    position: relative;
+    background-color: #daa520;
+    width: 10%;
+    height: 80%;
+    position: relative;
 }
 .pixel-art.mystery-key::before {
-    content: '';
-    position: absolute;
-    width: 150%;
-    height: 15%;
-    background-color: #daa520;
-    top: 50%;
-    left: -50%;
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 15%;
+    background-color: #daa520;
+    top: 50%;
+    left: -50%;
 }
 
 .pixel-art.worn-eraser {
-    background-color: #e6e6fa;
-    width: 40%;
-    height: 20%;
-    border: 2px solid #ccc;
-    border-radius: 5px;
+    background-color: #e6e6fa;
+    width: 40%;
+    height: 20%;
+    border: 2px solid #ccc;
+    border-radius: 5px;
 }
 
 .pixel-art.chewed-pen {
-    background-color: #808080;
-    width: 15%;
-    height: 70%;
-    border-radius: 5px;
-    position: relative;
+    background-color: #808080;
+    width: 15%;
+    height: 70%;
+    border-radius: 5px;
+    position: relative;
 }
 .pixel-art.chewed-pen::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 10%;
-    background-color: #fff;
-    bottom: 20%;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    background-color: #fff;
+    bottom: 20%;
 }
 
 .pixel-art.tangled-earbuds {
-    background: transparent;
-    border: 2px solid #808080;
-    border-radius: 50%;
-    width: 50%;
-    height: 50%;
-    position: relative;
+    background: transparent;
+    border: 2px solid #808080;
+    border-radius: 50%;
+    width: 50%;
+    height: 50%;
+    position: relative;
 }
 .pixel-art.tangled-earbuds::before {
-    content: '';
-    position: absolute;
-    top: 5%;
-    left: 5%;
-    width: 40%;
-    height: 40%;
-    border: 2px solid #808080;
-    border-radius: 50%;
-    transform: rotate(45deg);
+    content: '';
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 40%;
+    height: 40%;
+    border: 2px solid #808080;
+    border-radius: 50%;
+    transform: rotate(45deg);
 }
 
 .pixel-art.small-pebblestone {
-    background-color: #a9a9a9;
-    width: 30%;
-    height: 30%;
-    border-radius: 50%;
+    background-color: #a9a9a9;
+    width: 30%;
+    height: 30%;
+    border-radius: 50%;
 }
 
 .pixel-art.ripped-paper {
-    background-color: #f0f0f0;
-    width: 50%;
-    height: 60%;
-    transform: rotate(10deg);
+    background-color: #f0f0f0;
+    width: 50%;
+    height: 60%;
+    transform: rotate(10deg);
 }
 
 .pixel-art.matchbook {
-    background-color: #8b0000;
-    width: 40%;
-    height: 60%;
-    border: 2px solid #5a0000;
+    background-color: #8b0000;
+    width: 40%;
+    height: 60%;
+    border: 2px solid #5a0000;
 }
 .pixel-art.matchbook::before {
-    content: '';
-    position: absolute;
-    width: 80%;
-    height: 10%;
-    background-color: #fff;
-    top: 5%;
-    left: 10%;
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 10%;
+    background-color: #fff;
+    top: 5%;
+    left: 10%;
 }
 
 .pixel-art.dead-fly {
-    background-color: #000;
-    width: 20%;
-    height: 15%;
-    border-radius: 50%;
-    position: relative;
+    background-color: #000;
+    width: 20%;
+    height: 15%;
+    border-radius: 50%;
+    position: relative;
 }
 .pixel-art.dead-fly::before {
-    content: '';
-    position: absolute;
-    width: 50%;
-    height: 10%;
-    background-color: #fff;
-    top: 30%;
-    left: 25%;
-    transform: rotate(45deg);
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 10%;
+    background-color: #fff;
+    top: 30%;
+    left: 25%;
+    transform: rotate(45deg);
 }
 
 .pixel-art.dry-leaf {
-    background-color: #a0522d;
-    width: 30%;
-    height: 50%;
-    border-radius: 50% 0;
-    transform: rotate(45deg);
+    background-color: #a0522d;
+    width: 30%;
+    height: 50%;
+    border-radius: 50% 0;
+    transform: rotate(45deg);
 }
 
 .pixel-art.rusty-nail {
-    background-color: #a0522d;
-    width: 5%;
-    height: 70%;
-    position: relative;
+    background-color: #a0522d;
+    width: 5%;
+    height: 70%;
+    position: relative;
 }
 .pixel-art.rusty-nail::before {
-    content: '';
-    position: absolute;
-    width: 150%;
-    height: 10%;
-    background-color: #d2b48c;
-    top: 0;
-    left: -25%;
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 10%;
+    background-color: #d2b48c;
+    top: 0;
+    left: -25%;
 }
 
 .pixel-art.old-shoelace {
-    background-color: #8b0000;
-    width: 70%;
-    height: 50%;
-    border-radius: 50%;
-    border: 2px solid #5a0000;
+    background-color: #8b0000;
+    width: 70%;
+    height: 50%;
+    border-radius: 50%;
+    border: 2px solid #5a0000;
 }
 
 .pixel-art.fuzzy-dice {
-    background-color: #a52a2a;
-    width: 50%;
-    height: 50%;
-    border: 2px solid #8b0000;
-    position: relative;
-    border-radius: 5px;
+    background-color: #a52a2a;
+    width: 50%;
+    height: 50%;
+    border: 2px solid #8b0000;
+    position: relative;
+    border-radius: 5px;
 }
 .pixel-art.fuzzy-dice::before {
-    content: '';
-    position: absolute;
-    width: 20%;
-    height: 20%;
-    background-color: #fff;
-    top: 20%;
-    left: 20%;
-    border-radius: 50%;
+    content: '';
+    position: absolute;
+    width: 20%;
+    height: 20%;
+    background-color: #fff;
+    top: 20%;
+    left: 20%;
+    border-radius: 50%;
 }
 .pixel-art.fuzzy-dice::after {
-    content: '';
-    position: absolute;
-    width: 20%;
-    height: 20%;
-    background-color: #fff;
-    bottom: 20%;
-    right: 20%;
-    border-radius: 50%;
+    content: '';
+    position: absolute;
+    width: 20%;
+    height: 20%;
+    background-color: #fff;
+    bottom: 20%;
+    right: 20%;
+    border-radius: 50%;
 }
 
 .pixel-art.bent-paperclip {
-    background-color: #c0c0c0;
-    width: 20%;
-    height: 60%;
-    border-radius: 50%;
-    border: 2px solid #808080;
+    background-color: #c0c0c0;
+    width: 20%;
+    height: 60%;
+    border-radius: 50%;
+    border: 2px solid #808080;
 }
 
 .pixel-art.cardboard-box {
-    background-color: #b87333;
-    width: 60%;
-    height: 60%;
-    border: 2px solid #8b4513;
-    position: relative;
+    background-color: #b87333;
+    width: 60%;
+    height: 60%;
+    border: 2px solid #8b4513;
+    position: relative;
 }
 .pixel-art.cardboard-box::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 20%;
-    background-color: #d2b48c;
-    top: 0;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 20%;
+    background-color: #d2b48c;
+    top: 0;
 }
 .pixel-art.unidentified-scraps {
-    background-color: #556b2f;
-    width: 40%;
-    height: 40%;
-    border-radius: 50%;
-    box-shadow: 
-        10px 0 #556b2f,
-        -10px 0 #556b2f,
-        5px 10px #556b2f;
+    background-color: #556b2f;
+    width: 40%;
+    height: 40%;
+    border-radius: 50%;
+    box-shadow: 
+        10px 0 #556b2f,
+        -10px 0 #556b2f,
+        5px 10px #556b2f;
 }
 
 
 /* Uncommon Items */
 .pixel-art.cassette-player {
-    background: #333;
-    border: 2px solid #1a1a1a;
-    position: relative;
-    width: 60%;
-    height: 30%;
+    background: #333;
+    border: 2px solid #1a1a1a;
+    position: relative;
+    width: 60%;
+    height: 30%;
 }
 .pixel-art.cassette-player::before {
-    content: '';
-    position: absolute;
-    top: 15%;
-    left: 10%;
-    width: 70%;
-    height: 40%;
-    background: #555;
-    border: 1px solid #111;
+    content: '';
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    width: 70%;
+    height: 40%;
+    background: #555;
+    border: 1px solid #111;
 }
 
 .pixel-art.fidget-spinner {
-    width: 80%;
-    height: 80%;
-    position: relative;
+    width: 80%;
+    height: 80%;
+    position: relative;
 }
 .pixel-art.fidget-spinner::before, .pixel-art.fidget-spinner::after {
-    content: '';
-    position: absolute;
-    background: #87ceeb;
-    border-radius: 50%;
-    width: 25%;
-    height: 25%;
+    content: '';
+    position: absolute;
+    background: #87ceeb;
+    border-radius: 50%;
+    width: 25%;
+    height: 25%;
 }
 .pixel-art.fidget-spinner::before { top: 0; left: 50%; transform: translateX(-50%); }
 .pixel-art.fidget-spinner::after { bottom: 0; left: 50%; transform: translateX(-50%); }
 
 .pixel-art.signed-napkin {
-    background-color: #f0f0f0;
-    width: 50%;
-    height: 50%;
-    border: 1px solid #ccc;
-    transform: rotate(-10deg);
+    background-color: #f0f0f0;
+    width: 50%;
+    height: 50%;
+    border: 1px solid #ccc;
+    transform: rotate(-10deg);
 }
 .pixel-art.signed-napkin::before {
-    content: 'X';
-    position: absolute;
-    font-size: 20px;
-    font-weight: bold;
-    color: #000;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    content: 'X';
+    position: absolute;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .pixel-art.rubber-chicken {
-    background-color: #ffd700;
-    width: 20%;
-    height: 80%;
-    border-radius: 50% 50% 0 0;
-    position: relative;
+    background-color: #ffd700;
+    width: 20%;
+    height: 80%;
+    border-radius: 50% 50% 0 0;
+    position: relative;
 }
 .pixel-art.rubber-chicken::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 20%;
-    background-color: #ff4500;
-    bottom: -10%;
-    left: 0;
-    border-radius: 50%;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 20%;
+    background-color: #ff4500;
+    bottom: -10%;
+    left: 0;
+    border-radius: 50%;
 }
 
 .pixel-art.half-sandwich {
-    background-color: #d2b48c;
-    width: 60%;
-    height: 40%;
-    border: 2px solid #8b4513;
-    position: relative;
-    transform: rotate(5deg);
+    background-color: #d2b48c;
+    width: 60%;
+    height: 40%;
+    border: 2px solid #8b4513;
+    position: relative;
+    transform: rotate(5deg);
 }
 .pixel-art.half-sandwich::before {
-    content: '';
-    position: absolute;
-    width: 80%;
-    height: 50%;
-    background-color: #808080;
-    top: 20%;
-    left: 10%;
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 50%;
+    background-color: #808080;
+    top: 20%;
+    left: 10%;
 }
 
 .pixel-art.bag-of-marbles {
-    background-color: #a0522d;
-    width: 50%;
-    height: 60%;
-    border-radius: 10px;
-    position: relative;
+    background-color: #a0522d;
+    width: 50%;
+    height: 60%;
+    border-radius: 10px;
+    position: relative;
 }
 .pixel-art.bag-of-marbles::before {
-    content: '';
-    position: absolute;
-    width: 10%;
-    height: 10%;
-    background-color: #ff0000;
-    border-radius: 50%;
-    top: 20%;
-    left: 20%;
+    content: '';
+    position: absolute;
+    width: 10%;
+    height: 10%;
+    background-color: #ff0000;
+    border-radius: 50%;
+    top: 20%;
+    left: 20%;
 }
 
 .pixel-art.glow-star {
-    background-color: #ffff00;
-    width: 40%;
-    height: 40%;
-    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    box-shadow: 0 0 10px #ffff00;
-    animation: glow 1s infinite alternate;
+    background-color: #ffff00;
+    width: 40%;
+    height: 40%;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    box-shadow: 0 0 10px #ffff00;
+    animation: glow 1s infinite alternate;
 }
 
 .pixel-art.retro-pager {
-    background-color: #2f4f4f;
-    width: 50%;
-    height: 40%;
-    border-radius: 5px;
-    border: 2px solid #000;
-    position: relative;
+    background-color: #2f4f4f;
+    width: 50%;
+    height: 40%;
+    border-radius: 5px;
+    border: 2px solid #000;
+    position: relative;
 }
 .pixel-art.retro-pager::before {
-    content: 'BEEP';
-    position: absolute;
-    top: 10%;
-    left: 10%;
-    font-size: 10px;
-    color: #00ff00;
+    content: 'BEEP';
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    font-size: 10px;
+    color: #00ff00;
 }
 
 .pixel-art.floppy-hat {
-    background-color: #8b4513;
-    width: 80%;
-    height: 30%;
-    border-radius: 50%;
-    position: relative;
+    background-color: #8b4513;
+    width: 80%;
+    height: 30%;
+    border-radius: 50%;
+    position: relative;
 }
 .pixel-art.floppy-hat::before {
-    content: '';
-    position: absolute;
-    width: 50%;
-    height: 100%;
-    background-color: #a0522d;
-    top: -50%;
-    left: 25%;
-    border-radius: 50% 50% 0 0;
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background-color: #a0522d;
+    top: -50%;
+    left: 25%;
+    border-radius: 50% 50% 0 0;
 }
 
 .pixel-art.teddy-bear {
-    background-color: #a0522d;
-    border-radius: 50%;
-    width: 50%;
-    height: 50%;
-    position: relative;
+    background-color: #a0522d;
+    border-radius: 50%;
+    width: 50%;
+    height: 50%;
+    position: relative;
 }
 .pixel-art.teddy-bear::before {
-    content: '';
-    position: absolute;
-    width: 80%;
-    height: 80%;
-    background-color: #8b4513;
-    border-radius: 50%;
-    top: 10%;
-    left: 10%;
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    background-color: #8b4513;
+    border-radius: 50%;
+    top: 10%;
+    left: 10%;
 }
 .pixel-art.teddy-bear::after {
-    content: '';
-    position: absolute;
-    width: 10%;
-    height: 10%;
-    background-color: #000;
-    top: 40%;
-    left: 45%;
-    border-radius: 50%;
+    content: '';
+    position: absolute;
+    width: 10%;
+    height: 10%;
+    background-color: #000;
+    top: 40%;
+    left: 45%;
+    border-radius: 50%;
 }
 
 .pixel-art.troll-doll {
-    background-color: #8b4513;
-    width: 20%;
-    height: 50%;
-    position: relative;
-    border-radius: 5px;
+    background-color: #8b4513;
+    width: 20%;
+    height: 50%;
+    position: relative;
+    border-radius: 5px;
 }
 .pixel-art.troll-doll::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 150%;
-    background-color: #0000ff;
-    top: -100%;
-    left: 0;
-    border-radius: 50%;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 150%;
+    background-color: #0000ff;
+    top: -100%;
+    left: 0;
+    border-radius: 50%;
 }
 
 .pixel-art.polished-stone {
-    background-color: #c0c0c0;
-    width: 40%;
-    height: 40%;
-    border-radius: 50%;
-    box-shadow: inset 5px 5px 5px rgba(255, 255, 255, 0.5);
+    background-color: #c0c0c0;
+    width: 40%;
+    height: 40%;
+    border-radius: 50%;
+    box-shadow: inset 5px 5px 5px rgba(255, 255, 255, 0.5);
 }
 
 .pixel-art.action-figure {
-    background-color: #800000;
-    width: 20%;
-    height: 60%;
-    position: relative;
-    border-radius: 5px;
+    background-color: #800000;
+    width: 20%;
+    height: 60%;
+    position: relative;
+    border-radius: 5px;
 }
 .pixel-art.action-figure::before {
-    content: '';
-    position: absolute;
-    width: 150%;
-    height: 100%;
-    background-color: #f0f0f0;
-    left: -25%;
-    top: -100%;
-    border: 2px solid #555;
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 100%;
+    background-color: #f0f0f0;
+    left: -25%;
+    top: -100%;
+    border: 2px solid #555;
 }
 
 .pixel-art.magic-8-ball {
-    background-color: #000;
-    width: 60%;
-    height: 60%;
-    border-radius: 50%;
-    position: relative;
+    background-color: #000;
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+    position: relative;
 }
 .pixel-art.magic-8-ball::before {
-    content: 'YES';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #00ff00;
-    font-size: 15px;
-    font-weight: bold;
+    content: 'YES';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #00ff00;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .pixel-art.game-console {
-    background-color: #808080;
-    width: 70%;
-    height: 40%;
-    border: 2px solid #555;
-    border-radius: 5px;
-    position: relative;
+    background-color: #808080;
+    width: 70%;
+    height: 40%;
+    border: 2px solid #555;
+    border-radius: 5px;
+    position: relative;
 }
 .pixel-art.game-console::before {
-    content: '';
-    position: absolute;
-    width: 40%;
-    height: 50%;
-    background-color: #000;
-    top: 20%;
-    left: 10%;
-    border-radius: 3px;
+    content: '';
+    position: absolute;
+    width: 40%;
+    height: 50%;
+    background-color: #000;
+    top: 20%;
+    left: 10%;
+    border-radius: 3px;
 }
 .pixel-art.game-console::after {
-    content: '';
-    position: absolute;
-    width: 10%;
-    height: 10%;
-    background-color: #ff0000;
-    top: 30%;
-    right: 15%;
-    border-radius: 50%;
+    content: '';
+    position: absolute;
+    width: 10%;
+    height: 10%;
+    background-color: #ff0000;
+    top: 30%;
+    right: 15%;
+    border-radius: 50%;
 }
 
 .pixel-art.jingle-bell {
-    background-color: #daa520;
-    width: 40%;
-    height: 40%;
-    border-radius: 50%;
-    border: 2px solid #b8860b;
+    background-color: #daa520;
+    width: 40%;
+    height: 40%;
+    border-radius: 50%;
+    border: 2px solid #b8860b;
 }
 
 .pixel-art.tiny-umbrella {
-    background-color: #8b0000;
-    width: 60%;
-    height: 20%;
-    border-radius: 50%;
-    position: relative;
+    background-color: #8b0000;
+    width: 60%;
+    height: 20%;
+    border-radius: 50%;
+    position: relative;
 }
 .pixel-art.tiny-umbrella::before {
-    content: '';
-    position: absolute;
-    width: 5%;
-    height: 150%;
-    background-color: #000;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%);
+    content: '';
+    position: absolute;
+    width: 5%;
+    height: 150%;
+    background-color: #000;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .pixel-art.clean-feather {
-    background-color: #fff;
-    width: 15%;
-    height: 70%;
-    border-radius: 50% 50% 0 0;
-    transform: rotate(-15deg);
+    background-color: #fff;
+    width: 15%;
+    height: 70%;
+    border-radius: 50% 50% 0 0;
+    transform: rotate(-15deg);
 }
 
 .pixel-art.unknown-key {
-    background-color: #555;
-    width: 10%;
-    height: 80%;
-    position: relative;
+    background-color: #555;
+    width: 10%;
+    height: 80%;
+    position: relative;
 }
 .pixel-art.unknown-key::before {
-    content: '';
-    position: absolute;
-    width: 150%;
-    height: 15%;
-    background-color: #555;
-    top: 50%;
-    left: -50%;
-    border-radius: 50%;
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 15%;
+    background-color: #555;
+    top: 50%;
+    left: -50%;
+    border-radius: 50%;
 }
 
 .pixel-art.shiny-orb {
-    background: radial-gradient(circle, #fff 0%, #007bff 100%);
-    width: 40%;
-    height: 40%;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #007bff;
+    background: radial-gradient(circle, #fff 0%, #007bff 100%);
+    width: 40%;
+    height: 40%;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #007bff;
 }
 
 .pixel-art.yo-yo {
-    background-color: #8b0000;
-    width: 60%;
-    height: 20%;
-    border-radius: 10px;
-    position: relative;
+    background-color: #8b0000;
+    width: 60%;
+    height: 20%;
+    border-radius: 10px;
+    position: relative;
 }
 .pixel-art.yo-yo::before {
-    content: '';
-    position: absolute;
-    width: 5%;
-    height: 200%;
-    background-color: #fff;
-    left: 50%;
-    top: -50%;
-    transform: translateX(-50%);
+    content: '';
+    position: absolute;
+    width: 5%;
+    height: 200%;
+    background-color: #fff;
+    left: 50%;
+    top: -50%;
+    transform: translateX(-50%);
 }
 
 .pixel-art.playing-cards {
-    background-color: #fff;
-    width: 50%;
-    height: 60%;
-    border: 1px solid #000;
-    position: relative;
+    background-color: #fff;
+    width: 50%;
+    height: 60%;
+    border: 1px solid #000;
+    position: relative;
 }
 .pixel-art.playing-cards::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 2px solid red;
-    top: -5px;
-    left: -5px;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid red;
+    top: -5px;
+    left: -5px;
 }
 
 .pixel-art.antique-coin {
-    background-color: #daa520;
-    width: 40%;
-    height: 40%;
-    border-radius: 50%;
-    border: 2px solid #b8860b;
+    background-color: #daa520;
+    width: 40%;
+    height: 40%;
+    border-radius: 50%;
+    border: 2px solid #b8860b;
 }
 
 .pixel-art.mini-globe {
-    background-color: #add8e6;
-    width: 50%;
-    height: 50%;
-    border-radius: 50%;
-    border: 2px solid #8b4513;
-    position: relative;
+    background-color: #add8e6;
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+    border: 2px solid #8b4513;
+    position: relative;
 }
 .pixel-art.mini-globe::before {
-    content: '';
-    position: absolute;
-    width: 20%;
-    height: 20%;
-    background-color: #2e8b57;
-    top: 20%;
-    left: 20%;
+    content: '';
+    position: absolute;
+    width: 20%;
+    height: 20%;
+    background-color: #2e8b57;
+    top: 20%;
+    left: 20%;
 }
 
 .pixel-art.broken-compass {
-    background-color: #a0522d;
-    width: 50%;
-    height: 50%;
-    border-radius: 50%;
-    border: 2px solid #8b4513;
-    position: relative;
+    background-color: #a0522d;
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+    border: 2px solid #8b4513;
+    position: relative;
 }
 .pixel-art.broken-compass::before {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 10px 10px 10px;
-    border-color: transparent transparent #ff0000 transparent;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(45deg);
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 10px 10px 10px;
+    border-color: transparent transparent #ff0000 transparent;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
 }
 
 .pixel-art.sealed-letter {
-    background-color: #f5f5dc;
-    width: 60%;
-    height: 40%;
-    border: 2px solid #a0522d;
-    position: relative;
+    background-color: #f5f5dc;
+    width: 60%;
+    height: 40%;
+    border: 2px solid #a0522d;
+    position: relative;
 }
 .pixel-art.sealed-letter::before {
-    content: '';
-    position: absolute;
-    width: 20%;
-    height: 20%;
-    background-color: #8b0000;
-    border-radius: 50%;
-    bottom: 5px;
-    right: 5px;
+    content: '';
+    position: absolute;
+    width: 20%;
+    height: 20%;
+    background-color: #8b0000;
+    border-radius: 50%;
+    bottom: 5px;
+    right: 5px;
 }
 
 .pixel-art.ornate-box {
-    background-color: #8b4513;
-    width: 50%;
-    height: 50%;
-    border: 2px solid #5a2e0d;
-    position: relative;
-    border-radius: 5px;
+    background-color: #8b4513;
+    width: 50%;
+    height: 50%;
+    border: 2px solid #5a2e0d;
+    position: relative;
+    border-radius: 5px;
 }
 .pixel-art.ornate-box::before {
-    content: '';
-    position: absolute;
-    width: 80%;
-    height: 20%;
-    background-color: #d4af37;
-    top: 10%;
-    left: 10%;
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 20%;
+    background-color: #d4af37;
+    top: 10%;
+    left: 10%;
 }
 
 .pixel-art.wooden-carving {
-    background-color: #a0522d;
-    width: 30%;
-    height: 60%;
-    border-radius: 5px;
-    transform: rotate(10deg);
+    background-color: #a0522d;
+    width: 30%;
+    height: 60%;
+    border-radius: 5px;
+    transform: rotate(10deg);
 }
 .pixel-art.broken-wristwatch {
-    background-color: #c0c0c0;
-    width: 50%;
-    height: 20%;
-    border-radius: 5px;
-    border: 2px solid #808080;
+    background-color: #c0c0c0;
+    width: 50%;
+    height: 20%;
+    border-radius: 5px;
+    border: 2px solid #808080;
 }
 .pixel-art.broken-wristwatch::before {
-    content: '';
-    position: absolute;
-    width: 20%;
-    height: 80%;
-    background-color: #000;
-    top: 50%;
-    left: 40%;
-    transform: translate(-50%, -50%);
+    content: '';
+    position: absolute;
+    width: 20%;
+    height: 80%;
+    background-color: #000;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
 }
 
 .pixel-art.old-photos {
-    background-color: #333;
-    width: 50%;
-    height: 60%;
-    border: 2px solid #808080;
-    position: relative;
-    transform: rotate(5deg);
+    background-color: #333;
+    width: 50%;
+    height: 60%;
+    border: 2px solid #808080;
+    position: relative;
+    transform: rotate(5deg);
 }
 
 .pixel-art.button-jar {
-    background-color: #add8e6;
-    width: 40%;
-    height: 60%;
-    border: 2px solid #87ceeb;
-    border-radius: 10px;
-    position: relative;
+    background-color: #add8e6;
+    width: 40%;
+    height: 60%;
+    border: 2px solid #87ceeb;
+    border-radius: 10px;
+    position: relative;
 }
 .pixel-art.button-jar::before {
-    content: '';
-    position: absolute;
-    width: 15%;
-    height: 15%;
-    background-color: #ff0000;
-    top: 20%;
-    left: 20%;
-    border-radius: 50%;
+    content: '';
+    position: absolute;
+    width: 15%;
+    height: 15%;
+    background-color: #ff0000;
+    top: 20%;
+    left: 20%;
+    border-radius: 50%;
 }
 
 .pixel-art.preserved-beetle {
-    background-color: #2e8b57;
-    width: 20%;
-    height: 40%;
-    border-radius: 50%;
-    position: relative;
+    background-color: #2e8b57;
+    width: 20%;
+    height: 40%;
+    border-radius: 50%;
+    position: relative;
 }
 .pixel-art.preserved-beetle::before {
-    content: '';
-    position: absolute;
-    width: 10%;
-    height: 50%;
-    background-color: #000;
-    top: 10%;
-    left: 45%;
+    content: '';
+    position: absolute;
+    width: 10%;
+    height: 50%;
+    background-color: #000;
+    top: 10%;
+    left: 45%;
 }
 
 .pixel-art.music-box {
-    background-color: #8b4513;
-    width: 60%;
-    height: 40%;
-    border: 2px solid #5a2e0d;
-    position: relative;
-    border-radius: 5px;
+    background-color: #8b4513;
+    width: 60%;
+    height: 40%;
+    border: 2px solid #5a2e0d;
+    position: relative;
+    border-radius: 5px;
 }
 .pixel-art.music-box::before {
-    content: '';
-    position: absolute;
-    width: 30%;
-    height: 30%;
-    background-color: #fff;
-    top: 20%;
-    left: 20%;
-    border-radius: 50%;
+    content: '';
+    position: absolute;
+    width: 30%;
+    height: 30%;
+    background-color: #fff;
+    top: 20%;
+    left: 20%;
+    border-radius: 50%;
 }
 
 .pixel-art.fake-map {
-    background-color: #f5f5dc;
-    width: 60%;
-    height: 60%;
-    border: 2px solid #8b4513;
-    position: relative;
-    transform: rotate(-5deg);
+    background-color: #f5f5dc;
+    width: 60%;
+    height: 60%;
+    border: 2px solid #8b4513;
+    position: relative;
+    transform: rotate(-5deg);
 }
 .pixel-art.vintage-comic {
-    background-color: #800000;
-    width: 50%;
-    height: 60%;
-    border: 2px solid #4d0000;
-    position: relative;
-    transform: rotate(5deg);
+    background-color: #800000;
+    width: 50%;
+    height: 60%;
+    border: 2px solid #4d0000;
+    position: relative;
+    transform: rotate(5deg);
 }
 .pixel-art.toy-soldier {
-    background-color: #228b22;
-    width: 20%;
-    height: 70%;
-    border-radius: 5px;
+    background-color: #228b22;
+    width: 20%;
+    height: 70%;
+    border-radius: 5px;
 }
 .pixel-art.snow-globe {
-    background-color: #add8e6;
-    width: 50%;
-    height: 60%;
-    border-radius: 50%;
-    border: 2px solid #87ceeb;
-    position: relative;
+    background-color: #add8e6;
+    width: 50%;
+    height: 60%;
+    border-radius: 50%;
+    border: 2px solid #87ceeb;
+    position: relative;
 }
 .pixel-art.snow-globe::before {
-    content: '';
-    position: absolute;
-    width: 80%;
-    height: 20%;
-    background-color: #8b4513;
-    bottom: -10%;
-    left: 10%;
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 20%;
+    background-color: #8b4513;
+    bottom: -10%;
+    left: 10%;
 }
 
 .pixel-art.rusty-whistle {
-    background-color: #a0522d;
-    width: 40%;
-    height: 20%;
-    border-radius: 5px;
-    border: 2px solid #8b4513;
+    background-color: #a0522d;
+    width: 40%;
+    height: 20%;
+    border-radius: 5px;
+    border: 2px solid #8b4513;
 }
 
 .pixel-art.mini-telescope {
-    background-color: #2f4f4f;
-    width: 70%;
-    height: 15%;
-    border-radius: 5px;
-    position: relative;
+    background-color: #2f4f4f;
+    width: 70%;
+    height: 15%;
+    border-radius: 5px;
+    position: relative;
 }
 .pixel-art.mini-telescope::before {
-    content: '';
-    position: absolute;
-    width: 20%;
-    height: 100%;
-    background-color: #808080;
-    right: 0;
+    content: '';
+    position: absolute;
+    width: 20%;
+    height: 100%;
+    background-color: #808080;
+    right: 0;
 }
 
 .pixel-art.perfectly-round-rock {
-    background-color: #a9a9a9;
-    width: 40%;
-    height: 40%;
-    border-radius: 50%;
+    background-color: #a9a9a9;
+    width: 40%;
+    height: 40%;
+    border-radius: 50%;
 }
 
 /* Rare Items */
 .pixel-art.crystal-skull {
-    background-color: #00ffff;
-    border-radius: 50%;
-    position: relative;
-    box-shadow: inset 0 0 0 2px #00cccc, inset 0 0 0 4px #009999;
-    width: 50%;
-    height: 60%;
+    background-color: #00ffff;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: inset 0 0 0 2px #00cccc, inset 0 0 0 4px #009999;
+    width: 50%;
+    height: 60%;
 }
 .pixel-art.crystal-skull::before {
-    content: '';
-    position: absolute;
-    bottom: 20%;
-    left: 20%;
-    width: 15%;
-    height: 15%;
-    background-color: #fff;
-    border-radius: 50%;
+    content: '';
+    position: absolute;
+    bottom: 20%;
+    left: 20%;
+    width: 15%;
+    height: 15%;
+    background-color: #fff;
+    border-radius: 50%;
 }
 .pixel-art.crystal-skull::after {
-    content: '';
-    position: absolute;
-    bottom: 20%;
-    right: 20%;
-    width: 15%;
-    height: 15%;
-    background-color: #fff;
-    border-radius: 50%;
+    content: '';
+    position: absolute;
+    bottom: 20%;
+    right: 20%;
+    width: 15%;
+    height: 15%;
+    background-color: #fff;
+    border-radius: 50%;
 }
 
 .pixel-art.floppy-disk {
-    background-color: #808080;
-    width: 60%;
-    height: 60%;
-    border: 2px solid #555;
-    position: relative;
+    background-color: #808080;
+    width: 60%;
+    height: 60%;
+    border: 2px solid #555;
+    position: relative;
 }
 .pixel-art.floppy-disk::before {
-    content: '';
-    position: absolute;
-    width: 80%;
-    height: 20%;
-    background-color: #f0f0f0;
-    top: 20%;
-    left: 10%;
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 20%;
+    background-color: #f0f0f0;
+    top: 20%;
+    left: 10%;
 }
 
 .pixel-art.jar-of-fireflies {
-    background: #add8e6;
-    border: 2px solid #5d8293;
-    position: relative;
-    width: 40%;
-    height: 70%;
-    border-radius: 5px;
+    background: #add8e6;
+    border: 2px solid #5d8293;
+    position: relative;
+    width: 40%;
+    height: 70%;
+    border-radius: 5px;
 }
 .pixel-art.jar-of-fireflies::before, .pixel-art.jar-of-fireflies::after {
-    content: '';
-    position: absolute;
-    width: 5px;
-    height: 5px;
-    background: #ffff00;
-    border-radius: 50%;
-    box-shadow: 0 0 5px #ffff00;
-    animation: glow 1s infinite alternate;
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #ffff00;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #ffff00;
+    animation: glow 1s infinite alternate;
 }
 .pixel-art.jar-of-fireflies::before { top: 20%; left: 30%; }
 .pixel-art.jar-of-fireflies::after { top: 50%; right: 20%; animation-delay: 0.5s; }
 
 .pixel-art.first-edition-comic {
-    background-color: #800000;
-    width: 50%;
-    height: 70%;
-    border: 2px solid #5a0000;
-    transform: rotate(5deg);
+    background-color: #800000;
+    width: 50%;
+    height: 70%;
+    border: 2px solid #5a0000;
+    transform: rotate(5deg);
 }
 
 .pixel-art.rabbit-foot {
-    background-color: #c0c0c0;
-    width: 30%;
-    height: 50%;
-    border-radius: 50%;
-    transform: rotate(-10deg);
+    background-color: #c0c0c0;
+    width: 30%;
+    height: 50%;
+    border-radius: 50%;
+    transform: rotate(-10deg);
 }
 
 .pixel-art.wooden-mask {
-    background-color: #a0522d;
-    width: 50%;
-    height: 60%;
-    border: 2px solid #8b4513;
-    border-radius: 10px;
-    position: relative;
+    background-color: #a0522d;
+    width: 50%;
+    height: 60%;
+    border: 2px solid #8b4513;
+    border-radius: 10px;
+    position: relative;
 }
 .pixel-art.wooden-mask::before {
-    content: '';
-    position: absolute;
-    width: 20%;
-    height: 20%;
-    background-color: #000;
-    top: 30%;
-    left: 20%;
-    border-radius: 50%;
+    content: '';
+    position: absolute;
+    width: 20%;
+    height: 20%;
+    background-color: #000;
+    top: 30%;
+    left: 20%;
+    border-radius: 50%;
 }
 .pixel-art.wooden-mask::after {
-    content: '';
-    position: absolute;
-    width: 20%;
-    height: 20%;
-    background-color: #000;
-    top: 30%;
-    right: 20%;
-    border-radius: 50%;
+    content: '';
+    position: absolute;
+    width: 20%;
+    height: 20%;
+    background-color: #000;
+    top: 30%;
+    right: 20%;
+    border-radius: 50%;
 }
 
 .pixel-art.golden-ring {
-    background-color: #ffd700;
-    width: 50%;
-    height: 50%;
-    border-radius: 50%;
-    border: 5px solid #ccac00;
+    background-color: #ffd700;
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+    border: 5px solid #ccac00;
 }
 
 .pixel-art.replica-sword {
-    background-color: #c0c0c0;
-    width: 10%;
-    height: 70%;
-    position: relative;
+    background-color: #c0c0c0;
+    width: 10%;
+    height: 70%;
+    position: relative;
 }
 .pixel-art.replica-sword::before {
-    content: '';
-    position: absolute;
-    width: 200%;
-    height: 20%;
-    background-color: #daa520;
-    bottom: 20%;
-    left: -50%;
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 20%;
+    background-color: #daa520;
+    bottom: 20%;
+    left: -50%;
 }
 
 .pixel-art.mystery-liquid {
-    background-color: #800080;
-    width: 30%;
-    height: 70%;
-    border-radius: 10px;
-    border: 2px solid #4b0082;
-    position: relative;
+    background-color: #800080;
+    width: 30%;
+    height: 70%;
+    border-radius: 10px;
+    border: 2px solid #4b0082;
+    position: relative;
 }
 .pixel-art.mystery-liquid::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 10%;
-    background-color: #4b0082;
-    top: 0;
-    border-radius: 5px;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    background-color: #4b0082;
+    top: 0;
+    border-radius: 5px;
 }
 
 .pixel-art.glowing-dice {
-    background-color: #000;
-    width: 40%;
-    height: 40%;
-    border-radius: 5px;
-    box-shadow: 0 0 10px #00ff00;
-    position: relative;
+    background-color: #000;
+    width: 40%;
+    height: 40%;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #00ff00;
+    position: relative;
 }
 .pixel-art.glowing-dice::before {
-    content: '';
-    position: absolute;
-    width: 10%;
-    height: 10%;
-    background-color: #00ff00;
-    top: 20%;
-    left: 20%;
-    border-radius: 50%;
+    content: '';
+    position: absolute;
+    width: 10%;
+    height: 10%;
+    background-color: #00ff00;
+    top: 20%;
+    left: 20%;
+    border-radius: 50%;
 }
 .pixel-art.glowing-dice::after {
-    content: '';
-    position: absolute;
-    width: 10%;
-    height: 10%;
-    background-color: #00ff00;
-    bottom: 20%;
-    right: 20%;
-    border-radius: 50%;
+    content: '';
+    position: absolute;
+    width: 10%;
+    height: 10%;
+    background-color: #00ff00;
+    bottom: 20%;
+    right: 20%;
+    border-radius: 50%;
 }
 
 .pixel-art.preserved-fossil {
-    background-color: #8b4513;
-    width: 60%;
-    height: 40%;
-    border: 2px solid #5a2e0d;
-    border-radius: 10px;
-    position: relative;
+    background-color: #8b4513;
+    width: 60%;
+    height: 40%;
+    border: 2px solid #5a2e0d;
+    border-radius: 10px;
+    position: relative;
 }
 .pixel-art.preserved-fossil::before {
-    content: '';
-    position: absolute;
-    width: 40%;
-    height: 60%;
-    background-color: #d2b48c;
-    top: 20%;
-    left: 30%;
-    transform: rotate(-10deg);
+    content: '';
+    position: absolute;
+    width: 40%;
+    height: 60%;
+    background-color: #d2b48c;
+    top: 20%;
+    left: 30%;
+    transform: rotate(-10deg);
 }
 
 .pixel-art.cursed-necklace {
-    background-color: #8b0000;
-    width: 70%;
-    height: 20%;
-    border-radius: 50%;
-    border: 2px solid #5a0000;
-    position: relative;
+    background-color: #8b0000;
+    width: 70%;
+    height: 20%;
+    border-radius: 50%;
+    border: 2px solid #5a0000;
+    position: relative;
 }
 .pixel-art.cursed-necklace::before {
-    content: '';
-    position: absolute;
-    width: 20%;
-    height: 30%;
-    background-color: #000;
-    top: 50%;
-    left: 40%;
-    transform: translate(-50%, -50%);
+    content: '';
+    position: absolute;
+    width: 20%;
+    height: 30%;
+    background-color: #000;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
 }
 
 .pixel-art.magical-key {
-    background-color: #007bff;
-    width: 15%;
-    height: 80%;
-    position: relative;
+    background-color: #007bff;
+    width: 15%;
+    height: 80%;
+    position: relative;
 }
 .pixel-art.magical-key::before {
-    content: '';
-    position: absolute;
-    width: 150%;
-    height: 20%;
-    background-color: #007bff;
-    top: 50%;
-    left: -25%;
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 20%;
+    background-color: #007bff;
+    top: 50%;
+    left: -25%;
 }
 
 .pixel-art.wizards-hat {
-    background-color: #4b0082;
-    width: 60%;
-    height: 80%;
-    clip-path: polygon(50% 0, 100% 100%, 0 100%);
-    position: relative;
+    background-color: #4b0082;
+    width: 60%;
+    height: 80%;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    position: relative;
 }
 .pixel-art.wizards-hat::before {
-    content: '';
-    position: absolute;
-    width: 80%;
-    height: 10%;
-    background-color: #800080;
-    bottom: 0;
-    left: 10%;
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 10%;
+    background-color: #800080;
+    bottom: 0;
+    left: 10%;
 }
 
 .pixel-art.crystal-ball {
-    background: radial-gradient(circle, #f0f8ff 0%, #0000ff 100%);
-    width: 60%;
-    height: 60%;
-    border-radius: 50%;
-    box-shadow: 0 0 20px #0000ff;
+    background: radial-gradient(circle, #f0f8ff 0%, #0000ff 100%);
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #0000ff;
 }
 
 .pixel-art.dragon-scale {
-    background: linear-gradient(135deg, #ff4500, #8b0000);
-    width: 50%;
-    height: 50%;
-    clip-path: polygon(0 50%, 50% 0, 100% 50%, 50% 100%);
+    background: linear-gradient(135deg, #ff4500, #8b0000);
+    width: 50%;
+    height: 50%;
+    clip-path: polygon(0 50%, 50% 0, 100% 50%, 50% 100%);
 }
 
 .pixel-art.grimoire {
-    background-color: #8b4513;
-    width: 60%;
-    height: 70%;
-    border: 2px solid #5a2e0d;
-    position: relative;
+    background-color: #8b4513;
+    width: 60%;
+    height: 70%;
+    border: 2px solid #5a2e0d;
+    position: relative;
 }
 .pixel-art.grimoire::before {
-    content: '';
-    position: absolute;
-    width: 80%;
-    height: 20%;
-    background-color: #fff;
-    top: 10%;
-    left: 10%;
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 20%;
+    background-color: #fff;
+    top: 10%;
+    left: 10%;
 }
 
 .pixel-art.sundial {
-    background-color: #a0522d;
-    width: 70%;
-    height: 70%;
-    border-radius: 50%;
-    border: 2px solid #8b4513;
+    background-color: #a0522d;
+    width: 70%;
+    height: 70%;
+    border-radius: 50%;
+    border: 2px solid #8b4513;
 }
 .pixel-art.sundial::before {
-    content: '';
-    position: absolute;
-    width: 5%;
-    height: 80%;
-    background-color: #000;
-    top: 10%;
-    left: 45%;
-    transform: rotate(30deg);
+    content: '';
+    position: absolute;
+    width: 5%;
+    height: 80%;
+    background-color: #000;
+    top: 10%;
+    left: 45%;
+    transform: rotate(30deg);
 }
 
 .pixel-art.healing-potion {
-    background-color: #228b22;
-    width: 20%;
-    height: 60%;
-    border-radius: 10px;
-    border: 2px solid #006400;
+    background-color: #228b22;
+    width: 20%;
+    height: 60%;
+    border-radius: 10px;
+    border: 2px solid #006400;
 }
 .pixel-art.healing-potion::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 10%;
-    background-color: #8b4513;
-    top: -10%;
-    border-radius: 5px;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    background-color: #8b4513;
+    top: -10%;
+    border-radius: 5px;
 }
 
 .pixel-art.jar-of-starlight {
-    background: linear-gradient(135deg, #00008b, #4b0082);
-    width: 40%;
-    height: 70%;
-    border: 2px solid #800080;
-    border-radius: 10px;
-    position: relative;
+    background: linear-gradient(135deg, #00008b, #4b0082);
+    width: 40%;
+    height: 70%;
+    border: 2px solid #800080;
+    border-radius: 10px;
+    position: relative;
 }
 .pixel-art.jar-of-starlight::before {
-    content: '';
-    position: absolute;
-    width: 5px;
-    height: 5px;
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: 0 0 5px #fff;
-    top: 20%;
-    left: 20%;
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #fff;
+    top: 20%;
+    left: 20%;
 }
 .pixel-art.jar-of-starlight::after {
-    content: '';
-    position: absolute;
-    width: 5px;
-    height: 5px;
-    background: #fff;
-    border-radius: 50%;
-    box-shadow: 0 0 5px #fff;
-    bottom: 30%;
-    right: 30%;
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #fff;
+    bottom: 30%;
+    right: 30%;
 }
 
 
 /* Mythical Items */
 .pixel-art.golden-compass {
-    background-color: #ffd700;
-    border-radius: 50%;
-    border: 2px solid #ccac00;
-    position: relative;
-    width: 60%;
-    height: 60%;
+    background-color: #ffd700;
+    border-radius: 50%;
+    border: 2px solid #ccac00;
+    position: relative;
+    width: 60%;
+    height: 60%;
 }
 .pixel-art.golden-compass::before, .pixel-art.golden-compass::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-style: solid;
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
 }
 .pixel-art.golden-compass::before {
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 0 10% 20% 10%;
-    border-color: transparent transparent #ccac00 transparent;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 0 10% 20% 10%;
+    border-color: transparent transparent #ccac00 transparent;
 }
 .pixel-art.golden-compass::after {
-    bottom: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 20% 10% 0 10%;
-    border-color: #ccac00 transparent transparent transparent;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 20% 10% 0 10%;
+    border-color: #ccac00 transparent transparent transparent;
 }
 
 .pixel-art.bottle-of-sunlight {
-    background-color: #ffff00;
-    border: 2px solid #ccac00;
-    border-radius: 5px;
-    position: relative;
-    width: 40%;
-    height: 70%;
-    box-shadow: 0 0 10px 2px #ffff00;
+    background-color: #ffff00;
+    border: 2px solid #ccac00;
+    border-radius: 5px;
+    position: relative;
+    width: 40%;
+    height: 70%;
+    box-shadow: 0 0 10px 2px #ffff00;
 }
 .pixel-art.bottle-of-sunlight::before {
-    content: '';
-    position: absolute;
-    width: 50%;
-    height: 10%;
-    background-color: #8b4513;
-    top: 0;
-    left: 25%;
-    border-radius: 2px;
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 10%;
+    background-color: #8b4513;
+    top: 0;
+    left: 25%;
+    border-radius: 2px;
 }
 
 .pixel-art.ever-burning-candle {
-    background-color: #fdfd96;
-    border: 2px solid #c0c080;
-    position: relative;
-    width: 20%;
-    height: 60%;
-    border-radius: 5px;
+    background-color: #fdfd96;
+    border: 2px solid #c0c080;
+    position: relative;
+    width: 20%;
+    height: 60%;
+    border-radius: 5px;
 }
 .pixel-art.ever-burning-candle::before {
-    content: '';
-    position: absolute;
-    top: -20%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 10% solid transparent;
-    border-right: 10% solid transparent;
-    border-bottom: 30% solid #ff4500;
-    filter: drop-shadow(0 0 5px #ff4500);
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10% solid transparent;
+    border-right: 10% solid transparent;
+    border-bottom: 30% solid #ff4500;
+    filter: drop-shadow(0 0 5px #ff4500);
 }
 
 .pixel-art.snow-orb {
-    background: radial-gradient(circle, #f0f8ff 0%, #add8e6 100%);
-    width: 60%;
-    height: 60%;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    box-shadow: 0 0 10px #fff;
+    background: radial-gradient(circle, #f0f8ff 0%, #add8e6 100%);
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 10px #fff;
 }
 .pixel-art.snow-orb::before {
-    content: '';
-    position: absolute;
-    width: 5%;
-    height: 5%;
-    background: #fff;
-    border-radius: 50%;
-    top: 20%;
-    left: 30%;
-    animation: snowfall 5s linear infinite;
+    content: '';
+    position: absolute;
+    width: 5%;
+    height: 5%;
+    background: #fff;
+    border-radius: 50%;
+    top: 20%;
+    left: 30%;
+    animation: snowfall 5s linear infinite;
 }
 @keyframes snowfall {
-    from { transform: translateY(0); }
-    to { transform: translateY(50%); }
+    from { transform: translateY(0); }
+    to { transform: translateY(50%); }
 }
 
 .pixel-art.unicorn-horn {
-    background: linear-gradient(45deg, #e6e6fa, #fff, #e6e6fa);
-    width: 20%;
-    height: 80%;
-    clip-path: polygon(0% 100%, 100% 100%, 50% 0%);
-    transform: rotate(15deg);
+    background: linear-gradient(45deg, #e6e6fa, #fff, #e6e6fa);
+    width: 20%;
+    height: 80%;
+    clip-path: polygon(0% 100%, 100% 100%, 50% 0%);
+    transform: rotate(15deg);
 }
 
 .pixel-art.glove-of-telekinesis {
-    background-color: #c0c0c0;
-    width: 50%;
-    height: 60%;
-    border-radius: 10px;
-    border: 2px solid #808080;
-    position: relative;
+    background-color: #c0c0c0;
+    width: 50%;
+    height: 60%;
+    border-radius: 10px;
+    border: 2px solid #808080;
+    position: relative;
 }
 .pixel-art.glove-of-telekinesis::before {
-    content: '';
-    position: absolute;
-    width: 15%;
-    height: 15%;
-    background-color: #007bff;
-    top: 20%;
-    left: 20%;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #007bff;
+    content: '';
+    position: absolute;
+    width: 15%;
+    height: 15%;
+    background-color: #007bff;
+    top: 20%;
+    left: 20%;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #007bff;
 }
 
 .pixel-art.golem-heart {
-    background-color: #8b4513;
-    width: 50%;
-    height: 50%;
-    border-radius: 10px;
-    border: 2px solid #5a2e0d;
-    position: relative;
-    animation: heart-beat 1.5s infinite;
+    background-color: #8b4513;
+    width: 50%;
+    height: 50%;
+    border-radius: 10px;
+    border: 2px solid #5a2e0d;
+    position: relative;
+    animation: heart-beat 1.5s infinite;
 }
 @keyframes heart-beat {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
 
 .pixel-art.archangel-feather {
-    background: linear-gradient(135deg, #fff, #ffd700);
-    width: 20%;
-    height: 80%;
-    border-radius: 50% 50% 0 0;
-    transform: rotate(-15deg);
-    box-shadow: 0 0 10px #fff;
+    background: linear-gradient(135deg, #fff, #ffd700);
+    width: 20%;
+    height: 80%;
+    border-radius: 50% 50% 0 0;
+    transform: rotate(-15deg);
+    box-shadow: 0 0 10px #fff;
 }
 
 .pixel-art.atlantis-map {
-    background-color: #f5f5dc;
-    width: 60%;
-    height: 60%;
-    border: 2px solid #8b4513;
-    transform: rotate(-5deg);
-    position: relative;
+    background-color: #f5f5dc;
+    width: 60%;
+    height: 60%;
+    border: 2px solid #8b4513;
+    transform: rotate(-5deg);
+    position: relative;
 }
 .pixel-art.atlantis-map::before {
-    content: '';
-    position: absolute;
-    width: 10%;
-    height: 10%;
-    background-color: #00008b;
-    top: 20%;
-    left: 20%;
+    content: '';
+    position: absolute;
+    width: 10%;
+    height: 10%;
+    background-color: #00008b;
+    top: 20%;
+    left: 20%;
 }
 
 .pixel-art.philosopher-stone {
-    background: radial-gradient(circle, #b8860b 0%, #8b4513 100%);
-    width: 50%;
-    height: 50%;
-    border-radius: 50%;
-    box-shadow: 0 0 20px #b8860b;
+    background: radial-gradient(circle, #b8860b 0%, #8b4513 100%);
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #b8860b;
 }
 
 .pixel-art.vampire-blood {
-    background-color: #8b0000;
-    width: 30%;
-    height: 60%;
-    border-radius: 10px;
-    border: 2px solid #5a0000;
+    background-color: #8b0000;
+    width: 30%;
+    height: 60%;
+    border-radius: 10px;
+    border: 2px solid #5a0000;
 }
 
 .pixel-art.phoenix-feather {
-    background: linear-gradient(135deg, #ff4500, #ffd700);
-    width: 20%;
-    height: 80%;
-    border-radius: 50% 50% 0 0;
-    transform: rotate(15deg);
-    box-shadow: 0 0 10px #ff4500;
+    background: linear-gradient(135deg, #ff4500, #ffd700);
+    width: 20%;
+    height: 80%;
+    border-radius: 50% 50% 0 0;
+    transform: rotate(15deg);
+    box-shadow: 0 0 10px #ff4500;
 }
 
 .pixel-art.werewolf-fang {
-    background-color: #f5f5dc;
-    width: 20%;
-    height: 60%;
-    clip-path: polygon(0 100%, 100% 100%, 50% 0%);
-    transform: rotate(90deg);
+    background-color: #f5f5dc;
+    width: 20%;
+    height: 60%;
+    clip-path: polygon(0 100%, 100% 100%, 50% 0%);
+    transform: rotate(90deg);
 }
 
 .pixel-art.griffin-claw {
-    background-color: #daa520;
-    width: 20%;
-    height: 50%;
-    border-radius: 50%;
-    transform: rotate(-15deg);
+    background-color: #daa520;
+    width: 20%;
+    height: 50%;
+    border-radius: 50%;
+    transform: rotate(-15deg);
 }
 
 .pixel-art.dragon-tear {
-    background: radial-gradient(circle, #add8e6 0%, #0000ff 100%);
-    width: 30%;
-    height: 40%;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #0000ff;
+    background: radial-gradient(circle, #add8e6 0%, #0000ff 100%);
+    width: 30%;
+    height: 40%;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #0000ff;
 }
 
 
 /* Legendary Items */
 .pixel-art.amulet-of-time {
-    background-color: #964B00;
-    border-radius: 50% 50% 10px 10px;
-    border: 2px solid #5A2E0D;
-    position: relative;
-    width: 70%;
-    height: 70%;
+    background-color: #964B00;
+    border-radius: 50% 50% 10px 10px;
+    border: 2px solid #5A2E0D;
+    position: relative;
+    width: 70%;
+    height: 70%;
 }
 .pixel-art.amulet-of-time::before {
-    content: '';
-    position: absolute;
-    width: 80%;
-    height: 80%;
-    background: radial-gradient(circle, #f0f0f0 20%, transparent 20%);
-    border-radius: 50%;
-    top: 10%;
-    left: 10%;
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(circle, #f0f0f0 20%, transparent 20%);
+    border-radius: 50%;
+    top: 10%;
+    left: 10%;
 }
 
 .pixel-art.sun-king-crown {
-    background-color: #ffd700;
-    width: 80%;
-    height: 40%;
-    border: 2px solid #ccac00;
-    clip-path: polygon(0% 100%, 20% 0%, 40% 100%, 60% 0%, 80% 100%, 100% 0%);
+    background-color: #ffd700;
+    width: 80%;
+    height: 40%;
+    border: 2px solid #ccac00;
+    clip-path: polygon(0% 100%, 20% 0%, 40% 100%, 60% 0%, 80% 100%, 100% 0%);
 }
 
 .pixel-art.holy-grail {
-    background-color: #ffd700;
-    width: 40%;
-    height: 60%;
-    border: 2px solid #ccac00;
-    position: relative;
-    border-radius: 5px 5px 20px 20px;
+    background-color: #ffd700;
+    width: 40%;
+    height: 60%;
+    border: 2px solid #ccac00;
+    position: relative;
+    border-radius: 5px 5px 20px 20px;
 }
 .pixel-art.holy-grail::before {
-    content: '';
-    position: absolute;
-    width: 150%;
-    height: 10%;
-    background-color: #ccac00;
-    bottom: -10%;
-    left: -25%;
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 10%;
+    background-color: #ccac00;
+    bottom: -10%;
+    left: -25%;
 }
 
 .pixel-art.excalibur-sword {
-    background-color: #c0c0c0;
-    width: 10%;
-    height: 70%;
-    position: relative;
-    box-shadow: 0 0 0 1px #808080;
+    background-color: #c0c0c0;
+    width: 10%;
+    height: 70%;
+    position: relative;
+    box-shadow: 0 0 0 1px #808080;
 }
 .pixel-art.excalibur-sword::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: -150%;
-    width: 400%;
-    height: 15%;
-    background-color: #ffd700;
-    box-shadow: 0 0 0 1px #ccac00;
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -150%;
+    width: 400%;
+    height: 15%;
+    background-color: #ffd700;
+    box-shadow: 0 0 0 1px #ccac00;
 }
 .pixel-art.excalibur-sword::after {
-    content: '';
-    position: absolute;
-    top: -20%;
-    left: -50%;
-    width: 200%;
-    height: 20%;
-    background-color: #ffffff;
-    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-    box-shadow: 0 0 0 1px #c0c0c0;
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: -50%;
+    width: 200%;
+    height: 20%;
+    background-color: #ffffff;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    box-shadow: 0 0 0 1px #c0c0c0;
 }
 
 .pixel-art.ark-of-covenant {
-    background-color: #daa520;
-    width: 80%;
-    height: 50%;
-    border: 2px solid #b8860b;
-    border-radius: 5px;
+    background-color: #daa520;
+    width: 80%;
+    height: 50%;
+    border: 2px solid #b8860b;
+    border-radius: 5px;
 }
 
 .pixel-art.ring-of-power {
-    background-color: #ffd700;
-    width: 50%;
-    height: 50%;
-    border-radius: 50%;
-    border: 5px solid #ccac00;
-    box-shadow: 0 0 10px #ff4500;
+    background-color: #ffd700;
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+    border: 5px solid #ccac00;
+    box-shadow: 0 0 10px #ff4500;
 }
 
 .pixel-art.essence-vial {
-    background-color: #0000ff;
-    width: 20%;
-    height: 60%;
-    border-radius: 10px;
-    border: 2px solid #4b0082;
+    background-color: #0000ff;
+    width: 20%;
+    height: 60%;
+    border-radius: 10px;
+    border: 2px solid #4b0082;
 }
 .pixel-art.essence-vial::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 10%;
-    background-color: #8b4513;
-    top: -10%;
-    border-radius: 5px;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    background-color: #8b4513;
+    top: -10%;
+    border-radius: 5px;
 }
 
 .pixel-art.golden-fleece {
-    background-color: #ffd700;
-    width: 70%;
-    height: 50%;
-    border-radius: 50%;
-    border: 2px solid #ccac00;
+    background-color: #ffd700;
+    width: 70%;
+    height: 50%;
+    border-radius: 50%;
+    border: 2px solid #ccac00;
 }
 
 .pixel-art.poseidon-trident {
-    background-color: #00008b;
-    width: 10%;
-    height: 80%;
-    position: relative;
+    background-color: #00008b;
+    width: 10%;
+    height: 80%;
+    position: relative;
 }
 .pixel-art.poseidon-trident::before {
-    content: '';
-    position: absolute;
-    width: 200%;
-    height: 20%;
-    background-color: #00008b;
-    top: 0;
-    left: -50%;
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 20%;
+    background-color: #00008b;
+    top: 0;
+    left: -50%;
 }
 .pixel-art.poseidon-trident::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: #00008b;
-    top: 0;
-    left: 0;
-    transform: rotate(45deg);
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #00008b;
+    top: 0;
+    left: 0;
+    transform: rotate(45deg);
 }
 
 /* Hidden Items */
-.pixel-art.stick { 
-    background-color: #603010; 
-    width: 10%; 
-    height: 50%; 
+.pixel-art.stick { 
+    background-color: #603010; 
+    width: 10%; 
+    height: 50%; 
 }
-.pixel-art.baba-belt { 
-    background-color: #a52a2a; 
-    width: 50%; 
-    height: 10%; 
-    border-radius: 5px; 
+.pixel-art.baba-belt { 
+    background-color: #a52a2a; 
+    width: 50%; 
+    height: 10%; 
+    border-radius: 5px; 
 }
-.pixel-art.shoe { 
-    background-color: #1a1a1a; 
-    width: 25%; 
-    height: 15%; 
-    border-radius: 5px 5px 0 0; 
+.pixel-art.shoe { 
+    background-color: #1a1a1a; 
+    width: 25%; 
+    height: 15%; 
+    border-radius: 5px 5px 0 0; 
 }
-.pixel-art.button { 
-    background-color: #f0f0f0; 
-    width: 20%; 
-    height: 20%; 
-    border-radius: 50%; 
+.pixel-art.button { 
+    background-color: #f0f0f0; 
+    width: 20%; 
+    height: 20%; 
+    border-radius: 50%; 
 }
