@@ -265,10 +265,7 @@ function showScreen(screenId) {
 
 function showNotification(message) {
     notificationMessage.textContent = message;
-    notificationPopup.classList.remove('hidden');
-    setTimeout(() => {
-        notificationPopup.classList.add('visible');
-    }, 10);
+    notificationPopup.classList.add('visible');
     
     setTimeout(() => {
         notificationPopup.classList.remove('visible');
@@ -712,7 +709,7 @@ finishOpeningBtn.addEventListener('click', () => {
 
 buyButtons.forEach(button => {
     button.addEventListener('click', (e) => {
-        const crateType = e.target.dataset.crate-type;
+        const crateType = e.target.dataset.crateType; // Fixed syntax here
         const cratePrice = CRATE_PRICES[crateType];
         const amount = parseInt(buyAmountSlider.value);
         const totalCost = cratePrice * amount;
