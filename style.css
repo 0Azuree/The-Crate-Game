@@ -214,14 +214,14 @@ body, html {
     display: grid;
 }
 
-.crate-item, .item-item, .empty-slot {
+.item-slot {
     width: 100%;
     padding-top: 100%; /* Creates a square container */
     position: relative;
     background-color: #333;
     border-radius: 8px;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, border 0.2s;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -229,21 +229,15 @@ body, html {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.crate-item:hover, .item-item:hover {
+.item-slot:hover {
     transform: scale(1.05);
 }
 
-.item-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1.2em;
-    font-weight: 700;
-    text-transform: uppercase;
-    text-align: center;
+.item-slot.selected {
+    border: 2px solid #007BFF !important;
 }
 
+/* Rarity Colors for Borders */
 .rarity-common { border: 2px solid #808080; }
 .rarity-uncommon { border: 2px solid #008000; }
 .rarity-rare { border: 2px solid #0000ff; }
@@ -253,9 +247,101 @@ body, html {
 .rarity-hidden { border: 2px solid #ff1493; }
 .rarity-crate { border: 2px solid #5A2E0D; }
 
-.crate-pixel-art {
+/* ITEM Pixel Art */
+.pixel-art {
     width: 80%;
     height: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 0 1px; /* Base for all pixel art */
+}
+
+/* Common Item Pixel Art (Dusty Relic) */
+.pixel-art.common {
+    background: #505050;
+    box-shadow: 
+        10px 0 #505050, 
+        0 10px #505050, 
+        10px 10px #505050;
+    width: 20px;
+    height: 20px;
+}
+
+/* Uncommon Item Pixel Art (Gleaming Fragment) */
+.pixel-art.uncommon {
+    background: #00ff00;
+    box-shadow: 
+        0 10px #00ff00, 
+        10px 10px #00ff00;
+    width: 10px;
+    height: 10px;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* Rare Item Pixel Art (Enchanted Gemstone) */
+.pixel-art.rare {
+    background: #0000ff;
+    box-shadow: 
+        10px 0 #0000ff, 
+        20px 0 #0000ff, 
+        0 10px #0000ff, 
+        10px 10px #0000ff, 
+        20px 10px #0000ff, 
+        10px 20px #0000ff;
+    width: 10px;
+    height: 10px;
+}
+
+/* Epic Item Pixel Art (Astral Shard) */
+.pixel-art.epic {
+    background: #800080;
+    box-shadow: 
+        10px 0 #800080, 
+        0 10px #800080, 
+        10px 10px #800080, 
+        20px 10px #800080, 
+        10px 20px #800080, 
+        20px 20px #800080;
+    width: 10px;
+    height: 10px;
+}
+
+/* Mythical Item Pixel Art (Cosmic Core) */
+.pixel-art.mythical {
+    background: #ff4500;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    box-shadow: 
+        -5px -5px #ffa500, 
+        5px -5px #ffa500, 
+        -5px 5px #ffa500, 
+        5px 5px #ffa500;
+}
+
+/* Legendary Item Pixel Art (Eternal Flame) */
+.pixel-art.legendary {
+    background: #ffd700;
+    width: 10px;
+    height: 20px;
+    box-shadow: 
+        -10px 10px #ffd700, 
+        10px 10px #ffd700, 
+        0 20px #ffd700;
+    border-radius: 50% 50% 0 0;
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Hidden Item Pixel Art */
+.pixel-art.hidden.stick { background: #603010; width: 10px; height: 50px; }
+.pixel-art.hidden.baba { background: #a52a2a; width: 50px; height: 10px; border-radius: 5px; }
+.pixel-art.hidden.shoe { background: #1a1a1a; width: 25px; height: 15px; border-radius: 5px 5px 0 0; }
+.pixel-art.hidden.button { background: #f0f0f0; width: 20px; height: 20px; border-radius: 50%; }
+
+/* Crate Pixel Art */
+.pixel-art.crate {
     background-color: #8B4513;
     border-top: 10px solid #5A2E0D;
     border-bottom: 10px solid #5A2E0D;
@@ -263,6 +349,8 @@ body, html {
         inset 0 0 0 5px #703A0E, 
         inset 0 0 0 8px #60320B,
         inset 0 0 0 11px #703A0E;
+    width: 80%;
+    height: 80%;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -430,4 +518,33 @@ body, html {
     background-color: #121212;
     color: #f0f0f0;
     text-align: center;
+}
+
+/* New Notification Pop-up */
+.notification-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(36, 36, 36, 0.9);
+    padding: 25px 40px;
+    border-radius: 10px;
+    border: 2px solid #555;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0s 0.5s;
+    text-align: center;
+}
+
+.notification-box.visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease;
+}
+
+#notification-message {
+    font-size: 1.4em;
+    font-weight: 700;
 }
